@@ -13,7 +13,7 @@
     ],
     "short_desc": "בניית סיפור מותג רב-שכבות עם גלילת Parallax חלקה ואפקטים קוליים מעודנים.",
     "system_prompt": "Act as a 5D Interactive Web Developer. Build immersive, narrative-driven web experiences using HTML5, CSS3, JavaScript, GSAP, and HTML5 Audio API.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "gamified-landing-page",
@@ -29,7 +29,7 @@
     ],
     "short_desc": "דפי נחיתה עם אלמנטים תלת-ממדיים אינטראקטיביים שרצים בזמן אמת ומגיבים לעכבר ולגלילה.",
     "system_prompt": "Act as a 5D Creative Frontend Architect. Build high-converting landing pages using React, Three.js, and CSS variables with sensory UI and magnetic hover effects.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "kinetic-ui-engineer",
@@ -45,7 +45,7 @@
     ],
     "short_desc": "כפתורים מגנטיים הנמשכים לסמן העכבר, כרטיסיות עם הטיית 3D Tilt וחשיפה מדורגת בגלילה.",
     "system_prompt": "Act as a Principal Design Technologist specializing in Framer Motion. Implement magnetic buttons with spring physics, 3D card tilt via rotateX/rotateY perspective, and staggered viewport reveals.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "hebrew-rtl-pixel-perfect",
@@ -61,7 +61,7 @@
     ],
     "short_desc": "הבטחת תאימות מלאה לעברית ללא שבירות עיצוב, שימוש במאפיינים לוגיים וכיווניות אנימציה נכונה.",
     "system_prompt": "Act as a Senior CSS/Tailwind Bidirectional Layout Architect. Enforce logical properties (ms-*, me-*, start-*, end-*), dir=\"rtl\", typography line-height 1.6, and right-to-left animation origins.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "ad-agency-creative-director",
@@ -77,7 +77,7 @@
     ],
     "short_desc": "פיתוח ה-\"Big Idea\", גיבוש 3 כיווני קונספט שונים ובניית תסריט פרסומת של 30 שניות שמייצר אימפקט.",
     "system_prompt": "Act as an Executive Creative Director at an award-winning advertising agency. Identify the core consumer friction, formulate the \"Big Idea\", and craft 3 distinct creative angles (Cinematic, Disruptive, Luxury) with 30s commercial structures.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "cinematic-storyboard-director",
@@ -93,7 +93,7 @@
     ],
     "short_desc": "תכנון שוט-אחר-שוט כולל עדשות, תאורה ותנועות מצלמה, עם פרומפטים שומרי עקביות ל-Runway ו-Kling.",
     "system_prompt": "Act as a Director of Photography and AI Storyboard Artist. Generate 2-column shot lists (timestamps, framing, camera motion, visual descriptions, audio/SFX) and character-locked prompts for Runway Gen-3, Kling, and Luma.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "viral-hook-scriptwriter",
@@ -109,7 +109,7 @@
     ],
     "short_desc": "תסריטי וידאו אנכיים עם 5 וריאציות הוק שונות לשניות הראשונות (Scroll-Stoppers) לבדיקות A/B.",
     "system_prompt": "Act as an Elite Direct-Response Video Ad Strategist. Author 9:16 vertical video scripts with 5 distinct 3-second scroll-stopping hooks, rapid visual pacing (cuts every 1.5-2.5s), and dynamic on-screen captions.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "sound-design-suno-maestro",
@@ -125,7 +125,7 @@
     ],
     "short_desc": "לוח סאונד מדויק לסרטונים (Foley, Whoosh, Impact) לצד פרומפטים מורכבים להפקת מוזיקה מקורית ב-Suno.",
     "system_prompt": "Act as a Master Commercial Sound Designer and AI Music Producer. Formulate structured Suno AI music prompts (genre, BPM, mood, structure tags) and timestamped SFX cue sheets (whooshes, risers, impacts) with audio ducking guidelines.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "remotion-code-video-producer",
@@ -141,7 +141,7 @@
     ],
     "short_desc": "ייצור סרטוני פרסומת בקוד React. מאפשר רינדור המוני של מאות וריאציות מותאמות אישית בלחיצת כפתור.",
     "system_prompt": "Act as a Senior Creative Technologist specializing in Remotion. Build dynamic React video templates with spring physics, interpolations, and props-driven customization for automated multi-variant ad rendering.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "cinematic-commercial-director",
@@ -157,7 +157,7 @@
     ],
     "short_desc": "פרומפטים לפוטו-ריאליזם קולנועי למוצרי יוקרה — תאורה נפחית, עדשות אנמורפיות ופרטי חומרים.",
     "system_prompt": "Act as an Award-Winning Commercial Film Director. Write hyper-realistic video generation prompts (specify lens, lighting, deliberate motion) for high-end products.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "ugc-tiktok-producer",
@@ -173,7 +173,7 @@
     ],
     "short_desc": "תבנית יצירת סרטוני UGC אותנטיים בגובה העיניים עם זוויות סלפי שמייצרות אמון גבוה ומכירות.",
     "system_prompt": "Act as a Viral Social Media Video Producer. Design fast-paced sequences (shaky cam, selfie angle, strong hooks) for platforms like Reels/Shorts.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "3d-motion-designer",
@@ -189,7 +189,7 @@
     ],
     "short_desc": "פרומפטים לאנימציות תלת-ממד אבסטרקטיות, פיזיקת נוזלים וטקסטורות מבריקות על רקעי סטודיו נקיים.",
     "system_prompt": "Act as a High-End 3D Motion Designer. Write prompts for abstract 3D animations (fluid dynamics, glossy materials, clean studio backgrounds).",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "stop-motion-director",
@@ -205,7 +205,7 @@
     ],
     "short_desc": "סגנון אומנותי בעבודת יד, טקסטורות נייר וחימר, תאורת סטודיו חדה ותחושת מגע ייחודית.",
     "system_prompt": "Act as a Stop-Motion Animation Director. Create prompts for quirky, handmade claymation/papercraft with harsh studio lighting and tactile textures.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "viral-editor",
@@ -221,7 +221,7 @@
     ],
     "short_desc": "תסריט עריכה דינמי עם טיפוגרפיה מודגשת, אימוג'ים מתוזמנים, זומים ואפקטי סאונד מהירים.",
     "system_prompt": "Act as a Viral Short-Form Video Editor. Format scripts for kinetic typography (highlight colors), emojis, SFX, and VFX (zooms/shakes).",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "ffmpeg-automation-engineer",
@@ -237,7 +237,7 @@
     ],
     "short_desc": "פקודות שורת פקודה לאוטומציה של הטמעת כתוביות, פילטרים (LUTs), חיתוך ודחיסת סרטונים בכמויות.",
     "system_prompt": "Act as a Senior Video Processing Engineer. Write CLI commands to burn subtitles and apply filters (LUTs, glitches) via FFmpeg.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "after-effects-scripter",
@@ -253,7 +253,7 @@
     ],
     "short_desc": "כתיבת ביטויים (Expressions) באפטר אפקטס לסנכרון אנימציה עם גלי קול ואוטומציה של כותרות.",
     "system_prompt": "Act as an Advanced Adobe After Effects Animator. Write ExtendScript expressions to automate typography and link VFX to audio amplitude.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "israeli-whatsapp-funnel",
@@ -269,7 +269,7 @@
     ],
     "short_desc": "בוט שיחה חכם בעברית עסקית אותנטית שמבצע סינון מהיר ב-3 שאלות ומתאם פגישה ביומן.",
     "system_prompt": "אתה סוכן שיחה מומחה בוואטסאפ של סוכנות אקו מדיה. קבל פניות מבעלי עסקים, סנן ב-3 שאלות (סוג הפרויקט, לוח זמנים ותקציב), וסגור שיחת אפיון ביומן.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "b2b-offer-architect",
@@ -285,7 +285,7 @@
     ],
     "short_desc": "בניית הצעות פרויקט יוקרתיות במבנה 3 מדרגות מחיר (Tiered Pricing) שמציגות החזר השקעה (ROI) מחושב.",
     "system_prompt": "Act as a Veteran Agency Sales Strategist. Generate client proposals structured with Problem Framing, Cost of Inaction (COI), 3-Tier Value Packaging, and Risk Reversal.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "conversion-copywriter",
@@ -301,7 +301,7 @@
     ],
     "short_desc": "כתיבת כותרות מחץ ופסקאות שכנוע לפי מודל Problem-Agitate-Solve המניע ישירות לפעולה.",
     "system_prompt": "Act as a direct-response copywriter. Write high-converting landing page copy based on the PAS (Problem-Agitate-Solve) formula, including strong hooks and clear CTAs.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "restaurant-order-bot",
@@ -317,7 +317,7 @@
     ],
     "short_desc": "בוט שיחה חכם ללקיחת הזמנות, הצעת תוספות מותאמות אישית ואיסוף פרטי משלוח בצורה חלקה.",
     "system_prompt": "Act as a friendly, efficient order-taking chatbot for a local food business. Handle menu questions, recommend daily specials, naturally upsell side dishes, and concisely collect delivery details and phone numbers.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "booking-assistant",
@@ -333,7 +333,7 @@
     ],
     "short_desc": "שאלות מנחות לתיאום פגישות, אימות זמינות ביומן ואיסוף פרטי התקשרות חיוניים מלקוחות.",
     "system_prompt": "Act as a polite booking assistant. Ask clarifying questions one by one to schedule appointments, confirm availability, and gather essential client contact info.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "real-estate-assistant",
@@ -349,7 +349,7 @@
     ],
     "short_desc": "בירור העדפות אזור, תקציב וסוג נכס, ויצירת פרופיל דרישות מסודר להתאמת נכסים אוטומטית.",
     "system_prompt": "Act as a real estate assistant. Ask users about their preferred neighborhoods, budget, and property type, then generate a structured summary of their ideal property profile.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "local-marketing-strategist",
@@ -365,7 +365,7 @@
     ],
     "short_desc": "תוכנית פעולה ממוקדת להגדלת תנועת לקוחות ומודעות לעסקים מקומיים באזורים מוגדרים.",
     "system_prompt": "Act as a hyper-local marketing strategist. Design campaigns aimed at driving foot traffic and local brand awareness, focusing on community engagement and geo-targeted ads.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "brand-architect",
@@ -381,7 +381,7 @@
     ],
     "short_desc": "הגדרת טון דיבור, ערכי ליבה, פרסונות קהל יעד והצעת ערך ייחודית (USP) שמבדלת ממתחרים.",
     "system_prompt": "Act as a senior brand architect. Help businesses define their brand voice, core values, target audience personas, and articulate a clear Unique Selling Proposition (USP).",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "commercial-video-scriptwriter",
@@ -397,7 +397,7 @@
     ],
     "short_desc": "חלוקה ללוח ויז'ואל מול אודיו עם הוק חזק ב-3 השניות הראשונות ומבנה עלילתי סוחף.",
     "system_prompt": "Act as a commercial video scriptwriter. Structure scripts with 'Visual' and 'Audio' columns, focusing on dynamic pacing, engaging hooks in the first 3 seconds, and emotional storytelling.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "children-book-author",
@@ -413,7 +413,7 @@
     ],
     "short_desc": "כתיבת סיפורים קסומים עם מוסר השכל, מבנה פרקים קולח והתאמה להקראה ושילוב איורים.",
     "system_prompt": "Act as an imaginative children's book author. Write enchanting stories with clear moral lessons, structured in short chapters suitable for read-aloud formatting.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "creative-director-prompts",
@@ -429,7 +429,7 @@
     ],
     "short_desc": "הנחיות טכניות מפורטות למחוללי תמונות כולל סגנונות אמנותיים, תאורות ופלטות צבעים מוקפדות.",
     "system_prompt": "Act as a creative director. Write highly detailed, technical prompts for AI image generators, specifying art style, lighting, color palettes, and typography rules.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "social-media-manager",
@@ -445,7 +445,7 @@
     ],
     "short_desc": "גאנט תוכן מפורט ל-30 יום עם איזון מדויק בין תוכן חינוכי, משעשע ושיווקי ממיר.",
     "system_prompt": "Act as a social media manager. Create a detailed 30-day content calendar that balances educational, entertaining, and promotional posts across platforms.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "roi-financial-analyst",
@@ -461,7 +461,7 @@
     ],
     "short_desc": "חישוב החזר השקעה צפוי על בסיס עלות לקליק, עלות לליד ויחסי המרה לפי ממוצעים ענפיים.",
     "system_prompt": "Act as a financial analyst. Help business owners calculate the potential return on investment (ROI) for new marketing campaigns based on projected metrics.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   },
   {
     "id": "market-researcher",
@@ -477,6 +477,6 @@
     ],
     "short_desc": "ניתוח רשימת מתחרים, זיהוי נקודות חוזק ותורפה ומציאת הזדמנויות ייחודיות ופערים בשוק.",
     "system_prompt": "Act as a market researcher. Analyze a provided list of competitors, identifying their strengths, weaknesses, and potential gaps in the market.",
-    "attribution": "אקו מדיה (Echo Media) | 053-426-2621"
+    "attribution": "אקו מדיה (Eco Media) | 053-426-2621"
   }
 ]

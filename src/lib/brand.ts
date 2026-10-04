@@ -1,10 +1,10 @@
 // כל נתוני המיתוג של אקו מדיה במקום אחד
 export const BRAND = {
   nameHe: 'אקו מדיה',
-  nameEn: 'Echo Media',
+  nameEn: 'Eco Media',
   phoneDisplay: '053-426-2621',
   phoneIntl: '972534262621',
-  banner: 'מיזם קהילתי לקידום עסקים ב-AI מבית אקו מדיה (Echo Media)',
+  banner: 'מיזם קהילתי לקידום עסקים ב-AI מבית אקו מדיה (Eco Media)',
   heroCallout:
     'התרשמתם מחוויית ה-5D? אקו מדיה מפתחת אתרי תלת-ממד וסרטוני AI לעסקים שרוצים להוביל',
   defaultWaMessage:

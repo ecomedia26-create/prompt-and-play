@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { Sparkles, Volume2, VolumeX } from 'lucide-react'
 import { BRAND } from '../lib/brand'
 import { useSound } from '../lib/sound'
-import { EchoLogo } from './EchoLogo'
+import { EcoLogo } from './EcoLogo'
 import { WhatsAppButton } from './WhatsAppButton'
 
 const NAV = [
@@ -32,7 +32,7 @@ export function Header() {
 
       <motion.nav style={{ backgroundColor: bg }} className="border-b border-white/5 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-          <EchoLogo />
+          <EcoLogo />
           <ul className="hidden items-center gap-6 text-sm text-white/70 lg:flex">
             {NAV.map((n) => (
               <li key={n.href}>
