@@ -54,6 +54,17 @@
     mask-composite: exclude;
     z-index: -1;
   }
+  .spotlight::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .3s;
+    background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,.11), transparent 65%);
+  }
+  .spotlight:hover::before { opacity: 1; }
   .grid-bg {
     background-image:
       linear-gradient(rgba(0,240,255,.05) 1px, transparent 1px),

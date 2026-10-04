@@ -305,7 +305,16 @@ export function SoundProvider({ children }: { children: ReactNode }) {
     (cue: Cue) => {
       const e = engine.current
       if (!enabled || !e) return
-      CUE_NOTES[cue].forEach((n, i) => playBell(e, n, e.ctx.currentTime + i * 0.09, e.cues, CUE_LEVEL[cue]))
+      const t = e.ctx.currentTime + 0.01
+      if (!e.timer) {
+        CUE_NOTES[cue].forEach((n, i) => playBell(e, n, t + i * 0.09, e.cues, CUE_LEVEL[cue]))
+        return
+      }
+      // כשהגרוב מתנגן, הצלילים לקוחים מהאקורד הנוכחי כדי שישבו בתוך המוזיקה
+      const chord = CHORDS[Math.floor(e.step / 32) % CHORDS.length].notes
+      if (cue === 'hover') noiseHit(e, t, 7000, 'highpass', 0.035, 0.05, e.cues)
+      else if (cue === 'copy') chord.slice(1, 4).forEach((n, i) => playBell(e, n + 12, t + i * 0.07, e.cues, 0.05))
+      else stab(e, chord.map((n) => n + 12), t, cue === 'open' ? 0.07 : 0.05)
     },
     [enabled],
   )

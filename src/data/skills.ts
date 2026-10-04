@@ -60,8 +60,8 @@ export const PROPRIETARY: ReadonlySet<CategoryId> = new Set(['development'])
 
 export const CATEGORIES: { id: CategoryId | 'all'; label: string; accent: string }[] = [
   { id: 'all', label: 'הכל', accent: '#ffffff' },
-  { id: 'business_bots', label: 'שיווק, מכירות ובוטים', accent: '#25D366' },
-  { id: 'video_ads', label: 'פרסומות ווידאו', accent: '#00F0FF' },
+  { id: 'business_bots', label: 'בוטים ושיווק לעסקים', accent: '#25D366' },
+  { id: 'video_ads', label: 'פרסומות וידאו וקולנוע', accent: '#00F0FF' },
   { id: 'vfx_editing', label: 'עריכת וידאו ואפקטים', accent: '#9333EA' },
   { id: 'development', label: 'חוויות 5D (בלעדי)', accent: '#F0ABFC' },
 ]

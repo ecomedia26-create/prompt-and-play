@@ -1,7 +1,8 @@
-import { motion } from 'framer-motion'
+import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion'
 import { Search } from 'lucide-react'
-import type { FormEvent } from 'react'
+import { useEffect, type FormEvent } from 'react'
 import { SKILLS } from '../data/skills'
+import { useIsTouch } from '../hooks/useIsTouch'
 import { goToLibrary, setSearch, useSearch } from '../lib/search'
 import { useSound } from '../lib/sound'
 
@@ -11,6 +12,30 @@ const EXAMPLES = ['לכתוב פוסט שמוכר', 'תסריט לרילס', 'ב
 export function Hero() {
   const query = useSearch()
   const { play } = useSound()
+  const touch = useIsTouch()
+  const narrow = typeof window !== 'undefined' && window.innerWidth < 480
+
+  // גלילה: התוכן מתרחק לאט ונמוג, כאילו הגולש עף למעלה דרך העננים
+  const { scrollY } = useScroll()
+  const lift = useTransform(scrollY, [0, 500], [0, -120])
+  const fade = useTransform(scrollY, [0, 420], [1, 0.15])
+  const blur = useTransform(scrollY, [0, 420], ['blur(0px)', 'blur(6px)'])
+
+  // עכבר: הכותרת נוטה ומרחפת בעדינות לכיוון הסמן
+  const mx = useMotionValue(0)
+  const my = useMotionValue(0)
+  const rotY = useSpring(useTransform(mx, [-1, 1], [-10, 10]), { stiffness: 80, damping: 18 })
+  const rotX = useSpring(useTransform(my, [-1, 1], [8, -8]), { stiffness: 80, damping: 18 })
+  const shiftX = useSpring(useTransform(mx, [-1, 1], [-18, 18]), { stiffness: 80, damping: 18 })
+  useEffect(() => {
+    if (touch) return
+    const move = (e: PointerEvent) => {
+      mx.set((e.clientX / window.innerWidth) * 2 - 1)
+      my.set((e.clientY / window.innerHeight) * 2 - 1)
+    }
+    window.addEventListener('pointermove', move, { passive: true })
+    return () => window.removeEventListener('pointermove', move)
+  }, [touch, mx, my])
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault()
@@ -20,16 +45,26 @@ export function Hero() {
 
   return (
     <section id="top" className="relative pt-36 pb-12 sm:pt-44 sm:pb-16">
-      <div className="relative z-10 mx-auto max-w-3xl px-4 text-center sm:px-6">
-        <motion.h1
-          dir="ltr"
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
-          className="font-display text-5xl font-black leading-none tracking-tight [text-shadow:0_2px_18px_rgba(18,20,70,.35)] sm:text-7xl"
-        >
-          Prompt <span className="text-neon-gradient [text-shadow:none]">&</span> Play
-        </motion.h1>
+      <motion.div style={{ y: lift, opacity: fade, filter: blur }} className="relative z-10 mx-auto max-w-3xl px-4 text-center sm:px-6">
+        <div className="[perspective:900px]">
+          <motion.h1
+            dir="ltr"
+            style={{ rotateX: rotX, rotateY: rotY, x: shiftX }}
+            className="font-display text-5xl font-black leading-none tracking-tight [text-shadow:0_2px_18px_rgba(18,20,70,.35)] sm:text-7xl lg:text-8xl"
+          >
+            {['Prompt', '&', 'Play'].map((w, i) => (
+              <motion.span
+                key={w}
+                initial={{ opacity: 0, y: 50, filter: 'blur(10px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                transition={{ delay: 0.1 + i * 0.14, type: 'spring', stiffness: 110, damping: 16 }}
+                className={`inline-block ${w === '&' ? 'text-neon-gradient mx-3 [text-shadow:none]' : ''}`}
+              >
+                {w}
+              </motion.span>
+            ))}
+          </motion.h1>
+        </div>
 
         <motion.p
           initial={{ opacity: 0 }}
@@ -53,7 +88,7 @@ export function Hero() {
             type="search"
             value={query}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="מה תרצו ש-AI יעשה לעסק שלכם?"
+            placeholder={narrow ? 'מה AI יעשה לעסק שלכם?' : 'מה תרצו ש-AI יעשה לעסק שלכם?'}
             aria-label="חיפוש פרומפט"
             className="min-w-0 flex-1 bg-transparent py-2.5 text-base text-[#141846] outline-none placeholder:text-[#141846]/45 sm:text-lg"
           />
@@ -88,7 +123,7 @@ export function Hero() {
         </motion.div>
 
         <p className="mt-6 text-sm text-white/85">{SKILLS.length} פרומפטים · בעברית · בלי הרשמה · מבית אקו מדיה</p>
-      </div>
+      </motion.div>
     </section>
   )
 }

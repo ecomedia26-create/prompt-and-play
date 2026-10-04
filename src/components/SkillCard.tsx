@@ -33,7 +33,15 @@ export function SkillCard({ skill, index = 0 }: { skill: Skill; index?: number }
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
       transition={{ delay: (index % 8) * 0.04, duration: 0.35 }}
-      className="glass relative flex h-full flex-col rounded-2xl p-5 transition-colors hover:border-white/30"
+      onMouseEnter={() => play('hover')}
+      onMouseMove={(e) => {
+        // אור רך שעוקב אחרי הסמן בתוך הכרטיס
+        const r = e.currentTarget.getBoundingClientRect()
+        e.currentTarget.style.setProperty('--mx', `${e.clientX - r.left}px`)
+        e.currentTarget.style.setProperty('--my', `${e.clientY - r.top}px`)
+      }}
+      whileHover={{ y: -4 }}
+      className="glass spotlight relative flex h-full flex-col rounded-2xl p-5 transition-colors hover:border-white/30"
     >
       <div className="flex flex-wrap items-center gap-2">
         <span className="rounded-full px-2.5 py-0.5 text-[11px] font-semibold" style={{ color: accent, background: `${accent}1a` }}>
@@ -71,7 +79,7 @@ export function SkillCard({ skill, index = 0 }: { skill: Skill; index?: number }
           <button
             type="button"
             onClick={copy}
-            className={`inline-flex flex-1 items-center justify-center gap-1.5 rounded-full px-4 py-2 text-sm font-bold transition ${
+            className={`inline-flex flex-1 items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-3 py-2 text-sm font-bold transition ${
               copied ? 'bg-wa text-void' : 'bg-white text-[#141846] hover:bg-white/90'
             }`}
           >
@@ -82,7 +90,7 @@ export function SkillCard({ skill, index = 0 }: { skill: Skill; index?: number }
         <button
           type="button"
           onClick={open}
-          className="inline-flex flex-1 items-center justify-center rounded-full border border-white/25 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
+          className="inline-flex flex-1 items-center justify-center whitespace-nowrap rounded-full border border-white/25 px-3 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
         >
           {locked ? 'לפרטים' : 'התאמה לעסק'}
         </button>

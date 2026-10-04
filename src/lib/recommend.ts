@@ -9,6 +9,10 @@ const SYNONYMS: [RegExp, CategoryId | string[]][] = [
   [/בוט|וואטסאפ|ווטסאפ|whatsapp|לקוח|לידים|ליד|מכיר|שיווק|פוסט|תוכן|אינסטגרם|פייסבוק|לינקדאין|מייל|מסעדה|הזמנ|תור|פגיש|נדל|מחיר|הצע/i, 'business_bots'],
   [/מוזיק|שיר|ג'ינגל|ג׳ינגל|סאונד|suno|קריינ|קול/i, ['suno', 'music', 'audio', 'voice', 'jingle']],
   [/תמונ|עיצוב|לוגו|באנר|midjourney|image|גרפיק/i, ['image', 'midjourney', 'design', 'visual']],
+  [/פוסט|רשתות|אינסטגרם|פייסבוק/i, ['פוסט', 'רשתות', 'קופי']],
+  [/הצע.{0,3}מחיר|הצעת/i, ['הצע', 'high-ticket', 'proposal']],
+  [/ריל|טיקטוק|reels/i, ['reels', 'הוק', 'רילס']],
+  [/ליד/i, ['לידים', 'סינון']],
 ]
 
 const tokenize = (s: string) =>
@@ -32,12 +36,14 @@ export function recommend(query: string, limit = 3, minScore = 1, pool: Skill[] 
     else cats.add(hit)
   }
   const scored = pool.map((s) => {
-    const hay = [s.title_he, s.title_en, s.short_desc, s.category_he, s.outcome_he ?? '', ...(s.tools ?? []), ...s.tags]
-      .join(' ')
-      .toLowerCase()
-    let score = cats.has(s.category) ? 2 : 0
-    for (const w of words) if (hay.includes(w)) score += w.length > 3 ? 3 : 1
-    for (const w of extra) if (hay.includes(w)) score += 2
+    // התאמה בשם או ב"מה תקבלו" שווה יותר מהתאמה בתיאור או בתגיות
+    const head = [s.title_he, s.title_en, s.outcome_he ?? ''].join(' ').toLowerCase()
+    const hay = [s.short_desc, s.category_he, ...(s.tools ?? []), ...s.tags].join(' ').toLowerCase()
+    let score = cats.has(s.category) ? 1 : 0
+    for (const w of [...words, ...extra]) {
+      if (head.includes(w)) score += w.length > 3 ? 4 : 2
+      else if (hay.includes(w)) score += w.length > 3 ? 2 : 1
+    }
     if (s.tags.some((t) => words.includes(t.toLowerCase()))) score += 3
     return { s, score }
   })
