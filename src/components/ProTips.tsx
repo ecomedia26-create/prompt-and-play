@@ -23,13 +23,13 @@ export function ProTips() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: (i % 3) * 0.06 }}
-              className="glass rounded-2xl p-6 text-center"
+              className="card rounded-3xl p-7 text-center"
             >
               <h3 className="font-bold">
-                <span className="mb-1 block text-sm font-semibold text-white/50">{String(i + 1).padStart(2, '0')}</span>
+                <span className="mb-1 block text-sm font-semibold text-ink/40">{String(i + 1).padStart(2, '0')}</span>
                 {t.title}
               </h3>
-              <p className="mt-1.5 text-sm text-white/75">{t.text}</p>
+              <p className="mt-1.5 text-sm text-ink/70">{t.text}</p>
             </motion.div>
           ))}
         </div>

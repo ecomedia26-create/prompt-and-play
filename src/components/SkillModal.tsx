@@ -157,7 +157,7 @@ export function SkillModal({ skill, onClose }: Props) {
               <span className="text-xs font-semibold text-white/60">
                 {skill.category_he}
               </span>
-              <h2 id="skill-title" className="mt-1 pe-10 font-display text-2xl font-black sm:text-3xl">
+              <h2 id="skill-title" className="mt-1 pe-10 font-display text-2xl font-bold sm:text-3xl">
                 {skill.title_he}
               </h2>
               <p className="mt-2 text-white/80">{skill.outcome_he ?? skill.short_desc}</p>

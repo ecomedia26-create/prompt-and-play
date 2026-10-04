@@ -169,7 +169,7 @@ function Panel({ p }: { p: (typeof PANELS)[number] }) {
     <article className="grid h-full w-full shrink-0 overflow-hidden rounded-[2rem] border border-white/15 bg-[#151a4c]/80 backdrop-blur-xl lg:w-[78vw] lg:max-w-6xl lg:grid-cols-2">
       <div className="flex flex-col justify-center p-7 sm:p-10">
         <span className="font-mono text-sm text-white/50">{p.kicker}</span>
-        <h3 className="mt-2 font-display text-[clamp(2.4rem,5vw,4.5rem)] font-black leading-none tracking-tight">{p.title}</h3>
+        <h3 className="mt-2 font-display text-[clamp(2.25rem,4.5vw,4rem)] font-bold leading-none tracking-tight">{p.title}</h3>
         <p className="mt-4 max-w-md text-lg text-white/80">{p.text}</p>
         <div className="mt-6 flex flex-wrap gap-2">
           {p.chips.map((c) => (
@@ -215,7 +215,7 @@ export function AgencyCTA() {
           {BRAND.nameHe} · <span dir="ltr">{BRAND.nameEn}</span>
         </p>
         <RevealTitle className="mt-2">מה אנחנו בונים</RevealTitle>
-        <p className="mx-auto mt-3 max-w-2xl text-lg text-white/90 [text-shadow:0_1px_10px_rgba(18,20,70,.35)]">הפרומפטים בחינם. כשתרצו את הגרסה המלאה, בהתאמה למותג שלכם, אנחנו כאן.</p>
+        <p className="mx-auto mt-3 max-w-2xl text-lg font-medium text-white [text-shadow:0_1px_12px_rgba(18,20,70,.45)]">הפרומפטים בחינם. כשתרצו את הגרסה המלאה, בהתאמה למותג שלכם, אנחנו כאן.</p>
       </div>
 
       {wide ? (
@@ -242,7 +242,7 @@ export function AgencyCTA() {
       )}
 
       <div className="mx-auto max-w-4xl px-4 py-24 text-center sm:px-6">
-        <h2 className="font-display text-[clamp(2.2rem,5vw,4rem)] font-black leading-[1.1] tracking-tight">
+        <h2 className="font-display text-[clamp(2.25rem,4.8vw,4rem)] font-bold leading-[1.15] tracking-tight">
           האתר הזה נבנה ע"י אקו מדיה.
           <br />
           רוצים כזה לעסק שלכם?

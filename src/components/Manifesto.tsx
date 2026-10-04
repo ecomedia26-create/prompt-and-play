@@ -20,7 +20,7 @@ export function Manifesto() {
   const words = TEXT.split(' ')
   return (
     <section className="py-24 sm:py-32">
-      <p ref={ref} className="mx-auto max-w-4xl px-4 text-center font-display text-3xl font-black leading-[1.3] sm:px-6 sm:text-4xl lg:text-5xl">
+      <p ref={ref} className="mx-auto max-w-4xl px-4 text-center font-display text-3xl font-bold leading-[1.3] sm:px-6 sm:text-4xl lg:text-5xl">
         {words.map((w, i) => (
           <Word key={i} word={w} progress={scrollYProgress} range={[i / words.length, (i + 1) / words.length]} />
         ))}

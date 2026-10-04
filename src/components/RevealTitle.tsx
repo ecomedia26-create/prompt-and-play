@@ -9,7 +9,7 @@ export function RevealTitle({ children, className = '' }: { children: ReactNode;
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, margin: '-40px' }}
-      className={`overflow-hidden pb-[0.08em] text-center font-display text-[clamp(2.4rem,6vw,5rem)] font-black leading-[1.05] tracking-tight ${className}`}
+      className={`overflow-hidden pb-[0.08em] text-center font-display text-[clamp(2.25rem,4.8vw,4rem)] font-bold leading-[1.1] tracking-tight ${className}`}
     >
       <motion.span
         className="block"

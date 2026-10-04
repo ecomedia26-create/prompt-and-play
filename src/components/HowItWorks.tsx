@@ -20,14 +20,14 @@ export function HowItWorks() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              className="glass flex flex-col items-center rounded-2xl p-6 text-center"
+              className="card flex flex-col items-center rounded-3xl p-7 text-center"
             >
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-white text-lg font-black text-[#141846]">
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-ink text-lg font-bold text-white">
                 {i + 1}
               </span>
               <div className="mt-4">
                 <h3 className="font-bold">{s.title}</h3>
-                <p className="mt-1 text-sm text-white/75">{s.text}</p>
+                <p className="mt-1 text-sm text-ink/70">{s.text}</p>
               </div>
             </motion.li>
           ))}

@@ -7,6 +7,7 @@ export default {
         void: { DEFAULT: '#070709', 900: '#070709', 800: '#0b0c10', 700: '#12131a' },
         neon: { blue: '#00F0FF', purple: '#9333EA' },
         wa: { DEFAULT: '#25D366', dark: '#128C7E' },
+        ink: '#1c2160',
       },
       fontFamily: {
         sans: ['Heebo', 'Rubik', 'system-ui', 'sans-serif'],

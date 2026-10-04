@@ -16,7 +16,7 @@ function SectionTitle({ title, sub }: { title: string; sub: string }) {
   return (
     <div className="mb-10 text-center">
       <RevealTitle>{title}</RevealTitle>
-      <p className="mx-auto mt-3 max-w-3xl text-lg text-white/90 [text-shadow:0_1px_10px_rgba(18,20,70,.35)]">{sub}</p>
+      <p className="mx-auto mt-3 max-w-3xl text-lg font-medium text-white [text-shadow:0_1px_12px_rgba(18,20,70,.45)]">{sub}</p>
     </div>
   )
 }
@@ -72,15 +72,15 @@ export function Library() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="flex flex-col items-center">
             <SectionTitle title="הספרייה" sub={`כל ${SKILLS.length} הפרומפטים, לפי תחום. לחצו "התאמה לעסק" כדי למלא את הפרטים שלכם לפני ההעתקה.`} />
-            <label className="glass -mt-4 mb-8 flex w-full max-w-md items-center gap-2 rounded-full px-4 py-2.5 focus-within:border-white/50">
-              <Search className="h-5 w-5 shrink-0 text-white/50" />
+            <label className="-mt-4 mb-8 flex w-full max-w-md items-center gap-2 rounded-full bg-white px-4 py-2.5 text-ink shadow-lg shadow-[#141846]/15">
+              <Search className="h-5 w-5 shrink-0 text-ink/50" />
               <input
                 type="search"
                 value={query}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="חיפוש: פוסט, וואטסאפ, רילס..."
                 aria-label="חיפוש בספרייה"
-                className="w-full bg-transparent text-sm outline-none placeholder:text-white/45"
+                className="w-full bg-transparent text-sm outline-none placeholder:text-ink/45"
               />
             </label>
           </div>
@@ -99,7 +99,7 @@ export function Library() {
                     setCat(c.id)
                   }}
                   className={`shrink-0 rounded-full px-4 py-2 text-sm font-semibold transition ${
-                    active ? 'bg-white text-[#141846]' : 'glass text-white/80 hover:text-white'
+                    active ? 'bg-ink text-white' : 'bg-white/55 text-ink/80 backdrop-blur hover:bg-white/80'
                   }`}
                 >
                   {c.label} <span className="opacity-60">({counts[c.id] ?? 0})</span>

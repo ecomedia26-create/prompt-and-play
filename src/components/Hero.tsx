@@ -57,7 +57,7 @@ export function Hero() {
           <motion.h1
             dir="ltr"
             style={{ rotateX: rotX, rotateY: rotY, x: shiftX }}
-            className="font-display text-5xl font-black leading-none tracking-tight [text-shadow:0_2px_18px_rgba(18,20,70,.35)] sm:text-7xl lg:text-8xl"
+            className="font-display text-5xl font-extrabold leading-none tracking-tight [text-shadow:0_2px_18px_rgba(18,20,70,.35)] sm:text-7xl lg:text-8xl"
           >
             {['Prompt', '&', 'Play'].map((w, i) => (
               <motion.span
