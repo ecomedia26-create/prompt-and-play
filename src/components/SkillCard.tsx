@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { accentFor, fillPrompt, PROPRIETARY, type Skill } from '../data/skills'
 import { withWatermark } from '../lib/brand'
 import { copyText } from '../lib/copy'
+import { celebrateCopy } from '../lib/copyFx'
 import { openSkill } from '../lib/skillBus'
 import { useSound } from '../lib/sound'
 
@@ -18,9 +19,11 @@ export function SkillCard({ skill, index = 0 }: { skill: Skill; index?: number }
     play('open')
     openSkill(skill.id)
   }
-  const copy = async () => {
+  const copy = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    const btn = e.currentTarget
     if (await copyText(withWatermark(fillPrompt(skill)))) {
       play('copy')
+      celebrateCopy(btn)
       setCopied(true)
       setTimeout(() => setCopied(false), 2200)
     }

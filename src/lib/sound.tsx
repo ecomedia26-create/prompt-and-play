@@ -37,6 +37,8 @@ const BASS: [number, number][] = [
 interface Engine {
   ctx: AudioContext
   music: GainNode
+  open: BiquadFilterNode
+  whoosh: GainNode
   duck: GainNode
   drums: GainNode
   echo: AudioNode
@@ -64,7 +66,10 @@ function buildEngine(): Engine {
   const comp = ctx.createDynamicsCompressor()
   comp.threshold.value = -16
   comp.ratio.value = 3
-  comp.connect(ctx.destination)
+  // עוצמה כללית נעימה ברקע (הקומפרסור מוסיף הגברה אוטומטית)
+  const master = ctx.createGain()
+  master.gain.value = 0.5
+  comp.connect(master).connect(ctx.destination)
 
   const reverb = ctx.createConvolver()
   reverb.buffer = impulse(ctx, 2.2, 3)
@@ -75,7 +80,12 @@ function buildEngine(): Engine {
   // ערוץ המוזיקה: עולה ויורד בפייד רך בהפעלה/כיבוי
   const music = ctx.createGain()
   music.gain.value = 0
-  music.connect(comp)
+  // פילטר שנפתח ככל שגוללים עמוק יותר באתר: למעלה המוזיקה עמומה, למטה היא מלאה
+  const open = ctx.createBiquadFilter()
+  open.type = 'lowpass'
+  open.frequency.value = 1600
+  open.Q.value = 0.7
+  music.connect(open).connect(comp)
 
   const drums = ctx.createGain()
   drums.connect(music)
@@ -112,7 +122,20 @@ function buildEngine(): Engine {
   const d = noise.getChannelData(0)
   for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1
 
-  return { ctx, music, duck, drums, echo, pad, cues, noise, step: 0, nextTime: 0 }
+  // משב רוח שעוצמתו עוקבת אחרי מהירות הגלילה
+  const whoosh = ctx.createGain()
+  whoosh.gain.value = 0
+  const wf = ctx.createBiquadFilter()
+  wf.type = 'bandpass'
+  wf.frequency.value = 700
+  wf.Q.value = 0.6
+  const wsrc = ctx.createBufferSource()
+  wsrc.buffer = noise
+  wsrc.loop = true
+  wsrc.connect(wf).connect(whoosh).connect(comp)
+  wsrc.start()
+
+  return { ctx, music, open, whoosh, duck, drums, echo, pad, cues, noise, step: 0, nextTime: 0 }
 }
 
 function kick(e: Engine, t: number) {
@@ -326,7 +349,7 @@ export function SoundProvider({ children }: { children: ReactNode }) {
       const e = (engine.current ??= buildEngine())
       clearTimeout(e.suspendTimer)
       void e.ctx.resume()
-      ramp(e.music.gain, e.ctx, 2.2, 4)
+      ramp(e.music.gain, e.ctx, 1, 4)
       if (!e.timer) startMusic(e)
     } else if (engine.current) {
       const e = engine.current
@@ -335,6 +358,32 @@ export function SoundProvider({ children }: { children: ReactNode }) {
       e.suspendTimer = window.setTimeout(() => void e.ctx.suspend(), 1700)
     }
     setEnabled(next)
+  }, [enabled])
+
+  // הגלילה מנגנת: פותחת את הפילטר של המוזיקה ומשמיעה משב רוח לפי המהירות
+  useEffect(() => {
+    const e = engine.current
+    if (!enabled || !e) return
+    let lastY = window.scrollY
+    let lastT = performance.now()
+    let raf = 0
+    const loop = () => {
+      raf = requestAnimationFrame(loop)
+      const now = performance.now()
+      const y = window.scrollY
+      const v = Math.abs(y - lastY) / Math.max(now - lastT, 1)
+      lastY = y
+      lastT = now
+      const depth = Math.min(y / (window.innerHeight * 1.5), 1)
+      const t = e.ctx.currentTime
+      e.open.frequency.setTargetAtTime(1600 * Math.pow(18000 / 1600, depth), t, 0.25)
+      e.whoosh.gain.setTargetAtTime(Math.min(v * 0.06, 0.09), t, v > 0.05 ? 0.05 : 0.25)
+    }
+    loop()
+    return () => {
+      cancelAnimationFrame(raf)
+      e.whoosh.gain.setTargetAtTime(0, e.ctx.currentTime, 0.1)
+    }
   }, [enabled])
 
   // השהיית הפסקול כשהלשונית מוסתרת

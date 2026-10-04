@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { accentFor, fillPrompt, PROPRIETARY, type Skill } from '../data/skills'
 import { BRAND, waLink, withWatermark } from '../lib/brand'
 import { chatgptUrl, claudeUrl, copyText } from '../lib/copy'
+import { celebrateCopy } from '../lib/copyFx'
 import { useSound } from '../lib/sound'
 import { ShareRow } from './ShareRow'
 import { TryItNow } from './TryItNow'
@@ -21,9 +22,11 @@ function PromptBuilder({ skill }: { skill: Skill }) {
   const { play } = useSound()
   const prompt = withWatermark(fillPrompt(skill, values))
 
-  const onCopy = async () => {
+  const onCopy = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    const btn = e.currentTarget
     if (await copyText(prompt)) {
       play('copy')
+      celebrateCopy(btn)
       setCopied(true)
       setTimeout(() => setCopied(false), 2400)
     }
