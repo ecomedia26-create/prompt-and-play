@@ -1,7 +1,8 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { Search, ShieldCheck } from 'lucide-react'
-import { useCallback, useDeferredValue, useMemo, useState } from 'react'
+import { useCallback, useDeferredValue, useEffect, useMemo, useState } from 'react'
 import { CATEGORIES, SKILLS, type CategoryId, type Skill } from '../data/skills'
+import { onOpenSkill } from '../lib/skillBus'
 import { useSound } from '../lib/sound'
 import { SkillCard } from './SkillCard'
 import { SkillModal } from './SkillModal'
@@ -25,6 +26,17 @@ export function Vault() {
     return c
   }, [])
   const close = useCallback(() => setOpen(null), [])
+
+  // פתיחה מבחוץ: עוזר ה-AI, או קישור שיתוף עם ?skill=<id>
+  useEffect(() => {
+    const show = (id: string) => {
+      const s = SKILLS.find((x) => x.id === id)
+      if (s) setOpen(s)
+    }
+    const fromUrl = new URLSearchParams(window.location.search).get('skill')
+    if (fromUrl) show(fromUrl)
+    return onOpenSkill(show)
+  }, [])
 
   return (
     <section id="vault" className="relative scroll-mt-28 py-24">

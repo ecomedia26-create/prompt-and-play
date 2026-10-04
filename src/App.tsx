@@ -1,5 +1,6 @@
 import { AgencyCTA } from './components/AgencyCTA'
 import { AngelDust } from './components/AngelDust'
+import { AssistantChat } from './components/AssistantChat'
 import { CloudSky } from './components/CloudSky'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
@@ -27,6 +28,7 @@ export default function App() {
       </main>
       <Footer />
       <WhatsAppFab />
+      <AssistantChat />
     </div>
   )
 }
