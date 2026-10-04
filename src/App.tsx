@@ -1,3 +1,5 @@
+import { MotionConfig } from 'framer-motion'
+import { Accessibility } from './components/Accessibility'
 import { AgencyCTA } from './components/AgencyCTA'
 import { AngelDust } from './components/AngelDust'
 import { AssistantChat } from './components/AssistantChat'
@@ -18,13 +20,18 @@ import { ToolsMarquee } from './components/ToolsMarquee'
 import { WhatsAppFab } from './components/WhatsAppFab'
 import { useEffect } from 'react'
 import { useIsTouch, usePrefersReducedMotion } from './hooks/useIsTouch'
+import { useA11y } from './lib/a11y'
 import { startSmoothScroll } from './lib/smoothScroll'
 
 export default function App() {
   const touch = useIsTouch()
-  const reduced = usePrefersReducedMotion()
+  const prefersReduced = usePrefersReducedMotion()
+  // "עצירת אנימציות" בתפריט הנגישות שקולה להגדרת הפחתת תנועה במערכת
+  const { calm } = useA11y()
+  const reduced = prefersReduced || calm
   useEffect(() => (touch || reduced ? undefined : startSmoothScroll()), [touch, reduced])
   return (
+    <MotionConfig reducedMotion={calm ? 'always' : 'user'}>
     <div dir="rtl" className="relative min-h-screen overflow-x-clip font-sans text-white">
       {!reduced && <CloudSky lite={touch} />}
       {!reduced && !touch && <AngelDust />}
@@ -34,7 +41,7 @@ export default function App() {
       <Header />
       <main>
         <Hero />
-        <ToolsMarquee />
+        <ToolsMarquee calm={reduced} />
         <Library />
         <Manifesto />
         <HowItWorks />
@@ -46,6 +53,8 @@ export default function App() {
       <AssistantChat />
       <CopyFlight />
       {!reduced && <Intro />}
+      <Accessibility />
     </div>
+    </MotionConfig>
   )
 }

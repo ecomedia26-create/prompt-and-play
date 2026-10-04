@@ -23,6 +23,14 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 .lenis.lenis-stopped { overflow: hidden; }
 
+/* תפריט נגישות */
+html.pp-big { font-size: 118%; }
+html.pp-calm *, html.pp-calm *::before, html.pp-calm *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+html.pp-contrast .glass { background: rgba(8, 10, 34, .94); border-color: rgba(255,255,255,.55); backdrop-filter: none; }
+html.pp-contrast body { text-shadow: none; }
+html.pp-contrast main p, html.pp-contrast main span { color: #fff !important; }
+html.pp-links a { text-decoration: underline !important; text-underline-offset: 3px; outline: 1px dashed rgba(255,255,255,.6); }
+
 @layer components {
   .glass {
     background: linear-gradient(145deg, rgba(22,24,64,.62), rgba(14,15,44,.5));

@@ -2,7 +2,8 @@ import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'fram
 import { Search } from 'lucide-react'
 import { useEffect, type FormEvent } from 'react'
 import { PROPRIETARY, SKILLS } from '../data/skills'
-import { useIsTouch } from '../hooks/useIsTouch'
+import { useIsTouch, usePrefersReducedMotion } from '../hooks/useIsTouch'
+import { useA11y } from '../lib/a11y'
 import { goToLibrary, setSearch, useSearch } from '../lib/search'
 import { useSound } from '../lib/sound'
 
@@ -16,6 +17,9 @@ export function Hero() {
   const query = useSearch()
   const { play } = useSound()
   const touch = useIsTouch()
+  const { calm } = useA11y()
+  const prefersReduced = usePrefersReducedMotion()
+  const still = calm || prefersReduced
   const narrow = typeof window !== 'undefined' && window.innerWidth < 480
 
   // גלילה: התוכן מתרחק לאט ונמוג, כאילו הגולש עף למעלה דרך העננים
@@ -31,14 +35,14 @@ export function Hero() {
   const rotX = useSpring(useTransform(my, [-1, 1], [8, -8]), { stiffness: 80, damping: 18 })
   const shiftX = useSpring(useTransform(mx, [-1, 1], [-18, 18]), { stiffness: 80, damping: 18 })
   useEffect(() => {
-    if (touch) return
+    if (touch || still) return
     const move = (e: PointerEvent) => {
       mx.set((e.clientX / window.innerWidth) * 2 - 1)
       my.set((e.clientY / window.innerHeight) * 2 - 1)
     }
     window.addEventListener('pointermove', move, { passive: true })
     return () => window.removeEventListener('pointermove', move)
-  }, [touch, mx, my])
+  }, [touch, still, mx, my])
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault()

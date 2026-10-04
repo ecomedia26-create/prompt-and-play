@@ -9,7 +9,7 @@ const wrap = (min: number, max: number, v: number) => {
 }
 
 // פס הכלים זורם לבד, ומאיץ ומחליף כיוון לפי מהירות הגלילה
-export function ToolsMarquee() {
+export function ToolsMarquee({ calm = false }: { calm?: boolean }) {
   const base = useMotionValue(0)
   const { scrollY } = useScroll()
   const velocity = useSpring(useVelocity(scrollY), { damping: 50, stiffness: 400 })
@@ -18,6 +18,7 @@ export function ToolsMarquee() {
   const dir = useRef(1)
 
   useAnimationFrame((_, delta) => {
+    if (calm) return
     let move = dir.current * 1.6 * (delta / 1000)
     const f = factor.get()
     if (f < 0) dir.current = -1

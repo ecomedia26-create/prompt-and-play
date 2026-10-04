@@ -13,6 +13,13 @@ export function Footer() {
           <p className="text-center">
             Prompt & Play הוא מיזם קהילתי חינמי מבית {BRAND.nameHe}. © {YEAR}
           </p>
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new Event('pp:a11y-statement'))}
+            className="text-xs text-white/70 underline-offset-2 hover:text-white hover:underline"
+          >
+            הצהרת נגישות
+          </button>
           <InstallChip />
         </div>
         <div className="flex flex-col items-center gap-1 sm:items-end">
