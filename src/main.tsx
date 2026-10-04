@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
+import { registerServiceWorker } from './lib/install.ts'
 import { SoundProvider } from './lib/sound.tsx'
 
 createRoot(document.getElementById('root')!).render(
@@ -11,3 +12,5 @@ createRoot(document.getElementById('root')!).render(
     </SoundProvider>
   </StrictMode>,
 )
+
+registerServiceWorker()

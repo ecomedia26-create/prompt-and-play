@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { ChevronDown, Lock, Sparkles, Volume2 } from 'lucide-react'
 import { BRAND } from '../lib/brand'
 import { useSound } from '../lib/sound'
+import { InstallChip } from './InstallChip'
 import { MagneticButton } from './MagneticButton'
 import { WhatsAppButton } from './WhatsAppButton'
 
@@ -68,19 +69,22 @@ export function Hero() {
           <WhatsAppButton label="רוצים אתר כזה לעסק?" />
         </motion.div>
 
-        {!enabled && (
-          <motion.button
-            type="button"
-            onClick={toggle}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.5 }}
-            className="glass mx-auto mt-6 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-white transition hover:shadow-glow-blue"
-          >
-            <Volume2 className="h-4 w-4 animate-pulse text-neon-blue" />
-            הפעילו את חוויית הסאונד
-          </motion.button>
-        )}
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+          {!enabled && (
+            <motion.button
+              type="button"
+              onClick={toggle}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.5 }}
+              className="glass inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-white transition hover:shadow-glow-blue"
+            >
+              <Volume2 className="h-4 w-4 animate-pulse text-neon-blue" />
+              הפעילו את חוויית הסאונד
+            </motion.button>
+          )}
+          <InstallChip />
+        </div>
 
         {/* קולאאוט אקו מדיה */}
         <motion.a
