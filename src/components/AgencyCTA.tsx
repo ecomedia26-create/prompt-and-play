@@ -55,6 +55,15 @@ export function AgencyCTA() {
                 {BRAND.phoneDisplay}
               </a>
             </p>
+            <a
+              href={BRAND.siteUrl}
+              target="_blank"
+              rel="noopener"
+              className="glass mt-2 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white transition hover:shadow-glow-blue"
+            >
+              הכירו את אקו מדיה: עבודות, שירותים וסרטונים
+              <span dir="ltr" className="text-neon-blue">{BRAND.siteDisplay} ↗</span>
+            </a>
           </div>
         </motion.div>
       </div>

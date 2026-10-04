@@ -2,6 +2,8 @@
 export const BRAND = {
   nameHe: 'אקו מדיה',
   nameEn: 'Eco Media',
+  siteUrl: 'https://www.ecomedia.co.il',
+  siteDisplay: 'ecomedia.co.il',
   phoneDisplay: '053-426-2621',
   phoneIntl: '972534262621',
   banner: 'מיזם קהילתי לקידום עסקים ב-AI מבית אקו מדיה (Eco Media)',

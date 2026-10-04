@@ -11,9 +11,14 @@ export function Footer() {
         <p className="text-center">
           Prompt & Play הוא מיזם קהילתי חינמי מבית {BRAND.nameHe}. © {YEAR}
         </p>
-        <a href={waLink()} target="_blank" rel="noopener noreferrer" className="hover:text-wa" dir="ltr">
-          WhatsApp {BRAND.phoneDisplay}
-        </a>
+        <div className="flex flex-col items-center gap-1 sm:items-end">
+          <a href={BRAND.siteUrl} target="_blank" rel="noopener" className="font-semibold text-white hover:text-neon-blue">
+            לאתר אקו מדיה: <span dir="ltr">{BRAND.siteDisplay}</span>
+          </a>
+          <a href={waLink()} target="_blank" rel="noopener noreferrer" className="hover:text-wa" dir="ltr">
+            WhatsApp {BRAND.phoneDisplay}
+          </a>
+        </div>
       </div>
     </footer>
   )

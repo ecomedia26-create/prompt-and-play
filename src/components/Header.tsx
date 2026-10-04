@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { Sparkles, Volume2, VolumeX } from 'lucide-react'
+import { Globe, Sparkles, Volume2, VolumeX } from 'lucide-react'
 import { BRAND } from '../lib/brand'
 import { useSound } from '../lib/sound'
 import { EcoLogo } from './EcoLogo'
@@ -55,6 +55,17 @@ export function Header() {
               {enabled ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
               <span dir="ltr" className="hidden sm:inline">Sound: {enabled ? 'ON' : 'OFF'}</span>
             </button>
+            <a
+              href={BRAND.siteUrl}
+              target="_blank"
+              rel="noopener"
+              onClick={() => play('click')}
+              aria-label="לאתר הראשי של אקו מדיה"
+              className="glass flex items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-2 text-xs font-semibold text-white/85 transition hover:text-neon-blue"
+            >
+              <Globe className="h-4 w-4 text-neon-blue" />
+              <span className="hidden md:inline">לאתר אקו מדיה</span>
+            </a>
             <WhatsAppButton size="sm" label="וואטסאפ" className="hidden sm:inline-flex" />
           </div>
         </div>
