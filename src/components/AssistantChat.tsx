@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowUpLeft, Send, Sparkles, X } from 'lucide-react'
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { accentFor, SKILLS, type Skill } from '../data/skills'
+import { aiAvailable } from '../lib/ai'
 import { waLink } from '../lib/brand'
 import { AGENCY_HINT, recommend } from '../lib/recommend'
 import { openSkill } from '../lib/skillBus'
@@ -40,17 +41,8 @@ export function AssistantChat() {
   const [msgs, setMsgs] = useState<Msg[]>([GREETING])
   const [draft, setDraft] = useState('')
   const [busy, setBusy] = useState(false)
-  const ai = useRef<boolean | null>(null)
   const list = useRef<HTMLDivElement>(null)
   const { play } = useSound()
-
-  useEffect(() => {
-    if (!open || ai.current !== null) return
-    fetch('/api/assistant')
-      .then((r) => r.json())
-      .then((d: { ai?: boolean }) => (ai.current = !!d.ai))
-      .catch(() => (ai.current = false))
-  }, [open])
 
   useEffect(() => {
     list.current?.scrollTo({ top: list.current.scrollHeight, behavior: 'smooth' })
@@ -65,7 +57,7 @@ export function AssistantChat() {
     setDraft('')
     setBusy(true)
     let answer: Msg | null = null
-    if (ai.current) {
+    if (await aiAvailable()) {
       try {
         const r = await fetch('/api/assistant', {
           method: 'POST',

@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 import { accentFor, PROPRIETARY, type Skill } from '../data/skills'
 import { BRAND, withWatermark } from '../lib/brand'
 import { useSound } from '../lib/sound'
+import { ShareRow } from './ShareRow'
+import { TryItNow } from './TryItNow'
 import { WhatsAppButton } from './WhatsAppButton'
 
 interface Props {
@@ -76,16 +78,18 @@ export function SkillModal({ skill, onClose }: Props) {
             animate={{ y: 0, scale: 1, opacity: 1 }}
             exit={{ y: 40, scale: 0.97, opacity: 0 }}
             transition={{ type: 'spring', stiffness: 220, damping: 24 }}
-            className="neon-border relative max-h-[92svh] w-full max-w-2xl overflow-y-auto rounded-t-3xl bg-[#12153d] p-6 sm:rounded-3xl sm:p-8"
+            className="neon-border relative flex max-h-[92svh] w-full max-w-2xl flex-col rounded-t-3xl bg-[#12153d] sm:rounded-3xl"
           >
             <button
               type="button"
               onClick={onClose}
               aria-label="סגירה"
-              className="absolute top-4 end-4 rounded-full p-2 text-white/50 transition hover:bg-white/10 hover:text-white"
+              className="absolute top-4 end-4 z-10 rounded-full bg-[#12153d]/80 p-2 text-white/50 transition hover:bg-white/10 hover:text-white"
             >
               <X className="h-5 w-5" />
             </button>
+            {/* הגלילה בתוך עטיפה פנימית, כדי שמסגרת הניאון תישאר צמודה לקצוות המודאל */}
+            <div className="overflow-y-auto overscroll-contain p-6 sm:p-8">
 
             <span className="text-xs font-semibold" style={{ color: accent }}>
               {skill.category_he}
@@ -159,8 +163,11 @@ export function SkillModal({ skill, onClose }: Props) {
                 <p className="mt-3 text-center text-xs text-white/40">
                   ההעתקה כוללת חתימת קרדיט של אקו מדיה. טיפ: הדביקו כ-System Prompt בפרויקט ייעודי ב-Claude.
                 </p>
+                <TryItNow key={skill.id} skill={skill} />
               </>
             )}
+            <ShareRow skill={skill} />
+            </div>
           </motion.div>
         </motion.div>
       )}
