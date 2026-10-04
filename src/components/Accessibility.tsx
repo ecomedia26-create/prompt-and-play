@@ -78,7 +78,7 @@ export function Accessibility() {
         aria-expanded={open}
         aria-label="תפריט נגישות"
         title="נגישות"
-        className="fixed left-5 top-1/2 z-[59] grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-white/25 bg-[#1c2160]/90 text-white shadow-lg backdrop-blur transition hover:bg-[#262c78]"
+        className="fixed bottom-20 left-6 z-[59] grid h-11 w-11 place-items-center sm:bottom-auto sm:left-5 sm:top-1/2 sm:-translate-y-1/2 rounded-full border border-white/25 bg-[#1c2160]/90 text-white shadow-lg backdrop-blur transition hover:bg-[#262c78]"
       >
         <A11yIcon className="h-5 w-5" />
       </button>

@@ -12,10 +12,10 @@ const TIPS = [
 
 export function ProTips() {
   return (
-    <section id="tips" className="scroll-mt-24 py-16">
+    <section id="tips" className="scroll-mt-24 py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <RevealTitle className="text-[clamp(2.6rem,8vw,7rem)] leading-[0.95] tracking-tight">6 טיפים מהירים</RevealTitle>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <RevealTitle >6 טיפים מהירים</RevealTitle>
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {TIPS.map((t, i) => (
             <motion.div
               key={t.title}
@@ -23,10 +23,10 @@ export function ProTips() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: (i % 3) * 0.06 }}
-              className="glass rounded-2xl p-5"
+              className="glass rounded-2xl p-6 text-center"
             >
               <h3 className="font-bold">
-                <span className="me-2 text-white/50">{i + 1}.</span>
+                <span className="mb-1 block text-sm font-semibold text-white/50">{String(i + 1).padStart(2, '0')}</span>
                 {t.title}
               </h3>
               <p className="mt-1.5 text-sm text-white/75">{t.text}</p>

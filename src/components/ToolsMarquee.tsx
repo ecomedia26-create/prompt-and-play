@@ -28,14 +28,13 @@ export function ToolsMarquee({ calm = false }: { calm?: boolean }) {
   })
 
   return (
-    <div dir="ltr" aria-hidden="true" className="relative overflow-hidden border-y border-white/10 bg-white/[0.04] py-4 backdrop-blur-sm">
-      <motion.div style={{ x }} className="flex w-max gap-10 whitespace-nowrap">
+    <div dir="ltr" aria-hidden="true" className="relative overflow-hidden py-5 [mask-image:linear-gradient(90deg,transparent,#000_15%,#000_85%,transparent)]">
+      <motion.div style={{ x }} className="flex w-max gap-14 whitespace-nowrap">
         {[0, 1].map((k) => (
-          <div key={k} className="flex gap-10">
+          <div key={k} className="flex gap-14">
             {TOOLS.map((t) => (
-              <span key={t} className="font-display text-2xl font-black tracking-tight text-white/55 sm:text-3xl">
+              <span key={t} className="font-display text-lg font-bold tracking-tight text-white/50 sm:text-xl">
                 {t}
-                <span className="ms-10 text-white/25">✦</span>
               </span>
             ))}
           </div>

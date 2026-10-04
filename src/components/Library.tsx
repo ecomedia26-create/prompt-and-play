@@ -14,9 +14,9 @@ const GRID = 'grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-
 
 function SectionTitle({ title, sub }: { title: string; sub: string }) {
   return (
-    <div className="mb-6">
-      <RevealTitle className="text-[clamp(2.6rem,8vw,7rem)] leading-[0.95] tracking-tight">{title}</RevealTitle>
-      <p className="mt-2 max-w-2xl text-white/85">{sub}</p>
+    <div className="mb-10 text-center">
+      <RevealTitle>{title}</RevealTitle>
+      <p className="mx-auto mt-3 max-w-3xl text-lg text-white/90 [text-shadow:0_1px_10px_rgba(18,20,70,.35)]">{sub}</p>
     </div>
   )
 }
@@ -57,7 +57,7 @@ export function Library() {
 
   return (
     <>
-      <section id="start" className="relative scroll-mt-24 py-10">
+      <section id="start" className="relative scroll-mt-24 py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <SectionTitle title="התחילו כאן" sub="ששת הפרומפטים שהכי שווים לעסק קטן. לוחצים העתק, מדביקים ב-Claude או ב-ChatGPT, וזהו." />
           <div className={GRID.replace('xl:grid-cols-4', '')}>
@@ -68,11 +68,11 @@ export function Library() {
         </div>
       </section>
 
-      <section id="library" className="relative scroll-mt-24 py-16">
+      <section id="library" className="relative scroll-mt-24 py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div className="flex flex-col items-center">
             <SectionTitle title="הספרייה" sub={`כל ${SKILLS.length} הפרומפטים, לפי תחום. לחצו "התאמה לעסק" כדי למלא את הפרטים שלכם לפני ההעתקה.`} />
-            <label className="glass mb-6 flex w-full items-center gap-2 rounded-full px-4 py-2.5 focus-within:border-white/50 lg:w-80">
+            <label className="glass -mt-4 mb-8 flex w-full max-w-md items-center gap-2 rounded-full px-4 py-2.5 focus-within:border-white/50">
               <Search className="h-5 w-5 shrink-0 text-white/50" />
               <input
                 type="search"
@@ -85,7 +85,7 @@ export function Library() {
             </label>
           </div>
 
-          <div className="-mx-4 mb-6 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:px-0" role="tablist">
+          <div className="-mx-4 mb-8 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:justify-center sm:px-0" role="tablist">
             {CATEGORIES.map((c) => {
               const active = cat === c.id
               return (
@@ -109,7 +109,7 @@ export function Library() {
           </div>
 
           {q && (
-            <p className="mb-4 flex items-center gap-2 text-sm text-white/85">
+            <p className="mb-4 flex items-center justify-center gap-2 text-sm text-white/85">
               {list.length} תוצאות עבור "{q}"
               <button
                 type="button"

@@ -98,10 +98,10 @@ export function AssistantChat() {
         whileTap={{ scale: 0.95 }}
         aria-expanded={open}
         aria-label={open ? 'סגירת העוזר' : 'פתיחת עוזר ה-AI'}
-        className="fixed bottom-5 right-5 z-[58] flex items-center gap-2 rounded-full border border-white/20 bg-[#1c2160]/90 p-3 text-sm font-semibold text-white shadow-lg shadow-black/20 backdrop-blur sm:px-4"
+        title={open ? undefined : 'לא בטוחים? שאלו את העוזר'}
+        className="fixed bottom-5 right-5 z-[58] flex items-center gap-2 rounded-full border border-white/20 bg-[#1c2160]/90 p-3 text-sm font-semibold text-white shadow-lg shadow-black/20 backdrop-blur"
       >
         {open ? <X className="h-5 w-5" /> : <Sparkles className="h-5 w-5" />}
-        <span className="hidden sm:inline">{open ? 'סגירה' : 'לא בטוחים? שאלו את העוזר'}</span>
       </motion.button>
 
       <AnimatePresence>

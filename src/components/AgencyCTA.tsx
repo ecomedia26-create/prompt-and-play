@@ -209,13 +209,13 @@ export function AgencyCTA() {
   }, [touch, wide])
 
   return (
-    <section id="agency" className="relative scroll-mt-24 pt-16">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+    <section id="agency" className="relative scroll-mt-24 pt-16 sm:pt-24">
+      <div className="mx-auto max-w-7xl px-4 text-center sm:px-6">
         <p className="text-sm font-semibold text-white/75">
           {BRAND.nameHe} · <span dir="ltr">{BRAND.nameEn}</span>
         </p>
-        <RevealTitle className="mt-2 text-[clamp(2.6rem,8vw,7rem)] leading-[0.95] tracking-tight">מה אנחנו בונים</RevealTitle>
-        <p className="mt-4 max-w-2xl text-lg text-white/85">הפרומפטים בחינם. כשתרצו את הגרסה המלאה, בהתאמה למותג שלכם, אנחנו כאן.</p>
+        <RevealTitle className="mt-2">מה אנחנו בונים</RevealTitle>
+        <p className="mx-auto mt-3 max-w-2xl text-lg text-white/90 [text-shadow:0_1px_10px_rgba(18,20,70,.35)]">הפרומפטים בחינם. כשתרצו את הגרסה המלאה, בהתאמה למותג שלכם, אנחנו כאן.</p>
       </div>
 
       {wide ? (
@@ -242,7 +242,7 @@ export function AgencyCTA() {
       )}
 
       <div className="mx-auto max-w-4xl px-4 py-24 text-center sm:px-6">
-        <h2 className="font-display text-[clamp(2.2rem,5.5vw,4.5rem)] font-black leading-[1.02] tracking-tight">
+        <h2 className="font-display text-[clamp(2.2rem,5vw,4rem)] font-black leading-[1.1] tracking-tight">
           האתר הזה נבנה ע"י אקו מדיה.
           <br />
           רוצים כזה לעסק שלכם?

@@ -16,7 +16,7 @@ export function WhatsAppFab() {
       onClick={() => play('click')}
       style={{ opacity }}
       aria-label="שלחו הודעת וואטסאפ לאקו מדיה"
-      className="group fixed bottom-5 left-5 z-50 flex items-center gap-2 rounded-full bg-wa p-3.5 text-void shadow-glow-wa"
+      className="group fixed bottom-5 left-5 z-50 flex items-center gap-2 rounded-full bg-wa p-3.5 text-void shadow-lg shadow-black/20"
     >
       <WhatsAppIcon className="h-6 w-6" />
       <span className="hidden max-w-0 overflow-hidden whitespace-nowrap font-bold transition-all duration-300 group-hover:max-w-xs sm:inline">

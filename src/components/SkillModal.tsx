@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { Check, ChevronDown, Copy, ExternalLink, Lock, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { accentFor, fillPrompt, PROPRIETARY, type Skill } from '../data/skills'
+import { fillPrompt, PROPRIETARY, type Skill } from '../data/skills'
 import { BRAND, waLink, withWatermark } from '../lib/brand'
 import { chatgptUrl, claudeUrl, copyText } from '../lib/copy'
 import { celebrateCopy } from '../lib/copyFx'
@@ -123,7 +123,6 @@ export function SkillModal({ skill, onClose }: Props) {
   }, [skill, onClose])
 
   const locked = skill ? PROPRIETARY.has(skill.category) : false
-  const accent = skill ? accentFor(skill.category) : '#00F0FF'
 
   return (
     <AnimatePresence>
@@ -155,7 +154,7 @@ export function SkillModal({ skill, onClose }: Props) {
               <X className="h-5 w-5" />
             </button>
             <div className="overflow-y-auto overscroll-contain p-6 sm:p-8">
-              <span className="text-xs font-semibold" style={{ color: accent }}>
+              <span className="text-xs font-semibold text-white/60">
                 {skill.category_he}
               </span>
               <h2 id="skill-title" className="mt-1 pe-10 font-display text-2xl font-black sm:text-3xl">
@@ -164,8 +163,8 @@ export function SkillModal({ skill, onClose }: Props) {
               <p className="mt-2 text-white/80">{skill.outcome_he ?? skill.short_desc}</p>
 
               {locked ? (
-                <div className="mt-6 rounded-2xl border border-fuchsia-400/30 bg-fuchsia-500/5 p-6 text-center">
-                  <Lock className="mx-auto h-8 w-8 text-fuchsia-300" />
+                <div className="mt-6 rounded-2xl border border-white/15 bg-white/5 p-6 text-center">
+                  <Lock className="mx-auto h-8 w-8 text-white/70" />
                   <h3 className="mt-3 text-lg font-bold">ידע 5D בלעדי לאקו מדיה</h3>
                   <p className="mx-auto mt-2 max-w-md text-sm text-white/70">
                     ארכיטקטורת אתרי ה-5D, השיידרים וחוויות התלת-ממד נשמרים כנכס פנימי של הסוכנות. האתר הזה הוא ההדגמה החיה.

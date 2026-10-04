@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Check, Copy, Lock } from 'lucide-react'
 import { useState } from 'react'
-import { accentFor, fillPrompt, PROPRIETARY, type Skill } from '../data/skills'
+import { fillPrompt, PROPRIETARY, type Skill } from '../data/skills'
 import { withWatermark } from '../lib/brand'
 import { copyText } from '../lib/copy'
 import { celebrateCopy } from '../lib/copyFx'
@@ -12,7 +12,6 @@ import { useSound } from '../lib/sound'
 export function SkillCard({ skill, index = 0 }: { skill: Skill; index?: number }) {
   const { play } = useSound()
   const [copied, setCopied] = useState(false)
-  const accent = accentFor(skill.category)
   const locked = PROPRIETARY.has(skill.category)
 
   const open = () => {
@@ -37,47 +36,36 @@ export function SkillCard({ skill, index = 0 }: { skill: Skill; index?: number }
       exit={{ opacity: 0 }}
       transition={{ delay: (index % 8) * 0.04, duration: 0.35 }}
       onMouseEnter={() => play('hover')}
-      onMouseMove={(e) => {
-        // אור רך שעוקב אחרי הסמן בתוך הכרטיס
-        const r = e.currentTarget.getBoundingClientRect()
-        e.currentTarget.style.setProperty('--mx', `${e.clientX - r.left}px`)
-        e.currentTarget.style.setProperty('--my', `${e.clientY - r.top}px`)
-      }}
-      whileHover={{ y: -4 }}
-      className="glass spotlight relative flex h-full flex-col rounded-2xl p-5 transition-colors hover:border-white/30"
+      className="glass relative flex h-full flex-col items-center rounded-2xl p-6 text-center transition-colors hover:border-white/35 hover:bg-white/[0.14]"
     >
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="rounded-full px-2.5 py-0.5 text-[11px] font-semibold" style={{ color: accent, background: `${accent}1a` }}>
-          {skill.category_he}
-        </span>
+      <div className="flex flex-wrap items-center justify-center gap-2 text-[11px] font-semibold text-white/60">
+        <span>{skill.category_he}</span>
         {locked && (
-          <span className="inline-flex items-center gap-1 rounded-full bg-fuchsia-400/15 px-2.5 py-0.5 text-[11px] font-semibold text-fuchsia-200">
+          <span className="inline-flex items-center gap-1 rounded-full bg-white/10 px-2.5 py-0.5 text-white/80">
             <Lock className="h-3 w-3" />
             בלעדי לאקו מדיה
           </span>
         )}
       </div>
 
-      <h3 className="mt-3 text-lg font-bold leading-snug">
+      <h3 className="mt-2 text-lg font-bold leading-snug">
         {/* כל הכרטיס לחיץ לפתיחה, הכפתורים יושבים מעל */}
-        <button type="button" onClick={open} className="text-start after:absolute after:inset-0 after:rounded-2xl focus-visible:outline-none">
+        <button type="button" onClick={open} className="text-center after:absolute after:inset-0 after:rounded-2xl focus-visible:outline-none">
           {skill.title_he}
         </button>
       </h3>
       <p className="mt-1.5 line-clamp-2 text-sm text-white/75">{skill.outcome_he ?? skill.short_desc}</p>
 
       {!!skill.tools?.length && (
-        <p className="mt-3 flex flex-wrap items-center gap-1.5 text-[11px] text-white/60">
-          מתאים ל:
-          {skill.tools.map((t) => (
-            <span key={t} dir="ltr" className="rounded-md bg-white/10 px-1.5 py-0.5 font-medium text-white/80">
-              {t}
-            </span>
-          ))}
+        <p className="mt-3 text-xs text-white/55">
+          מתאים ל:{' '}
+          <span dir="ltr" className="font-medium text-white/75">
+            {skill.tools.join(' · ')}
+          </span>
         </p>
       )}
 
-      <div className="relative z-10 mt-auto flex gap-2 pt-4">
+      <div className="relative z-10 mt-auto flex w-full gap-2 pt-5">
         {!locked && (
           <button
             type="button"

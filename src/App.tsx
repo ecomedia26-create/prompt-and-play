@@ -5,7 +5,6 @@ import { AngelDust } from './components/AngelDust'
 import { AssistantChat } from './components/AssistantChat'
 import { CloudSky } from './components/CloudSky'
 import { CopyFlight } from './components/CopyFlight'
-import { CursorRing } from './components/CursorRing'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
@@ -15,7 +14,6 @@ import { Library } from './components/Library'
 import { Manifesto } from './components/Manifesto'
 import { PaperPlane } from './components/PaperPlane'
 import { ProTips } from './components/ProTips'
-import { ScrollProgress } from './components/ScrollProgress'
 import { ToolsMarquee } from './components/ToolsMarquee'
 import { WhatsAppFab } from './components/WhatsAppFab'
 import { useEffect } from 'react'
@@ -36,8 +34,6 @@ export default function App() {
       {!reduced && <CloudSky lite={touch} />}
       {!reduced && !touch && <AngelDust />}
       {!reduced && <PaperPlane touch={touch} />}
-      {!reduced && !touch && <CursorRing />}
-      <ScrollProgress />
       <Header />
       <main>
         <Hero />

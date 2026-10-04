@@ -7,7 +7,7 @@ function Word({ word, progress, range }: { word: string; progress: MotionValue<n
   const opacity = useTransform(progress, range, [0.18, 1])
   const y = useTransform(progress, range, [8, 0])
   return (
-    <motion.span style={{ opacity, y }} className="me-[0.28em] inline-block">
+    <motion.span style={{ opacity, y }} className="mx-[0.14em] inline-block">
       {word}
     </motion.span>
   )
@@ -19,8 +19,8 @@ export function Manifesto() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start 0.85', 'end 0.45'] })
   const words = TEXT.split(' ')
   return (
-    <section className="py-20 sm:py-28">
-      <p ref={ref} className="mx-auto max-w-5xl px-4 font-display text-3xl font-black leading-[1.25] [text-shadow:0_2px_20px_rgba(18,20,70,.35)] sm:px-6 sm:text-5xl lg:text-6xl">
+    <section className="py-24 sm:py-32">
+      <p ref={ref} className="mx-auto max-w-4xl px-4 text-center font-display text-3xl font-black leading-[1.3] sm:px-6 sm:text-4xl lg:text-5xl">
         {words.map((w, i) => (
           <Word key={i} word={w} progress={scrollYProgress} range={[i / words.length, (i + 1) / words.length]} />
         ))}

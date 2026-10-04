@@ -31,9 +31,9 @@ export function Hero() {
   // עכבר: הכותרת נוטה ומרחפת בעדינות לכיוון הסמן
   const mx = useMotionValue(0)
   const my = useMotionValue(0)
-  const rotY = useSpring(useTransform(mx, [-1, 1], [-10, 10]), { stiffness: 80, damping: 18 })
-  const rotX = useSpring(useTransform(my, [-1, 1], [8, -8]), { stiffness: 80, damping: 18 })
-  const shiftX = useSpring(useTransform(mx, [-1, 1], [-18, 18]), { stiffness: 80, damping: 18 })
+  const rotY = useSpring(useTransform(mx, [-1, 1], [-4, 4]), { stiffness: 80, damping: 18 })
+  const rotX = useSpring(useTransform(my, [-1, 1], [3, -3]), { stiffness: 80, damping: 18 })
+  const shiftX = useSpring(useTransform(mx, [-1, 1], [-8, 8]), { stiffness: 80, damping: 18 })
   useEffect(() => {
     if (touch || still) return
     const move = (e: PointerEvent) => {
@@ -65,7 +65,7 @@ export function Hero() {
                 initial={{ opacity: 0, y: 50, filter: 'blur(10px)' }}
                 animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                 transition={{ delay: 0.1 + i * 0.14, type: 'spring', stiffness: 110, damping: 16 }}
-                className={`inline-block ${w === '&' ? 'text-neon-gradient mx-3 [text-shadow:none]' : ''}`}
+                className={`inline-block ${w === '&' ? 'mx-3 font-light text-white/70' : ''}`}
               >
                 {w}
               </motion.span>

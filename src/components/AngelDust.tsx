@@ -32,8 +32,8 @@ export function AngelDust() {
     let py = -1
     const onMove = (e: PointerEvent) => {
       const dist = px < 0 ? 0 : Math.hypot(e.clientX - px, e.clientY - py)
-      const n = Math.min(3, Math.floor(dist / 14))
-      for (let i = 0; i < n && motes.length < 110; i++) {
+      const n = Math.min(3, Math.floor(dist / 28))
+      for (let i = 0; i < n && motes.length < 50; i++) {
         motes.push({
           x: e.clientX + (Math.random() - 0.5) * 8,
           y: e.clientY + (Math.random() - 0.5) * 8,
@@ -41,7 +41,7 @@ export function AngelDust() {
           vy: Math.random() * 0.6 + 0.2,
           life: 1,
           size: Math.random() * 2.2 + 0.8,
-          hue: Math.random() < 0.75 ? 45 : 190,
+          hue: 45,
         })
       }
       px = e.clientX
@@ -66,11 +66,11 @@ export function AngelDust() {
           continue
         }
         const r = m.size * (0.6 + m.life)
-        const a = m.life * 0.55
+        const a = m.life * 0.35
         const g = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, r * 2.5)
-        g.addColorStop(0, `hsla(${m.hue}, 90%, 94%, ${a})`)
-        g.addColorStop(0.3, `hsla(${m.hue}, 80%, 75%, ${a * 0.4})`)
-        g.addColorStop(1, `hsla(${m.hue}, 80%, 70%, 0)`)
+        g.addColorStop(0, `hsla(${m.hue}, 30%, 97%, ${a})`)
+        g.addColorStop(0.3, `hsla(${m.hue}, 30%, 90%, ${a * 0.4})`)
+        g.addColorStop(1, `hsla(${m.hue}, 30%, 90%, 0)`)
         ctx.fillStyle = g
         ctx.beginPath()
         ctx.arc(m.x, m.y, r * 2.5, 0, Math.PI * 2)
