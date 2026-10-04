@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ChevronDown, Lock, Sparkles } from 'lucide-react'
+import { ChevronDown, Lock, Sparkles, Volume2 } from 'lucide-react'
 import { lazy, Suspense } from 'react'
 import { useIsTouch, usePrefersReducedMotion } from '../hooks/useIsTouch'
 import { BRAND } from '../lib/brand'
@@ -14,7 +14,7 @@ const TITLE = 'Prompt & Play'
 export function Hero() {
   const touch = useIsTouch()
   const reduced = usePrefersReducedMotion()
-  const { play } = useSound()
+  const { enabled, toggle, play } = useSound()
 
   return (
     <section id="top" className="relative flex min-h-[100svh] items-center overflow-hidden pt-28">
@@ -81,6 +81,20 @@ export function Hero() {
           </MagneticButton>
           <WhatsAppButton label="רוצים אתר כזה לעסק?" />
         </motion.div>
+
+        {!enabled && (
+          <motion.button
+            type="button"
+            onClick={toggle}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5 }}
+            className="mx-auto mt-6 inline-flex items-center gap-2 rounded-full border border-neon-blue/30 px-4 py-2 text-sm text-neon-blue transition hover:bg-neon-blue/10"
+          >
+            <Volume2 className="h-4 w-4 animate-pulse" />
+            הפעילו את חוויית הסאונד
+          </motion.button>
+        )}
 
         {/* קולאאוט אקו מדיה */}
         <motion.a
