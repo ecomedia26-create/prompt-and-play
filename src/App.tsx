@@ -38,9 +38,9 @@ export default function App() {
       <main>
         <Hero />
         <ToolsMarquee calm={reduced} />
+        <HowItWorks />
         <Library />
         <Manifesto />
-        <HowItWorks />
         <ProTips />
         <AgencyCTA />
       </main>
