@@ -9,9 +9,9 @@ interface Flight {
   y: number
 }
 
-function PlaneIcon() {
+export function PlaneIcon({ className = 'h-9 w-9' }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" className="h-9 w-9 drop-shadow-[0_4px_8px_rgba(20,24,70,.35)]" aria-hidden="true">
+    <svg viewBox="0 0 24 24" className={`drop-shadow-[0_4px_8px_rgba(20,24,70,.35)] ${className}`} aria-hidden="true">
       <path d="M2 11.5 22 3l-6.5 18-3.2-7.3L2 11.5Z" fill="#fff" />
       <path d="M12.3 13.7 22 3 8.8 12.6l3.5 1.1Z" fill="#cfe9ff" />
     </svg>

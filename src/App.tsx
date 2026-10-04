@@ -8,6 +8,7 @@ import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { HowItWorks } from './components/HowItWorks'
+import { Intro } from './components/Intro'
 import { Library } from './components/Library'
 import { Manifesto } from './components/Manifesto'
 import { PaperPlane } from './components/PaperPlane'
@@ -44,6 +45,7 @@ export default function App() {
       <WhatsAppFab />
       <AssistantChat />
       <CopyFlight />
+      {!reduced && <Intro />}
     </div>
   )
 }
