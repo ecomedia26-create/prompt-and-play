@@ -1,10 +1,13 @@
 import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion'
 import { Search } from 'lucide-react'
 import { useEffect, type FormEvent } from 'react'
-import { SKILLS } from '../data/skills'
+import { PROPRIETARY, SKILLS } from '../data/skills'
 import { useIsTouch } from '../hooks/useIsTouch'
 import { goToLibrary, setSearch, useSearch } from '../lib/search'
 import { useSound } from '../lib/sound'
+
+// רק הפרומפטים הפתוחים נספרים כ"חינם"; סקילי ה-5D נעולים
+const FREE = SKILLS.filter((s) => !PROPRIETARY.has(s.category)).length
 
 const EXAMPLES = ['לכתוב פוסט שמוכר', 'תסריט לרילס', 'בוט וואטסאפ ללידים', 'הצעת מחיר ללקוח']
 
@@ -72,7 +75,7 @@ export function Hero() {
           transition={{ delay: 0.3 }}
           className="mx-auto mt-5 max-w-xl text-xl font-medium leading-snug text-white [text-shadow:0_1px_10px_rgba(18,20,70,.45)] sm:text-2xl"
         >
-          {SKILLS.length} פרומפטים מוכנים ל-AI שעושים עבודה אמיתית לעסק שלכם. בחינם.
+          {FREE} פרומפטים מוכנים ל-AI שעושים עבודה אמיתית לעסק שלכם. בחינם.
         </motion.p>
 
         <motion.form
@@ -122,7 +125,7 @@ export function Hero() {
           ))}
         </motion.div>
 
-        <p className="mt-6 text-sm text-white/85">{SKILLS.length} פרומפטים · בעברית · בלי הרשמה · מבית אקו מדיה</p>
+        <p className="mt-6 text-sm text-white/85">{FREE} פרומפטים · בעברית · בלי הרשמה · מבית אקו מדיה</p>
       </motion.div>
     </section>
   )
