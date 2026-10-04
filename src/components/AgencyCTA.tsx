@@ -2,6 +2,7 @@ import { AnimatePresence, motion, useMotionValue, useScroll, useSpring, useTrans
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
 import { useIsTouch } from '../hooks/useIsTouch'
 import { BRAND } from '../lib/brand'
+import { AdsReel } from './AdsReel'
 import { RevealTitle } from './RevealTitle'
 import { WhatsAppButton } from './WhatsAppButton'
 import { WhatsAppIcon } from './WhatsAppIcon'
@@ -240,6 +241,8 @@ export function AgencyCTA() {
           ))}
         </div>
       )}
+
+      <AdsReel />
 
       <div className="mx-auto max-w-4xl px-4 py-24 text-center sm:px-6">
         <h2 className="font-display text-[clamp(2.25rem,4.8vw,4rem)] font-bold leading-[1.15] tracking-tight">

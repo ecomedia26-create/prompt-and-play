@@ -20,7 +20,7 @@ import { WhatsAppFab } from './components/WhatsAppFab'
 import { useEffect } from 'react'
 import { useIsTouch, usePrefersReducedMotion } from './hooks/useIsTouch'
 import { useA11y } from './lib/a11y'
-import { startSmoothScroll } from './lib/smoothScroll'
+import { jumpToHash, startSmoothScroll } from './lib/smoothScroll'
 
 export default function App() {
   const touch = useIsTouch()
@@ -29,6 +29,7 @@ export default function App() {
   const { calm } = useA11y()
   const reduced = prefersReduced || calm
   useEffect(() => (touch || reduced ? undefined : startSmoothScroll()), [touch, reduced])
+  useEffect(jumpToHash, [])
   return (
     <MotionConfig reducedMotion={calm ? 'always' : 'user'}>
     <div dir="rtl" className="relative min-h-screen overflow-x-clip font-sans text-white">

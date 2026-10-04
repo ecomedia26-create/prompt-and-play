@@ -21,7 +21,7 @@ function seen() {
 // פתיחה קצרה (פעם אחת לביקור): מטוס הנייר חוצה את המסך, העננים נפתחים וחושפים את האתר.
 // כל לחיצה, מקש או גלילה מדלגים.
 export function Intro() {
-  const [show, setShow] = useState(() => !seen())
+  const [show, setShow] = useState(() => !seen() && !window.location.hash)
 
   useEffect(() => {
     if (!show) return
