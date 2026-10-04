@@ -67,7 +67,7 @@ export function SkillModal({ skill, onClose }: Props) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
+          <div className="absolute inset-0 bg-[#0b0d2a]/70 backdrop-blur-sm" onClick={onClose} />
           <motion.div
             role="dialog"
             aria-modal="true"
@@ -76,7 +76,7 @@ export function SkillModal({ skill, onClose }: Props) {
             animate={{ y: 0, scale: 1, opacity: 1 }}
             exit={{ y: 40, scale: 0.97, opacity: 0 }}
             transition={{ type: 'spring', stiffness: 220, damping: 24 }}
-            className="neon-border relative max-h-[92svh] w-full max-w-2xl overflow-y-auto rounded-t-3xl bg-void-800 p-6 sm:rounded-3xl sm:p-8"
+            className="neon-border relative max-h-[92svh] w-full max-w-2xl overflow-y-auto rounded-t-3xl bg-[#12153d] p-6 sm:rounded-3xl sm:p-8"
           >
             <button
               type="button"

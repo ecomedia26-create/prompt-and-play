@@ -40,7 +40,7 @@ export function Vault() {
             <h2 className="mt-2 font-display text-4xl font-black sm:text-5xl">
               הכספת: <span className="text-neon-gradient">{SKILLS.length} סקילים</span> לעסקים
             </h2>
-            <p className="mt-3 max-w-xl text-white/65">
+            <p className="mt-3 max-w-xl text-white/90">
               לחצו על כרטיסייה, העתיקו את הפרומפט והדביקו ב-Claude. חינם לגמרי, באדיבות אקו מדיה.
             </p>
           </div>
@@ -101,7 +101,7 @@ export function Vault() {
           <p className="py-16 text-center text-white/50">לא נמצאו סקילים. נסו מילת חיפוש אחרת.</p>
         )}
 
-        <p className="mt-10 flex items-center justify-center gap-2 text-center text-xs text-white/40">
+        <p className="mt-10 flex items-center justify-center gap-2 text-center text-xs text-white/85">
           <ShieldCheck className="h-4 w-4" />
           סקילי ה-5D מוצגים כהדגמה בלבד. ידע הפיתוח שמור בלעדית לאקו מדיה.
         </p>

@@ -93,7 +93,7 @@ export function WhatsAppSimulator() {
           <h2 className="mt-2 font-display text-4xl font-black sm:text-5xl">
             ככה נראה בוט <span className="text-wa">שעובד בשבילכם</span>
           </h2>
-          <p className="mt-4 max-w-lg text-lg text-white/70">
+          <p className="mt-4 max-w-lg text-lg text-white/90">
             הסקילים בכספת הם הבסיס. אקו מדיה לוקחת אותם צעד קדימה ומחברת אותם לוואטסאפ של העסק, ליומן ול-CRM, כך שהבוט מסנן
             לידים, לוקח הזמנות וקובע פגישות גם בשתיים בלילה.
           </p>
@@ -174,7 +174,7 @@ export function WhatsAppSimulator() {
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-wa text-void">➤</div>
             </div>
           </div>
-          <p className="mt-3 text-center text-xs text-white/40">הדגמה מבוססת על סקילי הבוטים מהכספת · Powered by אקו מדיה</p>
+          <p className="mt-3 text-center text-xs text-white/85">הדגמה מבוססת על סקילי הבוטים מהכספת · Powered by אקו מדיה</p>
         </div>
       </div>
     </section>

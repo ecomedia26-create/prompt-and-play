@@ -15,12 +15,12 @@ const NAV = [
 export function Header() {
   const { enabled, toggle, play } = useSound()
   const { scrollY } = useScroll()
-  const bg = useTransform(scrollY, [0, 120], ['rgba(7,7,9,0)', 'rgba(7,7,9,0.82)'])
+  const bg = useTransform(scrollY, [0, 120], ['rgba(22,26,74,0.35)', 'rgba(22,26,74,0.75)'])
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       {/* באנר עליון חברתי */}
-      <div className="relative overflow-hidden border-b border-neon-blue/20 bg-void bg-gradient-to-l from-neon-purple/30 via-void to-neon-blue/25">
+      <div className="relative overflow-hidden border-b border-white/15 bg-[#161a4a]/80 bg-gradient-to-l from-neon-purple/40 via-transparent to-neon-blue/30 backdrop-blur-md">
         <a
           href="#agency"
           className="flex items-center justify-center gap-2 px-4 py-1.5 text-center text-xs font-medium text-white/90 sm:text-sm"

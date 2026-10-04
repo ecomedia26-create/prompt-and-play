@@ -21,10 +21,12 @@ npm run build    # בדיקת טיפוסים + בילד ל-dist/
 | `src/lib/brand.ts` | טלפון, קישור וואטסאפ, באנר, קולאאוט ו-Watermark. כל המיתוג במקום אחד |
 | `src/data/public_skills_data.json` | קטלוג הסקילים (מהדרייב). להחלפת תוכן מחליפים רק את הקובץ הזה |
 | `src/data/skills.ts` | טיפוסים, קטגוריות, וסימון קטגוריית ה-5D כנכס בלעדי (נעולה להעתקה) |
-| `src/components/ParticleField.tsx` | קנבס Three.js עם שיידר חלקיקים "הד" המגיב לעכבר |
+| `src/components/CloudSky.tsx` | רקע שמיים תלת-ממדי: עננים בריימרצ'ינג בשיידר Three.js, הגלילה מעיפה את הגולש מעל העננים |
+| `src/components/AngelDust.tsx` | שובל אבק כוכבים שעוקב אחרי העכבר (דסקטופ בלבד) |
+| `src/lib/sound.tsx` | פסקול אמביינט גנרטיבי ב-Web Audio (מסונתז בדפדפן, בלי קבצי אודיו ובלי צורך ברישיון) |
 | `src/components/Vault.tsx`, `SkillCard.tsx`, `SkillModal.tsx` | גריד Bento, הטיית 3D, חיפוש, מודאל העתקה עם Watermark |
 | `src/components/WhatsAppSimulator.tsx` | סימולטור שיחת בוט בוואטסאפ (3 תרחישים) |
 | `src/components/AgencyCTA.tsx` | סקשן שירותי הסוכנות ותיבת הניאון |
 
 ## ביצועים במובייל
-במסכי מגע (`pointer: coarse`) מבוטלים מעקב העכבר וה-Tilt, מספר החלקיקים יורד ל-3,500 ו-pixelRatio מוגבל ל-1.5. הקנבס עוצר רינדור כשהוא מחוץ למסך, ונטען ב-lazy בצ'אנק נפרד. `prefers-reduced-motion` מכבה את הקנבס והאנימציות.
+במסכי מגע (`pointer: coarse`) מבוטלים מעקב העכבר וה-Tilt, השמיים מרונדרים ברזולוציה נמוכה יותר, בפחות צעדים ובקצב של 30 פריימים, ושובל האבק כבוי. `prefers-reduced-motion` מכבה את הקנבס והאנימציות.

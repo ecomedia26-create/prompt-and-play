@@ -20,7 +20,7 @@ export function AgencyCTA() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="neon-border relative overflow-hidden rounded-[2rem] bg-void-800 px-6 py-14 text-center sm:px-12"
+          className="neon-border relative overflow-hidden rounded-[2rem] bg-[#151a4c]/75 px-6 backdrop-blur-xl py-14 text-center sm:px-12"
         >
           <div className="absolute -top-32 start-1/2 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-neon-purple/25 blur-3xl" />
           <div className="absolute -bottom-32 end-1/4 h-64 w-96 rounded-full bg-neon-blue/20 blur-3xl" />

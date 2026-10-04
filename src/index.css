@@ -3,8 +3,13 @@
 @tailwind utilities;
 
 @layer base {
-  html { scroll-behavior: smooth; background: #070709; }
-  body { font-family: Heebo, Rubik, system-ui, sans-serif; line-height: 1.6; overflow-x: hidden; }
+  html { scroll-behavior: smooth; background: linear-gradient(180deg, #29337a 0%, #6574d8 45%, #f3c4d6 100%) fixed #2a3478; }
+  body {
+    font-family: Heebo, Rubik, system-ui, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  h2 { text-shadow: 0 3px 24px rgba(18, 20, 70, 0.55); }
   ::selection { background: rgba(0, 240, 255, 0.35); }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -14,10 +19,17 @@
 
 @layer components {
   .glass {
-    background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.015));
-    border: 1px solid rgba(255,255,255,.09);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    background: linear-gradient(145deg, rgba(22,24,64,.62), rgba(14,15,44,.5));
+    border: 1px solid rgba(255,255,255,.16);
+    backdrop-filter: blur(16px) saturate(1.2);
+    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+    box-shadow: 0 10px 40px rgba(14,16,48,.25);
+  }
+  .sky-fallback {
+    background:
+      radial-gradient(ellipse 60% 25% at 30% 70%, rgba(255,255,255,.55), transparent 70%),
+      radial-gradient(ellipse 50% 20% at 75% 55%, rgba(255,240,248,.5), transparent 70%),
+      linear-gradient(180deg, #29337a 0%, #6574d8 45%, #f3c4d6 100%);
   }
   .text-neon-gradient {
     background: linear-gradient(90deg, #00F0FF, #9333EA, #00F0FF);
