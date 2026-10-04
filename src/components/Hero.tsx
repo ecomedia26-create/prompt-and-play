@@ -35,7 +35,7 @@ export function Hero() {
               animate={{ opacity: 1, y: 0, rotateX: 0, filter: 'blur(0px)' }}
               transition={{ delay: 0.3 + i * 0.05, type: 'spring', stiffness: 120, damping: 14 }}
               className={`inline-block ${ch === '&' ? 'text-neon-gradient px-2' : ''}`}
-              style={{ textShadow: ch === '&' ? undefined : '0 4px 30px rgba(18,20,70,.55), 0 0 50px rgba(0,240,255,.35)' }}
+              style={{ textShadow: ch === '&' ? undefined : '0 2px 18px rgba(18,20,70,.4)' }}
             >
               {ch === ' ' ? ' ' : ch}
             </motion.span>
@@ -46,7 +46,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.1 }}
-          className="mx-auto mt-6 max-w-2xl text-lg text-white/90 [text-shadow:0_2px_16px_rgba(18,20,70,.7)] sm:text-xl"
+          className="mx-auto mt-6 max-w-2xl text-lg text-white/90 [text-shadow:0_1px_10px_rgba(18,20,70,.5)] sm:text-xl"
         >
           ספריית הפרומפטים והבוטים החינמית לבעלי עסקים ויוצרים בישראל. פרסומות וידאו, עריכה, שיווק ובוטים, מוכנים להעתקה
           ל-Claude.
@@ -61,7 +61,7 @@ export function Hero() {
           <MagneticButton
             href="#vault"
             onClick={() => play('open')}
-            className="neon-border group inline-flex items-center gap-3 rounded-full bg-[#141846]/85 px-8 backdrop-blur py-4 text-lg font-bold text-white shadow-glow-blue transition hover:shadow-glow-purple"
+            className="neon-border group inline-flex items-center gap-3 rounded-full bg-[#141846]/85 px-8 backdrop-blur py-4 text-lg font-bold text-white shadow-lg shadow-black/20 transition hover:bg-[#1b2058]/90"
           >
             <Lock className="h-5 w-5 text-neon-blue transition group-hover:rotate-12" />
             <span dir="ltr">Unlock the Vault</span>
@@ -77,9 +77,9 @@ export function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.5 }}
-              className="glass inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-white transition hover:shadow-glow-blue"
+              className="glass inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
             >
-              <Volume2 className="h-4 w-4 animate-pulse text-neon-blue" />
+              <Volume2 className="h-4 w-4 text-neon-blue" />
               הפעילו את חוויית הסאונד
             </motion.button>
           )}

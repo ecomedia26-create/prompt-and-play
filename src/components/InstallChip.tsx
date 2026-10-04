@@ -23,7 +23,7 @@ export function InstallChip() {
           if (mode === 'prompt') void install()
           else setIosHelp(true)
         }}
-        className="glass inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-white transition hover:shadow-glow-blue"
+        className="glass inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
       >
         <Download className="h-4 w-4 text-neon-blue" />
         התקינו כאפליקציה

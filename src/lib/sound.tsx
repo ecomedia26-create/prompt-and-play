@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 
-// פסקול אמביינט גנרטיבי (Web Audio): אקורדים רכים וחמים, פעמונים עדינים וריוורב של "שמיים".
+// גרוב דיפ האוס בסגנון ניו יורק (Web Audio): קיק ארבע לרבע, האי-האט באוף-ביט, קלאפ, בס חם וסטאבים של אקורדים.
 // הכל מסונתז בדפדפן, בלי קבצי אודיו ובלי רישיונות.
 type Cue = 'hover' | 'click' | 'copy' | 'open'
 
@@ -14,24 +14,38 @@ const Ctx = createContext<SoundCtx>({ enabled: false, toggle: () => {}, play: ()
 
 const midi = (n: number) => 440 * Math.pow(2, (n - 69) / 12)
 
-// Cmaj9 → Am9 → Fmaj9 → G6/9: מהלך חלומי ופתוח
+const BPM = 122
+const SIXTEENTH = 60 / BPM / 4
+const SWING = 0.12 * SIXTEENTH
+
+// Am9 → Dm9 → Fmaj9 → Em7, שתי תיבות לכל אקורד
 const CHORDS = [
-  [48, 52, 55, 59, 62],
-  [45, 52, 55, 59, 60],
-  [41, 48, 52, 57, 55],
-  [43, 50, 57, 59, 64],
+  { root: 33, notes: [57, 60, 64, 67, 71] },
+  { root: 38, notes: [57, 60, 62, 65, 69] },
+  { root: 29, notes: [57, 60, 64, 67, 65] },
+  { root: 28, notes: [55, 59, 62, 64, 67] },
 ]
-const BELLS = [72, 74, 76, 79, 81, 84]
-const CHORD_SECONDS = 9
+const STABS = [3, 6, 10, 13]
+const BASS: [number, number][] = [
+  [2, 0],
+  [6, 0],
+  [9, 12],
+  [10, 0],
+  [14, 0],
+]
 
 interface Engine {
   ctx: AudioContext
   music: GainNode
+  duck: GainNode
+  drums: GainNode
+  echo: AudioNode
   pad: BiquadFilterNode
-  bells: GainNode
   cues: GainNode
-  timers: number[]
-  chord: number
+  noise: AudioBuffer
+  step: number
+  nextTime: number
+  timer?: number
   suspendTimer?: number
 }
 
@@ -48,70 +62,208 @@ function impulse(ctx: AudioContext, seconds: number, decay: number) {
 function buildEngine(): Engine {
   const ctx = new AudioContext()
   const comp = ctx.createDynamicsCompressor()
-  comp.threshold.value = -18
+  comp.threshold.value = -16
+  comp.ratio.value = 3
   comp.connect(ctx.destination)
 
   const reverb = ctx.createConvolver()
-  reverb.buffer = impulse(ctx, 4, 2.4)
+  reverb.buffer = impulse(ctx, 2.2, 3)
   const wet = ctx.createGain()
-  wet.gain.value = 0.7
+  wet.gain.value = 0.35
   reverb.connect(wet).connect(comp)
 
-  // ערוץ המוזיקה (פד + פעמונים): עולה ויורד בפייד רך בהפעלה/כיבוי
+  // ערוץ המוזיקה: עולה ויורד בפייד רך בהפעלה/כיבוי
   const music = ctx.createGain()
   music.gain.value = 0
   music.connect(comp)
-  music.connect(reverb)
+
+  const drums = ctx.createGain()
+  drums.connect(music)
+
+  // סייד-צ'יין: הבס והאקורדים "נושמים" עם הקיק, כמו במיקס האוס אמיתי
+  const duck = ctx.createGain()
+  duck.connect(music)
+  duck.connect(reverb)
+
+  // דיליי של שמינית מנוקדת לסטאבים
+  const echo = ctx.createDelay(1)
+  echo.delayTime.value = SIXTEENTH * 3
+  const fb = ctx.createGain()
+  fb.gain.value = 0.28
+  const tone = ctx.createBiquadFilter()
+  tone.type = 'lowpass'
+  tone.frequency.value = 2200
+  echo.connect(tone).connect(fb).connect(echo)
+  const echoOut = ctx.createGain()
+  echoOut.gain.value = 0.45
+  tone.connect(echoOut).connect(duck)
 
   const pad = ctx.createBiquadFilter()
   pad.type = 'lowpass'
-  pad.frequency.value = 1100
-  pad.Q.value = 0.5
-  pad.connect(music)
-
-  const bells = ctx.createGain()
-  bells.gain.value = 0.55
-  bells.connect(music)
+  pad.frequency.value = 650
+  pad.connect(duck)
 
   const cues = ctx.createGain()
   cues.gain.value = 0.5
   cues.connect(comp)
   cues.connect(reverb)
 
-  return { ctx, music, pad, bells, cues, timers: [], chord: 0 }
+  const noise = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate)
+  const d = noise.getChannelData(0)
+  for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1
+
+  return { ctx, music, duck, drums, echo, pad, cues, noise, step: 0, nextTime: 0 }
 }
 
-function playChord(e: Engine, notes: number[], t: number) {
-  const { ctx, pad } = e
-  const peak = 0.11 / notes.length
+function kick(e: Engine, t: number) {
+  const { ctx } = e
+  const o = ctx.createOscillator()
+  const g = ctx.createGain()
+  o.frequency.setValueAtTime(140, t)
+  o.frequency.exponentialRampToValueAtTime(46, t + 0.11)
+  g.gain.setValueAtTime(0.55, t)
+  g.gain.exponentialRampToValueAtTime(0.001, t + 0.42)
+  o.connect(g).connect(e.drums)
+  o.start(t)
+  o.stop(t + 0.45)
+  e.duck.gain.cancelScheduledValues(t)
+  e.duck.gain.setValueAtTime(0.45, t)
+  e.duck.gain.setTargetAtTime(1, t + 0.03, 0.09)
+}
+
+function noiseHit(e: Engine, t: number, freq: number, type: BiquadFilterType, level: number, decay: number, out: AudioNode = e.drums) {
+  const { ctx } = e
+  const src = ctx.createBufferSource()
+  src.buffer = e.noise
+  const f = ctx.createBiquadFilter()
+  f.type = type
+  f.frequency.value = freq
+  const g = ctx.createGain()
+  g.gain.setValueAtTime(level, t)
+  g.gain.exponentialRampToValueAtTime(0.001, t + decay)
+  src.connect(f).connect(g).connect(out)
+  src.start(t, Math.random() * 0.5)
+  src.stop(t + decay + 0.02)
+}
+
+function clap(e: Engine, t: number) {
+  for (const [dt, lv] of [
+    [0, 0.09],
+    [0.011, 0.08],
+    [0.023, 0.1],
+  ])
+    noiseHit(e, t + dt, 1500, 'bandpass', lv, 0.16, e.duck)
+}
+
+function bass(e: Engine, n: number, t: number) {
+  const { ctx } = e
+  const g = ctx.createGain()
+  const f = ctx.createBiquadFilter()
+  f.type = 'lowpass'
+  f.frequency.setValueAtTime(520, t)
+  f.frequency.exponentialRampToValueAtTime(180, t + 0.2)
+  g.gain.setValueAtTime(0, t)
+  g.gain.linearRampToValueAtTime(0.2, t + 0.008)
+  g.gain.exponentialRampToValueAtTime(0.001, t + SIXTEENTH * 1.8)
+  f.connect(g).connect(e.duck)
+  for (const type of ['sine', 'triangle'] as OscillatorType[]) {
+    const o = ctx.createOscillator()
+    o.type = type
+    o.frequency.value = midi(n)
+    o.connect(f)
+    o.start(t)
+    o.stop(t + SIXTEENTH * 2)
+  }
+}
+
+function stab(e: Engine, notes: number[], t: number, level: number) {
+  const { ctx } = e
+  const g = ctx.createGain()
+  const f = ctx.createBiquadFilter()
+  f.type = 'lowpass'
+  f.Q.value = 2
+  f.frequency.setValueAtTime(2400, t)
+  f.frequency.exponentialRampToValueAtTime(500, t + 0.22)
+  g.gain.setValueAtTime(0, t)
+  g.gain.linearRampToValueAtTime(level / notes.length, t + 0.006)
+  g.gain.exponentialRampToValueAtTime(0.001, t + 0.3)
+  f.connect(g)
+  g.connect(e.duck)
+  g.connect(e.echo)
   for (const n of notes) {
-    const g = ctx.createGain()
-    g.gain.setValueAtTime(0, t)
-    g.gain.linearRampToValueAtTime(peak, t + 3.5)
-    g.gain.setValueAtTime(peak, t + CHORD_SECONDS - 1)
-    g.gain.linearRampToValueAtTime(0, t + CHORD_SECONDS + 4)
-    g.connect(pad)
     for (const [type, detune] of [
-      ['sine', -4],
-      ['triangle', 5],
+      ['sawtooth', -7],
+      ['square', 6],
     ] as [OscillatorType, number][]) {
       const o = ctx.createOscillator()
       o.type = type
       o.frequency.value = midi(n)
       o.detune.value = detune
-      o.connect(g)
+      o.connect(f)
       o.start(t)
-      o.stop(t + CHORD_SECONDS + 4.2)
+      o.stop(t + 0.32)
     }
   }
 }
 
-function playBell(e: Engine, n: number, t: number, out: AudioNode = e.bells, level = 0.06) {
+function padChord(e: Engine, notes: number[], t: number, seconds: number) {
+  const { ctx } = e
+  const g = ctx.createGain()
+  const peak = 0.05 / notes.length
+  g.gain.setValueAtTime(0, t)
+  g.gain.linearRampToValueAtTime(peak, t + 0.8)
+  g.gain.setValueAtTime(peak, t + seconds - 0.4)
+  g.gain.linearRampToValueAtTime(0, t + seconds + 0.3)
+  g.connect(e.pad)
+  for (const n of notes) {
+    const o = ctx.createOscillator()
+    o.type = 'triangle'
+    o.frequency.value = midi(n)
+    o.connect(g)
+    o.start(t)
+    o.stop(t + seconds + 0.35)
+  }
+}
+
+// צעד אחד (שש-עשרית) בלופ של 8 תיבות; הכלים נכנסים בהדרגה בפעם הראשונה
+function scheduleStep(e: Engine, step: number, time: number) {
+  const s = step % 16
+  const bar = Math.floor(step / 16)
+  const chord = CHORDS[Math.floor(bar / 2) % CHORDS.length]
+  const t = s % 2 ? time + SWING : time
+  if (s % 4 === 0) kick(e, t)
+  if (bar >= 1 && s % 4 === 2) noiseHit(e, t, 8000, 'highpass', 0.07, 0.09)
+  else if (bar >= 1 && s % 2 === 1) noiseHit(e, t, 9500, 'highpass', 0.022, 0.035)
+  if (bar >= 2 && (s === 4 || s === 12)) clap(e, t)
+  if (bar >= 2) for (const [bs, oct] of BASS) if (bs === s) bass(e, chord.root + 12 + oct, t)
+  if (bar >= 4 && STABS.includes(s)) stab(e, chord.notes, t, s === 3 ? 0.11 : 0.08)
+  if (s === 0 && bar % 2 === 0) padChord(e, chord.notes, t, SIXTEENTH * 32)
+}
+
+function startMusic(e: Engine) {
+  e.step = 0
+  e.nextTime = e.ctx.currentTime + 0.1
+  e.timer = window.setInterval(() => {
+    while (e.nextTime < e.ctx.currentTime + 0.15) {
+      scheduleStep(e, e.step, e.nextTime)
+      e.step = (e.step + 1) % (16 * 16)
+      if (e.step === 0) e.step = 16 * 8
+      e.nextTime += SIXTEENTH
+    }
+  }, 25)
+}
+
+function stopMusic(e: Engine) {
+  clearInterval(e.timer)
+  e.timer = undefined
+}
+
+function playBell(e: Engine, n: number, t: number, out: AudioNode, level: number) {
   const { ctx } = e
   const g = ctx.createGain()
   g.gain.setValueAtTime(0, t)
   g.gain.linearRampToValueAtTime(level, t + 0.015)
-  g.gain.exponentialRampToValueAtTime(0.0001, t + 3.2)
+  g.gain.exponentialRampToValueAtTime(0.0001, t + 1.6)
   g.connect(out)
   for (const [mult, amp] of [
     [1, 1],
@@ -125,30 +277,8 @@ function playBell(e: Engine, n: number, t: number, out: AudioNode = e.bells, lev
     og.gain.value = amp
     o.connect(og).connect(g)
     o.start(t)
-    o.stop(t + 3.3)
+    o.stop(t + 1.7)
   }
-}
-
-function startMusic(e: Engine) {
-  const next = () => {
-    playChord(e, CHORDS[e.chord % CHORDS.length], e.ctx.currentTime + 0.05)
-    e.chord++
-  }
-  next()
-  e.timers.push(window.setInterval(next, (CHORD_SECONDS - 1) * 1000))
-  const bell = () => {
-    playBell(e, BELLS[Math.floor(Math.random() * BELLS.length)], e.ctx.currentTime + 0.05)
-    e.timers.push(window.setTimeout(bell, 2200 + Math.random() * 3800))
-  }
-  e.timers.push(window.setTimeout(bell, 2500))
-}
-
-function stopMusic(e: Engine) {
-  e.timers.forEach((id) => {
-    clearInterval(id)
-    clearTimeout(id)
-  })
-  e.timers = []
 }
 
 function ramp(param: AudioParam, ctx: AudioContext, to: number, seconds: number) {
@@ -160,12 +290,12 @@ function ramp(param: AudioParam, ctx: AudioContext, to: number, seconds: number)
 
 // צלילי ממשק מוזיקליים מאותו סולם, כך שהם משתלבים בפסקול
 const CUE_NOTES: Record<Cue, number[]> = {
-  hover: [84],
-  click: [76],
-  open: [72, 79],
-  copy: [76, 79, 84],
+  hover: [88],
+  click: [81],
+  open: [76, 83],
+  copy: [81, 84, 88],
 }
-const CUE_LEVEL: Record<Cue, number> = { hover: 0.025, click: 0.07, open: 0.07, copy: 0.09 }
+const CUE_LEVEL: Record<Cue, number> = { hover: 0.02, click: 0.05, open: 0.05, copy: 0.07 }
 
 export function SoundProvider({ children }: { children: ReactNode }) {
   const [enabled, setEnabled] = useState(false)
@@ -187,8 +317,8 @@ export function SoundProvider({ children }: { children: ReactNode }) {
       const e = (engine.current ??= buildEngine())
       clearTimeout(e.suspendTimer)
       void e.ctx.resume()
-      ramp(e.music.gain, e.ctx, 1, 3)
-      startMusic(e)
+      ramp(e.music.gain, e.ctx, 2.2, 4)
+      if (!e.timer) startMusic(e)
     } else if (engine.current) {
       const e = engine.current
       stopMusic(e)

@@ -69,7 +69,7 @@ export function SkillCard({ skill, index, onOpen }: Props) {
       >
         {!touch && <motion.div className="pointer-events-none absolute inset-0" style={{ background: spotlight }} />}
         <div
-          className="pointer-events-none absolute -top-16 -end-16 h-40 w-40 rounded-full opacity-30 blur-3xl transition group-hover:opacity-60"
+          className="pointer-events-none absolute -top-16 -end-16 h-40 w-40 rounded-full opacity-10 blur-3xl transition group-hover:opacity-25"
           style={{ background: accent }}
         />
 

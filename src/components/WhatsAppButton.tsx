@@ -19,7 +19,7 @@ export function WhatsAppButton({ label = 'דברו עם אקו מדיה בווא
       href={waLink(message)}
       target="_blank"
       onClick={() => play('click')}
-      className={`inline-flex items-center gap-2 rounded-full bg-wa font-bold text-void shadow-glow-wa animate-wa-pulse transition-colors hover:bg-[#2fe676] ${sz} ${className}`}
+      className={`inline-flex items-center gap-2 rounded-full bg-wa font-bold text-void shadow-glow-wa transition-colors hover:bg-[#2fe676] ${sz} ${className}`}
     >
       <WhatsAppIcon className={size === 'lg' ? 'h-6 w-6' : 'h-4 w-4'} />
       <span>{label}</span>

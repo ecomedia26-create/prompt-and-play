@@ -10,11 +10,10 @@ export function EcoLogo({ compact = false }: { compact?: boolean }) {
         {BARS.map((h, i) => (
           <span
             key={i}
-            className="w-[3px] origin-center rounded-full bg-gradient-to-b from-neon-blue to-neon-purple shadow-glow-blue animate-wave"
+            className="w-[3px] origin-center rounded-full bg-gradient-to-b from-neon-blue to-neon-purple animate-wave"
             style={{ height: `${h * 100}%`, animationDelay: `${i * 0.12}s` }}
           />
         ))}
-        <span className="absolute inset-0 -z-10 rounded-full bg-neon-blue/20 blur-xl transition group-hover:bg-neon-purple/30" />
       </span>
       <motion.span
         initial={{ opacity: 0, x: 12 }}

@@ -119,7 +119,7 @@ export function WhatsAppSimulator() {
 
         {/* מוקאפ טלפון */}
         <div className="relative mx-auto w-full max-w-[360px]">
-          <div className="absolute -inset-8 -z-10 rounded-[3rem] bg-wa/20 blur-3xl" />
+          <div className="absolute -inset-8 -z-10 rounded-[3rem] bg-wa/10 blur-3xl" />
           <div className="overflow-hidden rounded-[2.5rem] border-[10px] border-[#1a1b22] bg-[#0b141a] shadow-2xl">
             <div className="flex items-center gap-3 bg-[#202c33] px-4 py-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-neon-blue to-neon-purple text-xs font-black text-void">

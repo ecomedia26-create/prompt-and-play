@@ -49,7 +49,7 @@ export function Header() {
               aria-pressed={enabled}
               aria-label={enabled ? 'כיבוי סאונד' : 'הפעלת סאונד'}
               className={`glass flex items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-2 text-xs font-semibold transition ${
-                enabled ? 'text-neon-blue shadow-glow-blue' : 'text-white/60'
+                enabled ? 'text-neon-blue' : 'text-white/60'
               }`}
             >
               {enabled ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}

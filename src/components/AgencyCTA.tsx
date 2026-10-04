@@ -22,8 +22,8 @@ export function AgencyCTA() {
           transition={{ duration: 0.6 }}
           className="neon-border relative overflow-hidden rounded-[2rem] bg-[#151a4c]/75 px-6 backdrop-blur-xl py-14 text-center sm:px-12"
         >
-          <div className="absolute -top-32 start-1/2 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-neon-purple/25 blur-3xl" />
-          <div className="absolute -bottom-32 end-1/4 h-64 w-96 rounded-full bg-neon-blue/20 blur-3xl" />
+          <div className="absolute -top-32 start-1/2 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-neon-purple/10 blur-3xl" />
+          <div className="absolute -bottom-32 end-1/4 h-64 w-96 rounded-full bg-neon-blue/10 blur-3xl" />
 
           <p className="relative text-sm font-semibold text-neon-blue">
             {BRAND.nameHe} · <span dir="ltr">{BRAND.nameEn}</span>
@@ -59,7 +59,7 @@ export function AgencyCTA() {
               href={BRAND.siteUrl}
               target="_blank"
               rel="noopener"
-              className="glass mt-2 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white transition hover:shadow-glow-blue"
+              className="glass mt-2 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10"
             >
               הכירו את אקו מדיה: עבודות, שירותים וסרטונים
               <span dir="ltr" className="text-neon-blue">{BRAND.siteDisplay} ↗</span>
