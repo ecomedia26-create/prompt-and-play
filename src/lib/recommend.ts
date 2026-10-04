@@ -22,7 +22,7 @@ const tokenize = (s: string) =>
 
 export const isPublic = (s: Skill) => !PROPRIETARY.has(s.category)
 
-export function recommend(query: string, limit = 3, minScore = 1): Skill[] {
+export function recommend(query: string, limit = 3, minScore = 1, pool: Skill[] = SKILLS.filter(isPublic)): Skill[] {
   const words = tokenize(query)
   const cats = new Set<string>()
   const extra: string[] = []
@@ -31,8 +31,10 @@ export function recommend(query: string, limit = 3, minScore = 1): Skill[] {
     if (Array.isArray(hit)) extra.push(...hit)
     else cats.add(hit)
   }
-  const scored = SKILLS.filter(isPublic).map((s) => {
-    const hay = [s.title_he, s.title_en, s.short_desc, s.category_he, ...s.tags].join(' ').toLowerCase()
+  const scored = pool.map((s) => {
+    const hay = [s.title_he, s.title_en, s.short_desc, s.category_he, s.outcome_he ?? '', ...(s.tools ?? []), ...s.tags]
+      .join(' ')
+      .toLowerCase()
     let score = cats.has(s.category) ? 2 : 0
     for (const w of words) if (hay.includes(w)) score += w.length > 3 ? 3 : 1
     for (const w of extra) if (hay.includes(w)) score += 2

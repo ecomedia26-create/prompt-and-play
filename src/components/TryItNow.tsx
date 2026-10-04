@@ -1,13 +1,11 @@
 import { motion } from 'framer-motion'
-import { ExternalLink, Play, Square } from 'lucide-react'
+import { Play, Square } from 'lucide-react'
 import { useRef, useState } from 'react'
 import type { Skill } from '../data/skills'
 import { useAiAvailable } from '../lib/ai'
-import { withWatermark } from '../lib/brand'
 import { useSound } from '../lib/sound'
 
-// "נסו עכשיו": הגולש כותב את הטקסט שלו ומקבל את הסקיל מופעל עליו.
-// עם מפתח AI ב-Vercel התשובה מוזרמת כאן; תמיד אפשר גם לפתוח ב-Claude.ai עם הכל ממולא מראש (חינם בחשבון של הגולש).
+// "נסו עכשיו": עם מפתח AI ב-Vercel הגולש מריץ את הסקיל על הטקסט שלו והתשובה מוזרמת כאן.
 export function TryItNow({ skill }: { skill: Skill }) {
   const ai = useAiAvailable()
   const [input, setInput] = useState('')
@@ -15,10 +13,6 @@ export function TryItNow({ skill }: { skill: Skill }) {
   const [running, setRunning] = useState(false)
   const abort = useRef<AbortController | null>(null)
   const { play } = useSound()
-
-  const claudeUrl = `https://claude.ai/new?q=${encodeURIComponent(
-    `${withWatermark(skill.system_prompt)}\n\n---\n\n${input.trim() || 'שלום! במה אתה יכול לעזור לעסק שלי?'}`,
-  )}`
 
   const run = async () => {
     if (running) {
@@ -56,6 +50,9 @@ export function TryItNow({ skill }: { skill: Skill }) {
     }
   }
 
+  // בלי מפתח AI ב-Vercel אין הרצה באתר; כפתורי "פתח ב-Claude / ChatGPT" שמעל מכסים את זה
+  if (!ai) return null
+
   return (
     <div className="mt-6 rounded-2xl border border-neon-blue/25 bg-neon-blue/[0.04] p-4">
       <h3 className="flex items-center gap-2 font-bold">
@@ -71,8 +68,7 @@ export function TryItNow({ skill }: { skill: Skill }) {
         className="mt-3 w-full resize-y rounded-xl bg-black/35 p-3 text-sm outline-none placeholder:text-white/40 focus:ring-1 focus:ring-neon-blue/60"
       />
       <div className="mt-3 flex flex-col gap-2 sm:flex-row">
-        {ai && (
-          <motion.button
+        <motion.button
             type="button"
             whileTap={{ scale: 0.97 }}
             onClick={() => void run()}
@@ -82,19 +78,6 @@ export function TryItNow({ skill }: { skill: Skill }) {
             {running ? <Square className="h-4 w-4" /> : <Play className="h-4 w-4" />}
             {running ? 'עצירה' : 'הריצו כאן'}
           </motion.button>
-        )}
-        <a
-          href={claudeUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => play('click')}
-          className={`flex flex-1 items-center justify-center gap-2 rounded-full px-5 py-3 font-bold transition ${
-            ai ? 'border border-white/25 text-white hover:border-white/50' : 'bg-neon-blue text-void hover:brightness-110'
-          }`}
-        >
-          <ExternalLink className="h-4 w-4" />
-          פתחו ב-Claude עם הכל מוכן
-        </a>
       </div>
       {output && (
         <div

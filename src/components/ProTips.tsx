@@ -1,34 +1,34 @@
 import { motion } from 'framer-motion'
-import { Brain, FileCode2, ScanEye, ShieldCheck } from 'lucide-react'
 
 const TIPS = [
-  { icon: Brain, en: 'Delegation', he: 'האצלה', text: 'הגדירו מראש מה המודל מבצע ומה נשאר בידי הצוות האנושי.' },
-  { icon: FileCode2, en: 'Description', he: 'תיאור', text: 'עטפו הוראות בתגיות XML כמו <instructions> והוסיפו דוגמאות Few-Shot.' },
-  { icon: ScanEye, en: 'Discernment', he: 'שיקול דעת', text: 'בקשו מ-Claude ביקורת עצמית (Self-Critique) בסוף כל פלט לשיפור איטרטיבי.' },
-  { icon: ShieldCheck, en: 'Diligence', he: 'אחריות', text: 'פתחו Project ייעודי עם בסיס ידע לכל לקוח, ושמרו על דיוק ואתיקה עסקית.' },
+  { title: 'תנו ל-AI תפקיד', text: 'פתחו ב"אתה קופירייטר בכיר שמתמחה ב..." והתשובות יהיו מקצועיות יותר.' },
+  { title: 'ספרו על העסק', text: 'מה אתם מוכרים, למי, ובמה אתם שונים מהמתחרים.' },
+  { title: 'הגדירו פורמט', text: '"3 גרסאות, עד 80 מילה, עם קריאה לפעולה" עדיף על "תכתוב פוסט".' },
+  { title: 'תנו דוגמה', text: 'הדביקו פוסט שעבד לכם וכתבו "בסגנון הזה".' },
+  { title: 'הפרידו הוראות מחומר', text: 'שימו טקסט מצורף בין תגיות <מסמך>...</מסמך> כדי שה-AI לא יתבלבל.' },
+  { title: 'אל תתפשרו על הטיוטה הראשונה', text: 'בקשו "קצר יותר", "יותר ישראלי", "תן עוד 5 כותרות".' },
 ]
 
 export function ProTips() {
   return (
-    <section id="tips" className="scroll-mt-28 py-24">
+    <section id="tips" className="scroll-mt-24 py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <p dir="ltr" className="text-end font-mono text-sm tracking-[0.3em] text-neon-purple lg:text-start">CLAUDE PRO TIPS · 4D</p>
-        <h2 className="mt-2 font-display text-4xl font-black sm:text-5xl">ככה מוציאים מהסקילים את המקסימום</h2>
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <h2 className="font-display text-3xl font-black sm:text-4xl">6 טיפים לתוצאות טובות יותר</h2>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {TIPS.map((t, i) => (
             <motion.div
-              key={t.en}
-              initial={{ opacity: 0, y: 24 }}
+              key={t.title}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
-              className="glass rounded-3xl p-6"
+              transition={{ delay: (i % 3) * 0.06 }}
+              className="glass rounded-2xl p-5"
             >
-              <t.icon className="h-8 w-8 text-neon-purple" />
-              <h3 className="mt-4 text-xl font-bold">
-                {t.he} <span dir="ltr" className="font-mono text-sm text-white/40">{t.en}</span>
+              <h3 className="font-bold">
+                <span className="me-2 text-white/50">{i + 1}.</span>
+                {t.title}
               </h3>
-              <p className="mt-2 text-sm text-white/65">{t.text}</p>
+              <p className="mt-1.5 text-sm text-white/75">{t.text}</p>
             </motion.div>
           ))}
         </div>

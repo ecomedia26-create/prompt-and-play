@@ -5,10 +5,10 @@ import { CloudSky } from './components/CloudSky'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
+import { HowItWorks } from './components/HowItWorks'
+import { Library } from './components/Library'
 import { ProTips } from './components/ProTips'
-import { Vault } from './components/Vault'
 import { WhatsAppFab } from './components/WhatsAppFab'
-import { WhatsAppSimulator } from './components/WhatsAppSimulator'
 import { useIsTouch, usePrefersReducedMotion } from './hooks/useIsTouch'
 
 export default function App() {
@@ -21,8 +21,8 @@ export default function App() {
       <Header />
       <main>
         <Hero />
-        <Vault />
-        <WhatsAppSimulator />
+        <Library />
+        <HowItWorks />
         <ProTips />
         <AgencyCTA />
       </main>

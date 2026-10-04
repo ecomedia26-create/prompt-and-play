@@ -1,109 +1,94 @@
 import { motion } from 'framer-motion'
-import { ChevronDown, Lock, Sparkles, Volume2 } from 'lucide-react'
-import { BRAND } from '../lib/brand'
+import { Search } from 'lucide-react'
+import type { FormEvent } from 'react'
+import { SKILLS } from '../data/skills'
+import { goToLibrary, setSearch, useSearch } from '../lib/search'
 import { useSound } from '../lib/sound'
-import { InstallChip } from './InstallChip'
-import { MagneticButton } from './MagneticButton'
-import { WhatsAppButton } from './WhatsAppButton'
 
-const TITLE = 'Prompt & Play'
+const EXAMPLES = ['לכתוב פוסט שמוכר', 'תסריט לרילס', 'בוט וואטסאפ ללידים', 'הצעת מחיר ללקוח']
 
+// גיבור: שורה אחת שמסבירה מה יש כאן, וחיפוש גדול כפעולה הראשית
 export function Hero() {
-  const { enabled, toggle, play } = useSound()
+  const query = useSearch()
+  const { play } = useSound()
+
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault()
+    play('click')
+    goToLibrary()
+  }
 
   return (
-    <section id="top" className="relative flex min-h-[100svh] items-center overflow-hidden pt-28">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(14,16,48,0.5)_0%,rgba(14,16,48,0.15)_45%,transparent_70%)]" />
-
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 text-center sm:px-6">
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
+    <section id="top" className="relative pt-36 pb-12 sm:pt-44 sm:pb-16">
+      <div className="relative z-10 mx-auto max-w-3xl px-4 text-center sm:px-6">
+        <motion.h1
+          dir="ltr"
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="glass mx-auto mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs text-white/80 sm:text-sm"
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+          className="font-display text-5xl font-black leading-none tracking-tight [text-shadow:0_2px_18px_rgba(18,20,70,.35)] sm:text-7xl"
         >
-          <Sparkles className="h-4 w-4 text-neon-blue" />
-          30 סקילים ובוטים של AI לעסקים, בחינם, בלחיצה אחת
-        </motion.p>
-
-        {/* כותרת קינטית */}
-        <h1 dir="ltr" className="font-display text-5xl font-black leading-none tracking-tight sm:text-7xl lg:text-8xl">
-          {TITLE.split('').map((ch, i) => (
-            <motion.span
-              key={i}
-              initial={{ opacity: 0, y: 60, rotateX: -90, filter: 'blur(12px)' }}
-              animate={{ opacity: 1, y: 0, rotateX: 0, filter: 'blur(0px)' }}
-              transition={{ delay: 0.3 + i * 0.05, type: 'spring', stiffness: 120, damping: 14 }}
-              className={`inline-block ${ch === '&' ? 'text-neon-gradient px-2' : ''}`}
-              style={{ textShadow: ch === '&' ? undefined : '0 2px 18px rgba(18,20,70,.4)' }}
-            >
-              {ch === ' ' ? ' ' : ch}
-            </motion.span>
-          ))}
-        </h1>
+          Prompt <span className="text-neon-gradient [text-shadow:none]">&</span> Play
+        </motion.h1>
 
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.1 }}
-          className="mx-auto mt-6 max-w-2xl text-lg text-white/90 [text-shadow:0_1px_10px_rgba(18,20,70,.5)] sm:text-xl"
+          transition={{ delay: 0.3 }}
+          className="mx-auto mt-5 max-w-xl text-xl font-medium leading-snug text-white [text-shadow:0_1px_10px_rgba(18,20,70,.45)] sm:text-2xl"
         >
-          ספריית הפרומפטים והבוטים החינמית לבעלי עסקים ויוצרים בישראל. פרסומות וידאו, עריכה, שיווק ובוטים, מוכנים להעתקה
-          ל-Claude.
+          {SKILLS.length} פרומפטים מוכנים ל-AI שעושים עבודה אמיתית לעסק שלכם. בחינם.
         </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+        <motion.form
+          role="search"
+          onSubmit={onSubmit}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.3 }}
-          className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
+          transition={{ delay: 0.45 }}
+          className="mx-auto mt-8 flex max-w-2xl items-center gap-2 rounded-full bg-white p-1.5 shadow-xl shadow-[#141846]/25 sm:p-2"
         >
-          <MagneticButton
-            href="#vault"
-            onClick={() => play('open')}
-            className="neon-border group inline-flex items-center gap-3 rounded-full bg-[#141846]/85 px-8 backdrop-blur py-4 text-lg font-bold text-white shadow-lg shadow-black/20 transition hover:bg-[#1b2058]/90"
+          <Search className="ms-3 h-5 w-5 shrink-0 text-[#4a4f9c] sm:h-6 sm:w-6" aria-hidden="true" />
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="מה תרצו ש-AI יעשה לעסק שלכם?"
+            aria-label="חיפוש פרומפט"
+            className="min-w-0 flex-1 bg-transparent py-2.5 text-base text-[#141846] outline-none placeholder:text-[#141846]/45 sm:text-lg"
+          />
+          <button
+            type="submit"
+            className="shrink-0 rounded-full bg-[#1c2160] px-5 py-2.5 font-bold text-white transition hover:bg-[#262c78] sm:px-7 sm:py-3"
           >
-            <Lock className="h-5 w-5 text-neon-blue transition group-hover:rotate-12" />
-            <span dir="ltr">Unlock the Vault</span>
-          </MagneticButton>
-          <WhatsAppButton label="רוצים אתר כזה לעסק?" />
+            חיפוש
+          </button>
+        </motion.form>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6 }}
+          className="mt-5 flex flex-wrap justify-center gap-2"
+        >
+          {EXAMPLES.map((ex) => (
+            <button
+              key={ex}
+              type="button"
+              onClick={() => {
+                play('click')
+                setSearch(ex)
+                goToLibrary()
+              }}
+              className="rounded-full border border-white/30 bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur transition hover:bg-white/20"
+            >
+              {ex}
+            </button>
+          ))}
         </motion.div>
 
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-          {!enabled && (
-            <motion.button
-              type="button"
-              onClick={toggle}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.5 }}
-              className="glass inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
-            >
-              <Volume2 className="h-4 w-4 text-neon-blue" />
-              הפעילו את חוויית הסאונד
-            </motion.button>
-          )}
-          <InstallChip />
-        </div>
-
-        {/* קולאאוט אקו מדיה */}
-        <motion.a
-          href="#agency"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.6 }}
-          className="glass mx-auto mt-12 flex max-w-xl items-center gap-3 rounded-2xl px-5 py-4 text-start text-sm text-white/85 transition hover:border-neon-purple/50 sm:text-base"
-        >
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-neon-blue to-neon-purple font-black text-void">
-            5D
-          </span>
-          <span>{BRAND.heroCallout}</span>
-        </motion.a>
+        <p className="mt-6 text-sm text-white/85">{SKILLS.length} פרומפטים · בעברית · בלי הרשמה · מבית אקו מדיה</p>
       </div>
-
-      <a href="#vault" aria-label="גללו לכספת" className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 text-white/70">
-        <ChevronDown className="h-7 w-7 animate-bounce" />
-      </a>
     </section>
   )
 }

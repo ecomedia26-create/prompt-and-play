@@ -98,10 +98,10 @@ export function AssistantChat() {
         whileTap={{ scale: 0.95 }}
         aria-expanded={open}
         aria-label={open ? 'סגירת העוזר' : 'פתיחת עוזר ה-AI'}
-        className="fixed bottom-5 right-5 z-[58] flex items-center gap-2 rounded-full bg-gradient-to-l from-neon-blue to-neon-purple p-4 font-bold text-void shadow-glow-blue sm:px-5"
+        className="fixed bottom-5 right-5 z-[58] flex items-center gap-2 rounded-full border border-white/20 bg-[#1c2160]/90 p-3 text-sm font-semibold text-white shadow-lg shadow-black/20 backdrop-blur sm:px-4"
       >
-        {open ? <X className="h-6 w-6" /> : <Sparkles className="h-6 w-6" />}
-        <span className="hidden sm:inline">{open ? 'סגירה' : 'עוזר AI'}</span>
+        {open ? <X className="h-5 w-5" /> : <Sparkles className="h-5 w-5" />}
+        <span className="hidden sm:inline">{open ? 'סגירה' : 'לא בטוחים? שאלו את העוזר'}</span>
       </motion.button>
 
       <AnimatePresence>
@@ -113,7 +113,7 @@ export function AssistantChat() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.97 }}
             transition={{ type: 'spring', stiffness: 260, damping: 26 }}
-            className="neon-border fixed bottom-24 right-3 left-3 z-[58] flex max-h-[70svh] flex-col overflow-hidden rounded-3xl bg-[#12153d]/95 backdrop-blur-xl sm:left-auto sm:right-5 sm:w-[380px]"
+            className="fixed bottom-20 right-3 left-3 z-[58] flex max-h-[70svh] flex-col overflow-hidden rounded-3xl border border-white/15 bg-[#14183f]/95 shadow-2xl backdrop-blur-xl sm:left-auto sm:right-5 sm:w-[380px]"
           >
             <div className="flex items-center gap-3 border-b border-white/10 px-5 py-4">
               <span className="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-neon-blue to-neon-purple text-void">
