@@ -14,7 +14,7 @@ export function ProTips() {
   return (
     <section id="tips" className="scroll-mt-24 py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <RevealTitle className="text-3xl sm:text-5xl">6 טיפים לתוצאות טובות יותר</RevealTitle>
+        <RevealTitle className="text-[clamp(2.6rem,8vw,7rem)] leading-[0.95] tracking-tight">6 טיפים מהירים</RevealTitle>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {TIPS.map((t, i) => (
             <motion.div

@@ -12,7 +12,7 @@ export function HowItWorks() {
   return (
     <section id="how" className="scroll-mt-24 py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <RevealTitle className="text-3xl sm:text-5xl">איך זה עובד</RevealTitle>
+        <RevealTitle className="text-[clamp(2.6rem,8vw,7rem)] leading-[0.95] tracking-tight">איך זה עובד</RevealTitle>
         <ol className="mt-6 grid gap-4 sm:grid-cols-3">
           {STEPS.map((s, i) => (
             <motion.li

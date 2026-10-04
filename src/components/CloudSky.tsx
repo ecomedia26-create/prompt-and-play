@@ -13,6 +13,8 @@ const fragment = /* glsl */ `
   uniform float uTime;
   uniform float uScroll;
   uniform vec2 uMouse;
+  uniform vec2 uCursor;
+  uniform float uClear;
 
   float hash(vec3 p) {
     p = fract(p * 0.3183099 + 0.1);
@@ -69,6 +71,8 @@ const fragment = /* glsl */ `
     vec3 ro = vec3(uMouse.x * 0.3 + sin(uScroll * 0.8) * 0.4, 2.75 + sin(uScroll * 1.3) * 0.15, -uTime * 0.1 - uScroll * 2.2);
     vec3 rd = normalize(vec3(uv.x + uMouse.x * 0.06, uv.y - 0.16 + uMouse.y * 0.04, -1.1));
 
+    // "חלון" רך בעננים סביב הסמן, כאילו הגולש מפזר אותם ביד
+    float clearing = 1.0 - uClear * (1.0 - smoothstep(0.06, 0.3, length(uv - uCursor)));
     vec4 acc = vec4(0.0);
     // המצלמה תמיד מעל צמרות העננים (y=2.3): קרן שעולה למעלה רואה רק שמיים, וקרן שיורדת מתחילה ישר בצמרות
     float t = rd.y < 0.0 ? (ro.y - 2.3) / -rd.y : 99.0;
@@ -77,7 +81,7 @@ const fragment = /* glsl */ `
       if (acc.a > 0.97 || t > 40.0) break;
       vec3 p = ro + rd * t;
       // מדללים עננים צמודים למצלמה כדי לא להיתקע בתוך ערפל
-      float d = density(p, OCTAVES) * smoothstep(1.0, 5.0, t);
+      float d = density(p, OCTAVES) * smoothstep(1.0, 5.0, t) * clearing;
       if (d > 0.008) {
         float dl = density(p + SUN * 0.6, LIGHT_OCTAVES);
         float lit = exp(-dl * 3.2);
@@ -124,6 +128,8 @@ export function CloudSky({ lite }: Props) {
       uRes: { value: new THREE.Vector2(1, 1) },
       uTime: { value: 0 },
       uScroll: { value: 0 },
+      uCursor: { value: new THREE.Vector2(9, 9) },
+      uClear: { value: 0 },
       uMouse: { value: new THREE.Vector2() },
     }
     const material = new THREE.ShaderMaterial({
@@ -147,8 +153,15 @@ export function CloudSky({ lite }: Props) {
     resize()
 
     const mouse = new THREE.Vector2()
-    const onMove = (e: PointerEvent) =>
-      mouse.set((e.clientX / window.innerWidth) * 2 - 1, -((e.clientY / window.innerHeight) * 2 - 1))
+    const cursor = new THREE.Vector2(9, 9)
+    let clearTarget = 0
+    const onMove = (e: PointerEvent) => {
+      const w = window.innerWidth
+      const h = window.innerHeight
+      mouse.set((e.clientX / w) * 2 - 1, -((e.clientY / h) * 2 - 1))
+      cursor.set(((e.clientX / w) - 0.5) * (w / h), 0.5 - e.clientY / h)
+      clearTarget = 0.8
+    }
     if (!lite) window.addEventListener('pointermove', onMove, { passive: true })
 
     const clock = new THREE.Clock()
@@ -165,6 +178,9 @@ export function CloudSky({ lite }: Props) {
       const target = window.scrollY / Math.max(window.innerHeight, 1)
       uniforms.uScroll.value += (target - uniforms.uScroll.value) * 0.06
       uniforms.uMouse.value.lerp(mouse, 0.04)
+      if (uniforms.uCursor.value.x > 8) uniforms.uCursor.value.copy(cursor)
+      uniforms.uCursor.value.lerp(cursor, 0.12)
+      uniforms.uClear.value += (clearTarget - uniforms.uClear.value) * 0.05
       renderer.render(scene, camera)
     }
     tick()

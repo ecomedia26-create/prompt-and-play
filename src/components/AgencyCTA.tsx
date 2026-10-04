@@ -24,7 +24,7 @@ export function AgencyCTA() {
           <p className="text-sm font-semibold text-white/70">
             {BRAND.nameHe} · <span dir="ltr">{BRAND.nameEn}</span>
           </p>
-          <h2 className="mx-auto mt-3 max-w-2xl font-display text-3xl font-black leading-tight sm:text-5xl">
+          <h2 className="mx-auto mt-3 max-w-3xl font-display text-[clamp(2.2rem,5.5vw,4.5rem)] font-black leading-[1.02] tracking-tight">
             האתר הזה נבנה ע"י אקו מדיה. רוצים כזה לעסק שלכם?
           </h2>
 

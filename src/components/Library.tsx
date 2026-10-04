@@ -15,7 +15,7 @@ const GRID = 'grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-
 function SectionTitle({ title, sub }: { title: string; sub: string }) {
   return (
     <div className="mb-6">
-      <RevealTitle className="text-3xl sm:text-5xl">{title}</RevealTitle>
+      <RevealTitle className="text-[clamp(2.6rem,8vw,7rem)] leading-[0.95] tracking-tight">{title}</RevealTitle>
       <p className="mt-2 max-w-2xl text-white/85">{sub}</p>
     </div>
   )
