@@ -17,6 +17,12 @@
   }
 }
 
+/* Lenis: הגלילה החלקה מנהלת את עצמה, בלי scroll-behavior של הדפדפן */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
 @layer components {
   .glass {
     background: linear-gradient(145deg, rgba(22,24,64,.62), rgba(14,15,44,.5));

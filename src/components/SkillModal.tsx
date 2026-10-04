@@ -126,6 +126,7 @@ export function SkillModal({ skill, onClose }: Props) {
     <AnimatePresence>
       {skill && (
         <motion.div
+          data-lenis-prevent
           className="fixed inset-0 z-[60] flex items-end justify-center p-0 sm:items-center sm:p-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

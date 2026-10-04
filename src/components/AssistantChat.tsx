@@ -125,7 +125,7 @@ export function AssistantChat() {
               </div>
             </div>
 
-            <div ref={list} className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
+            <div ref={list} data-lenis-prevent className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
               {msgs.map((m, i) => (
                 <div key={i} className={m.role === 'user' ? 'flex justify-start' : 'flex justify-end'}>
                   <div

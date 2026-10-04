@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { RevealTitle } from './RevealTitle'
 import { ClipboardPaste, MousePointerClick, PenLine } from 'lucide-react'
 
 const STEPS = [
@@ -11,7 +12,7 @@ export function HowItWorks() {
   return (
     <section id="how" className="scroll-mt-24 py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <h2 className="font-display text-3xl font-black sm:text-4xl">איך זה עובד</h2>
+        <RevealTitle className="text-3xl sm:text-5xl">איך זה עובד</RevealTitle>
         <ol className="mt-6 grid gap-4 sm:grid-cols-3">
           {STEPS.map((s, i) => (
             <motion.li

@@ -8,15 +8,19 @@ import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { HowItWorks } from './components/HowItWorks'
 import { Library } from './components/Library'
+import { Manifesto } from './components/Manifesto'
 import { ProTips } from './components/ProTips'
 import { ScrollProgress } from './components/ScrollProgress'
 import { ToolsMarquee } from './components/ToolsMarquee'
 import { WhatsAppFab } from './components/WhatsAppFab'
+import { useEffect } from 'react'
 import { useIsTouch, usePrefersReducedMotion } from './hooks/useIsTouch'
+import { startSmoothScroll } from './lib/smoothScroll'
 
 export default function App() {
   const touch = useIsTouch()
   const reduced = usePrefersReducedMotion()
+  useEffect(() => (touch || reduced ? undefined : startSmoothScroll()), [touch, reduced])
   return (
     <div dir="rtl" className="relative min-h-screen overflow-x-clip font-sans text-white">
       {!reduced && <CloudSky lite={touch} />}
@@ -28,6 +32,7 @@ export default function App() {
         <Hero />
         <ToolsMarquee />
         <Library />
+        <Manifesto />
         <HowItWorks />
         <ProTips />
         <AgencyCTA />

@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { RevealTitle } from './RevealTitle'
 
 const TIPS = [
   { title: 'תנו ל-AI תפקיד', text: 'פתחו ב"אתה קופירייטר בכיר שמתמחה ב..." והתשובות יהיו מקצועיות יותר.' },
@@ -13,7 +14,7 @@ export function ProTips() {
   return (
     <section id="tips" className="scroll-mt-24 py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <h2 className="font-display text-3xl font-black sm:text-4xl">6 טיפים לתוצאות טובות יותר</h2>
+        <RevealTitle className="text-3xl sm:text-5xl">6 טיפים לתוצאות טובות יותר</RevealTitle>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {TIPS.map((t, i) => (
             <motion.div

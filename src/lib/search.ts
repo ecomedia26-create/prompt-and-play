@@ -1,4 +1,5 @@
 import { useSyncExternalStore } from 'react'
+import { scrollToId } from './smoothScroll'
 
 // חיפוש משותף: תיבת החיפוש בגיבור והספרייה עובדות על אותו ערך
 let query = ''
@@ -19,5 +20,5 @@ const subscribe = (cb: () => void) => {
 export const useSearch = () => useSyncExternalStore(subscribe, () => query)
 
 export function goToLibrary() {
-  document.getElementById('library')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  scrollToId('library')
 }
