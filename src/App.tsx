@@ -9,6 +9,7 @@ import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { HowItWorks } from './components/HowItWorks'
+import { Legal } from './components/Legal'
 import { Intro } from './components/Intro'
 import { Library } from './components/Library'
 import { Manifesto } from './components/Manifesto'
@@ -50,6 +51,7 @@ export default function App() {
       <CopyFlight />
       {!reduced && <Intro />}
       <Accessibility />
+      <Legal />
     </div>
     </MotionConfig>
   )

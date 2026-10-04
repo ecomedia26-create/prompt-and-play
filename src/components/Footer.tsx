@@ -1,6 +1,9 @@
 import { BRAND, waLink } from '../lib/brand'
 import { EcoLogo } from './EcoLogo'
 import { InstallChip } from './InstallChip'
+import { openLegal } from '../lib/legal'
+
+const LINK = 'text-xs text-white/70 underline-offset-2 hover:text-white hover:underline'
 
 const YEAR = new Date().getFullYear()
 
@@ -11,15 +14,19 @@ export function Footer() {
         <EcoLogo />
         <div className="flex flex-col items-center gap-3">
           <p className="text-center">
-            Prompt & Play הוא מיזם קהילתי חינמי מבית {BRAND.nameHe}. © {YEAR}
+            Prompt & Play הוא מיזם קהילתי חינמי מבית {BRAND.nameHe}. © {YEAR} כל הזכויות שמורות.
           </p>
-          <button
-            type="button"
-            onClick={() => window.dispatchEvent(new Event('pp:a11y-statement'))}
-            className="text-xs text-white/70 underline-offset-2 hover:text-white hover:underline"
-          >
-            הצהרת נגישות
-          </button>
+          <nav aria-label="מידע משפטי" className="flex flex-wrap justify-center gap-x-4 gap-y-1">
+            <button type="button" onClick={() => openLegal('terms')} className={LINK}>
+              תנאי שימוש
+            </button>
+            <button type="button" onClick={() => openLegal('privacy')} className={LINK}>
+              מדיניות פרטיות
+            </button>
+            <button type="button" onClick={() => window.dispatchEvent(new Event('pp:a11y-statement'))} className={LINK}>
+              הצהרת נגישות
+            </button>
+          </nav>
           <InstallChip />
         </div>
         <div className="flex flex-col items-center gap-1 sm:items-end">
