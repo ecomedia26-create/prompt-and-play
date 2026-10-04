@@ -2,6 +2,8 @@
 
 מיזם קהילתי חינמי: ספריית 30 סקילים ובוטים של AI לעסקים בישראל, שהיא גם הדגמה חיה (Live Showcase) של יכולות ה-5D של אקו מדיה.
 
+כתובת האתר: https://play.ecomedia.co.il (ובנוסף https://prompt-and-play-sepia.vercel.app).
+
 **סטאק:** Vite + React + TypeScript, Tailwind CSS, Three.js, Framer Motion, Lucide. ללא שרת אחורי, מוכן לפריסה חינמית ב-Vercel.
 
 ## הרצה מקומית
