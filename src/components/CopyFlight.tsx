@@ -64,10 +64,11 @@ export function CopyFlight() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            className="fixed bottom-24 left-1/2 z-[80] -translate-x-1/2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-[#141846] shadow-xl"
+            className="pointer-events-none fixed inset-x-0 bottom-24 z-[80] flex justify-center px-4"
           >
-            <span className="inline-flex items-center gap-2 whitespace-nowrap">
-              <Check className="h-4 w-4 text-wa" />
+            {/* המרכוז במעטפת: האנימציה של framer דורסת translate של Tailwind על אותו אלמנט */}
+            <span className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-[#141846] shadow-xl">
+              <Check className="h-4 w-4 shrink-0 text-wa" />
               הועתק! הדביקו ב-Claude או ב-ChatGPT
             </span>
           </motion.div>
