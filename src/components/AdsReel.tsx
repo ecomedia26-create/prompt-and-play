@@ -3,8 +3,8 @@ import { useRef } from 'react'
 import { useSound } from '../lib/sound'
 
 const ADS = [
-  { src: '/videos/ad1.mp4', poster: '/videos/ad1.jpg', title: 'כלי AI חינמיים לעסק' },
-  { src: '/videos/ad2.mp4', poster: '/videos/ad2.jpg', title: 'אתר 5D ובוט וואטסאפ' },
+  { src: '/videos/ad1.mp4?v=2', poster: '/videos/ad1.jpg?v=2', title: '26 פרומפטים בחינם' },
+  { src: '/videos/ad2.mp4?v=2', poster: '/videos/ad2.jpg?v=2', title: 'אתרי 5D ובוטים לוואטסאפ' },
 ]
 
 // שתי הפרסומות שאקו מדיה הפיקה ל-Prompt & Play. קישור ישיר: /#ads
