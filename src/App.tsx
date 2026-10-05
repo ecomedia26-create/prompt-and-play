@@ -17,6 +17,7 @@ import { PaperPlane } from './components/PaperPlane'
 import { ProTips } from './components/ProTips'
 import { ToolsMarquee } from './components/ToolsMarquee'
 import { WhatsAppFab } from './components/WhatsAppFab'
+import { ShareFab } from './components/ShareFab'
 import { useEffect } from 'react'
 import { useIsTouch, usePrefersReducedMotion } from './hooks/useIsTouch'
 import { useA11y } from './lib/a11y'
@@ -48,6 +49,7 @@ export default function App() {
       </main>
       <Footer />
       <WhatsAppFab />
+      <ShareFab />
       <AssistantChat />
       <CopyFlight />
       {!reduced && <Intro />}
