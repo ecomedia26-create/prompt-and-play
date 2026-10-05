@@ -4,6 +4,8 @@ export const BRAND = {
   nameEn: 'Eco Media',
   siteUrl: 'https://www.ecomedia.co.il',
   siteDisplay: 'ecomedia.co.il',
+  // הכתובת הרשמית של Prompt & Play (שיתופים, קישורים קבועים)
+  appUrl: 'https://www.promptandplay.co.il',
   phoneDisplay: '053-426-2621',
   phoneIntl: '972534262621',
   banner: 'מיזם קהילתי לקידום עסקים ב-AI מבית אקו מדיה (Eco Media)',

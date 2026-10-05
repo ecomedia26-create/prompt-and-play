@@ -1,6 +1,7 @@
 import { Check, Link2, Share2 } from 'lucide-react'
 import { useState } from 'react'
 import type { Skill } from '../data/skills'
+import { BRAND } from '../lib/brand'
 import { useSound } from '../lib/sound'
 import { WhatsAppIcon } from './WhatsAppIcon'
 
@@ -16,7 +17,7 @@ function LinkedinIcon({ className = '' }: { className?: string }) {
 export function ShareRow({ skill }: { skill: Skill }) {
   const [copied, setCopied] = useState(false)
   const { play } = useSound()
-  const url = `${window.location.origin}/?skill=${encodeURIComponent(skill.id)}`
+  const url = `${BRAND.appUrl}/?skill=${encodeURIComponent(skill.id)}`
   const text = `${skill.title_he}: סקיל AI חינמי לעסקים מ-Prompt & Play של אקו מדיה`
   const canNativeShare = typeof navigator.share === 'function'
 

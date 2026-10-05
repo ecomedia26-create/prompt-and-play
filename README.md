@@ -1,6 +1,8 @@
 # Prompt & Play · מבית אקו מדיה (Eco Media)
 
-מיזם קהילתי חינמי: ספריית 30 סקילים ובוטים של AI לעסקים בישראל, שהיא גם הדגמה חיה (Live Showcase) של יכולות ה-5D של אקו מדיה.
+מיזם קהילתי חינמי: 26 פרומפטים מוכנים ל-AI לעסקים בישראל, בעברית, שהוא גם הדגמה חיה (Live Showcase) של יכולות ה-5D של אקו מדיה.
+
+**באוויר:** https://www.promptandplay.co.il
 
 **סטאק:** Vite + React + TypeScript, Tailwind CSS, Three.js, Framer Motion, Lucide. ללא שרת אחורי, מוכן לפריסה חינמית ב-Vercel.
 
