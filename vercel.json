@@ -8,5 +8,18 @@
       "includeFiles": "src/data/public_skills_data.json",
       "maxDuration": 60
     }
-  }
+  },
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "prompt-and-play-sepia.vercel.app"
+        }
+      ],
+      "destination": "https://www.promptandplay.co.il/:path*",
+      "permanent": true
+    }
+  ]
 }
