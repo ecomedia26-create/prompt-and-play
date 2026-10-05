@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 
-// מוזיקת הרקע של האתר (קובץ ב-public/audio) מתנגנת רק אחרי לחיצה, עם פייד רך.
+// מוזיקת הרקע של האתר (קבצים ב-public/audio) מתנגנת רק אחרי לחיצה, עם פייד רך.
 // צלילי הממשק ומשב הרוח בגלילה מסונתזים בדפדפן (Web Audio).
 type Cue = 'hover' | 'click' | 'copy' | 'open'
 
@@ -14,7 +14,8 @@ const Ctx = createContext<SoundCtx>({ enabled: false, toggle: () => {}, play: ()
 
 const midi = (n: number) => 440 * Math.pow(2, (n - 69) / 12)
 
-const MUSIC_SRC = '/audio/background.mp3'
+// הפלייליסט של האתר: השירים מתנגנים אחד אחרי השני ומתחילים מחדש בסוף
+const PLAYLIST = ['/audio/background.mp3', '/audio/welcome-to.mp3']
 const OPEN_TOP = 3500
 
 interface Engine {
@@ -45,7 +46,7 @@ function buildEngine(): Engine {
   comp.ratio.value = 3
   // עוצמה כללית נעימה ברקע (הקומפרסור מוסיף הגברה אוטומטית)
   const master = ctx.createGain()
-  master.gain.value = 0.5
+  master.gain.value = 0.75
   comp.connect(master).connect(ctx.destination)
 
   const reverb = ctx.createConvolver()
@@ -55,9 +56,14 @@ function buildEngine(): Engine {
   reverb.connect(wet).connect(comp)
 
   // ערוץ המוזיקה: עולה ויורד בפייד רך בהפעלה/כיבוי
-  const audio = new Audio(MUSIC_SRC)
-  audio.loop = true
+  let track = 0
+  const audio = new Audio(PLAYLIST[track])
   audio.preload = 'auto'
+  audio.addEventListener('ended', () => {
+    track = (track + 1) % PLAYLIST.length
+    audio.src = PLAYLIST[track]
+    void audio.play().catch(() => {})
+  })
   const music = ctx.createGain()
   music.gain.value = 0
   // פילטר שנפתח ככל שגוללים עמוק יותר באתר: למעלה המוזיקה מעט רכה, למטה היא מלאה
