@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>הצעות מחיר אקו מדיה</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=Rubik:wght@500;700;800&display=swap">
+<style>
+/* Layout: a calm dark studio desk. Right (RTL start): the builder. Left: one signature object, a live phone that shows the exact WhatsApp message the client will get, assembling as products are picked. Single dark theme by choice (Eco Media neon). */
+:root{
+  color-scheme:dark;
+  --ink-0:#070B12; --ink-1:#0D1420; --ink-2:#142032; --line:#22324A; --line-2:#2E4361;
+  --fg:#EAF1F8; --muted:#8FA3BA; --dim:#5F7590;
+  --cyan:#00F0FF; --purple:#9333EA; --violet:#B98BFF; --wa:#25D366; --wa-ink:#04210F;
+  --gold:#EDC56A; --warn:#F2B35B;
+  --chat-bg:#0B141A; --bubble:#005C4B; --bubble-ink:#E9EDEF; --chat-link:#53BDEB; --chat-meta:#8696A0;
+  --display:"Rubik","Heebo",system-ui,sans-serif;
+  --body:"Heebo",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --r-s:8px; --r-m:12px; --r-l:18px;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box}
+html,body{background:var(--ink-0)}
+body{color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.55;margin:0;
+  background:
+    radial-gradient(900px 500px at 85% -10%, color-mix(in srgb,var(--purple) 22%,transparent), transparent 60%),
+    radial-gradient(700px 420px at 5% 110%, color-mix(in srgb,var(--cyan) 12%,transparent), transparent 60%),
+    var(--ink-0);
+  background-attachment:fixed;min-height:100%}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:16px;padding-block:28px 120px;display:flex;flex-direction:column;gap:22px}
+bdi{unicode-bidi:isolate}
+
+/* header */
+.top{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px}
+.eyebrow{font-size:.72rem;letter-spacing:.14em;color:var(--cyan);font-weight:700;margin:0 0 6px}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(1.6rem,3.4vw,2.4rem);line-height:1.1;margin:0;text-wrap:balance}
+h1 span{background:linear-gradient(90deg,var(--cyan),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--muted);margin:6px 0 0;max-width:60ch}
+.offer-id{font-family:var(--display);font-size:.85rem;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:6px 12px;white-space:nowrap}
+.offer-id b{color:var(--fg)}
+
+.grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:start}
+.grid>.stage{grid-column:2;grid-row:1/span 2}
+.grid>.hist-card{grid-column:1;grid-row:2}
+@media (max-width:920px){.grid>.stage,.grid>.hist-card{grid-column:auto;grid-row:auto}}
+@media (max-width:920px){.grid{grid-template-columns:minmax(0,1fr)}}
+
+.card{background:color-mix(in srgb,var(--ink-1) 88%,transparent);border:1px solid var(--line);border-radius:var(--r-l);padding:18px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.step{display:flex;align-items:center;gap:10px}
+.step i{font-style:normal;font-family:var(--display);font-weight:700;font-size:.8rem;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line-2);color:var(--cyan)}
+.step h2{font-family:var(--display);font-size:1.05rem;font-weight:700;margin:0}
+
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.fields{grid-template-columns:1fr}}
+label.f{display:flex;flex-direction:column;gap:5px;font-size:.82rem;color:var(--muted)}
+input[type=text],input[type=tel],input[type=search],textarea,select{font:inherit;font-size:15px;color:var(--fg);background:var(--ink-0);border:1px solid var(--line);border-radius:var(--r-s);padding:10px 11px;width:100%}
+textarea{min-height:60px;resize:vertical}
+input::placeholder,textarea::placeholder{color:var(--dim)}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:inherit;font-size:.85rem;font-weight:500;color:var(--fg);background:var(--ink-2);border:1px solid var(--line);border-radius:99px;padding:7px 12px;cursor:pointer}
+.chip:hover{border-color:var(--cyan)}
+.chip small{color:var(--muted);font-weight:400;margin-inline-start:4px}
+.chip.on{border-color:var(--cyan);background:color-mix(in srgb,var(--cyan) 12%,var(--ink-2))}
+
+.search{position:relative}
+.search input{padding-inline-start:34px}
+.search svg{position:absolute;inset-inline-start:11px;top:50%;transform:translateY(-50%);color:var(--dim)}
+
+.group-title{font-size:.72rem;letter-spacing:.12em;color:var(--dim);margin:6px 0 0;font-weight:700}
+.items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media (max-width:620px){.items{grid-template-columns:minmax(0,1fr)}}
+.item{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:start;padding:11px 12px;border:1px solid var(--line);border-radius:var(--r-m);background:var(--ink-1);cursor:pointer;user-select:none}
+.item:hover{border-color:var(--line-2)}
+.item input{position:absolute;opacity:0;pointer-events:none}
+.item:has(input:focus-visible){outline:2px solid var(--cyan);outline-offset:2px}
+.item .name{font-weight:500;line-height:1.35}
+.item .price{font-family:var(--display);font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
+.item .meta{grid-column:1/-1;font-size:.75rem;color:var(--muted);display:flex;gap:8px;align-items:center}
+.item .tick{width:18px;height:18px;border-radius:6px;border:1.5px solid var(--line-2);display:grid;place-items:center;flex:none}
+.item .tick svg{opacity:0;transform:scale(.6)}
+.item:has(input:checked){border-color:color-mix(in srgb,var(--cyan) 70%,transparent);background:linear-gradient(135deg,color-mix(in srgb,var(--cyan) 10%,var(--ink-1)),color-mix(in srgb,var(--purple) 10%,var(--ink-1)))}
+.item:has(input:checked) .tick{background:var(--cyan);border-color:var(--cyan)}
+.item:has(input:checked) .tick svg{opacity:1;transform:none}
+.nolink{color:var(--warn)}
+.per{font-weight:400;color:var(--muted);font-size:.78rem;font-family:var(--body)}
+.empty-search{color:var(--muted);font-size:.9rem;padding:8px 2px;margin:0}
+
+/* phone */
+.stage{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);display:flex;flex-direction:column;gap:14px;align-items:center}
+@media (max-width:920px){.stage{position:static}}
+.phone{width:min(360px,100%);border-radius:42px;padding:10px;background:linear-gradient(160deg,#2A3850,#0E1522 40%,#1D2840);box-shadow:0 30px 80px -30px color-mix(in srgb,var(--purple) 60%,transparent),0 0 0 1px #33445F inset}
+.screen{border-radius:33px;overflow:hidden;background:var(--chat-bg);display:flex;flex-direction:column;height:620px;max-height:78vh}
+.chat-head{display:flex;align-items:center;gap:10px;padding:16px 14px 10px;background:#1F2C34}
+.chat-head .av{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--cyan),var(--purple));color:#07101A;font-family:var(--display);font-weight:800;font-size:.85rem}
+.chat-head b{display:block;font-size:.95rem;color:#E9EDEF}
+.chat-head small{color:var(--chat-meta);font-size:.75rem}
+.chat{flex:1;overflow:auto;padding:14px 12px;display:flex;flex-direction:column;gap:8px;
+  background-color:var(--chat-bg);
+  background-image:radial-gradient(circle at 1px 1px,#16232C 1px,transparent 1.5px);background-size:18px 18px}
+.day{align-self:center;font-size:.7rem;color:var(--chat-meta);background:#182229;padding:3px 10px;border-radius:8px}
+.bubble{align-self:flex-start;max-width:88%;background:var(--bubble);color:var(--bubble-ink);border-radius:10px;border-start-start-radius:2px;padding:7px 9px 5px;font-size:.86rem;line-height:1.45;white-space:pre-wrap;word-break:break-word;box-shadow:0 1px 1px #0006}
+.bubble a{color:var(--chat-link);text-decoration:none;word-break:break-all}
+.bubble .line{display:block}
+.bubble .meta{display:block;text-align:left;font-size:.66rem;color:#9FD5C8;margin-top:2px}
+.bubble .new{animation:pop .55s var(--ease) both}
+.placeholder{align-self:center;margin:auto;text-align:center;color:var(--chat-meta);font-size:.85rem;max-width:26ch}
+@keyframes pop{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+
+.totals{width:min(360px,100%);display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tot{border:1px solid var(--line);border-radius:var(--r-m);padding:10px 12px;background:var(--ink-1)}
+.tot span{display:block;font-size:.72rem;color:var(--muted);letter-spacing:.06em}
+.tot b{font-family:var(--display);font-size:1.35rem;font-variant-numeric:tabular-nums}
+.tot.one b{color:var(--cyan)} .tot.mon b{color:var(--violet)}
+.actions{width:min(360px,100%);display:flex;flex-direction:column;gap:8px}
+.btn{font:inherit;font-weight:700;font-size:1rem;border-radius:14px;padding:13px 16px;border:1px solid var(--line-2);background:var(--ink-2);color:var(--fg);cursor:pointer;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn.wa{background:var(--wa);border-color:var(--wa);color:var(--wa-ink)}
+.btn.wa:hover{filter:brightness(1.06)}
+.btn[aria-disabled="true"],.btn:disabled{opacity:.45;pointer-events:none}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn.ghost{background:transparent;font-size:.9rem;padding:10px}
+.toast{font-size:.85rem;color:var(--cyan);min-height:1.3em;margin:0;width:min(360px,100%);text-align:center}
+.hints{width:min(360px,100%);display:flex;flex-direction:column;gap:6px;margin:0;padding:0;list-style:none}
+.hints li{font-size:.8rem;color:var(--muted);padding:8px 10px;border:1px dashed var(--line);border-radius:var(--r-s)}
+.hints li.warn{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 40%,var(--line))}
+
+/* history */
+.hist{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;list-style:none}
+.hist li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;padding:9px 11px;border:1px solid var(--line);border-radius:var(--r-s);background:var(--ink-1)}
+.hist small{grid-column:1/-1;color:var(--muted);font-size:.75rem}
+.hist button{font:inherit;font-size:.8rem;color:var(--cyan);background:none;border:0;cursor:pointer;padding:0}
+.hist-empty{color:var(--dim);font-size:.85rem;margin:0}
+
+/* mobile sticky bar */
+.bar{display:none}
+@media (max-width:920px){
+  .bar{display:flex;position:fixed;inset-inline:0;bottom:0;z-index:5;gap:10px;align-items:center;justify-content:space-between;
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--ink-1) 92%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+  .bar b{font-family:var(--display);font-size:1.1rem;font-variant-numeric:tabular-nums}
+  .bar small{display:block;color:var(--muted);font-size:.72rem}
+  .bar .btn{padding:10px 14px;font-size:.92rem}
+  .bar>div{min-width:0;flex:1}
+  .bar .btn.ghost{padding:10px 12px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (prefers-reduced-motion:no-preference){.item,.chip,.btn,.item .tick svg{transition:all .25s var(--ease)}}
+</style>
+</head>
+<body style="margin:0">
+
+<div class="wrap" dir="rtl" lang="he">
+  <div class="top">
+    <div>
+      <p class="eyebrow">אקו מדיה · מערכת הצעות</p>
+      <h1>הצעה ללקוח, <span>בשלושה צעדים</span></h1>
+      <p class="sub">בוחרים לקוח, מסמנים מוצרים ושולחים. הטלפון מראה בדיוק מה הלקוח יקבל בוואטסאפ, כולל לינק תשלום של UPay לכל מוצר.</p>
+    </div>
+    <div class="offer-id">הצעה מס' <b><bdi id="oid"></bdi></b></div>
+  </div>
+
+  <div class="grid">
+    <div style="display:flex;flex-direction:column;gap:22px;min-width:0">
+      <section class="card" aria-labelledby="s1">
+        <div class="step"><i>1</i><h2 id="s1">למי שולחים</h2></div>
+        <div class="fields">
+          <label class="f" for="cname">שם הלקוח או העסק
+            <input id="cname" type="text" value="לקוח לדוגמה" autocomplete="off">
+          </label>
+          <label class="f" for="cphone">וואטסאפ של הלקוח
+            <input id="cphone" type="tel" inputmode="tel" placeholder="050-1234567" autocomplete="off" dir="ltr" style="text-align:right">
+          </label>
+        </div>
+        <label class="f" for="cnote">משפט פתיחה
+          <textarea id="cnote">שמחנו לדבר איתך! כמו שסיכמנו, הנה ההצעה שלנו.</textarea>
+        </label>
+        <div class="chips" aria-label="משפטי פתיחה מוכנים">
+          <button class="chip" type="button" data-note="שמחנו לדבר איתך! כמו שסיכמנו, הנה ההצעה שלנו.">אחרי שיחה</button>
+          <button class="chip" type="button" data-note="תודה שפנית לאקו מדיה! הכנו לך הצעה שמתאימה בדיוק לעסק שלך.">פנייה חדשה</button>
+          <button class="chip" type="button" data-note="רק מזכירים שההצעה שלנו עדיין מחכה לך. נשמח להתחיל!">תזכורת</button>
+        </div>
+        <label class="f" for="valid">ההצעה בתוקף
+          <select id="valid">
+            <option value="3">3 ימים</option>
+            <option value="7" selected>שבוע</option>
+            <option value="14">שבועיים</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="card" aria-labelledby="s2">
+        <div class="step"><i>2</i><h2 id="s2">מה מציעים</h2></div>
+        <p class="group-title" style="margin:0">חבילות מוכנות</p>
+        <div class="chips" id="packs"></div>
+        <div class="search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="q" type="search" placeholder="חיפוש מוצר…" aria-label="חיפוש מוצר">
+        </div>
+        <div id="list"></div>
+      </section>
+
+
+    </div>
+
+    <aside class="stage" aria-labelledby="s3">
+      <div class="step" style="align-self:stretch;justify-content:center"><i>3</i><h2 id="s3">ככה הלקוח יראה את זה</h2></div>
+      <div class="phone">
+        <div class="screen">
+          <div class="chat-head">
+            <div class="av">EM</div>
+            <div><b id="chatName">לקוח לדוגמה</b><small>וואטסאפ · <bdi id="chatPhone">אין מספר עדיין</bdi></small></div>
+          </div>
+          <div class="chat" id="chat" aria-live="polite"></div>
+        </div>
+      </div>
+      <div class="totals">
+        <div class="tot one"><span>סה"כ חד-פעמי</span><b><bdi id="tOnce">0 ₪</bdi></b></div>
+        <div class="tot mon"><span>סה"כ חודשי</span><b><bdi id="tMon">0 ₪</bdi></b></div>
+      </div>
+      <div class="actions">
+        <a id="send" class="btn wa" href="https://wa.me/" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.2-.2-.5-.3Z"/></svg>
+          שליחה ללקוח בוואטסאפ
+        </a>
+        <div class="row2">
+          <button id="copy" class="btn ghost" type="button">העתקת ההודעה</button>
+          <button id="reset" class="btn ghost" type="button">הצעה חדשה</button>
+        </div>
+      </div>
+      <p id="toast" class="toast" role="status" aria-live="polite"></p>
+      <ul class="hints" id="hints"></ul>
+    </aside>
+      <section class="card hist-card" aria-labelledby="s4">
+        <div class="step"><i>✓</i><h2 id="s4">הצעות אחרונות</h2></div>
+        <ul class="hist" id="hist"></ul>
+      </section>
+
+  </div>
+</div>
+
+<div class="bar" dir="rtl" lang="he">
+  <div><small>סה"כ להצעה</small><b id="barTot">0 ₪</b></div>
+  <button id="peek" class="btn ghost" type="button">תצוגה</button>
+  <a id="send2" class="btn wa" href="https://wa.me/" target="_blank" rel="noopener">שליחה בוואטסאפ</a>
+</div>
+
+<script>
+const U = 'https://app.upay.co.il/API6/s.php?m=';
+const PHONE = '053-426-2621';
+const PRODUCTS = [
+  {g:'וידאו וקריאייטיב', id:'reel', name:'סרטון AI קצר לרילס/סטורי', price:350, link:U+'RmFES2thNzhyNzc2THF2YXk3YXZIQT09'},
+  {g:'וידאו וקריאייטיב', id:'video', name:'הפקת וידאו AI – מסלול מלא', price:500, link:U+'WWpQaENLcTk0d0hMbS9OK0d4UGNJdz09'},
+  {g:'וידאו וקריאייטיב', id:'shoot', name:'הפקת שטח בעסק', price:1900, link:U+'NUF1eFhicEd2a2xPd3F2V04ycUtGUT09'},
+  {g:'וידאו וקריאייטיב', id:'avatar', name:'סרטון אווטאר ודובר וירטואלי', price:500, per:'לדקה', link:U+'cndDWW1WTzZXYU1sWlJrdGw3b0xNdz09'},
+  {g:'וידאו וקריאייטיב', id:'repurpose', name:'מיחזור תוכן ל-4–5 רילסים', price:900, link:U+'YkRCbmdYWkR3SWlESmhIUVgyT0lwUT09'},
+  {g:'וידאו וקריאייטיב', id:'ugc', name:'סרטון UGC מבוסס AI', price:700, link:U+'UGpCeXJZTUFrcFdRc3lHTXRWdjFLQT09'},
+  {g:'אתרים ומערכות', id:'landing', name:'בניית דף נחיתה', price:700, link:U+'ZVNHRzM0dUZpVG83ckNpUm80QVFRdz09'},
+  {g:'אתרים ומערכות', id:'site', name:'בניית אתר עסקי', price:2200, from:true, link:U+'dEpadFh0OFdWQVcvZGhSUFd1cmFJZz09'},
+  {g:'אתרים ומערכות', id:'dash', name:'הקמת דשבורד לעסק', price:1200, link:U+'alF2K0s5eDFnd0lDeXc5UVRSSEVxUT09'},
+  {g:'אתרים ומערכות', id:'calc', name:'מחשבון הצעת מחיר מותאם אישית', price:2500, link:U+'QmRHRnIyNHl0VHpyRkg2b0ZMbkJPdz09'},
+  {g:'אתרים ומערכות', id:'card', name:'כרטיס ביקור דיגיטלי חכם', price:390},
+  {g:'אתרים ומערכות', id:'brand', name:'חבילת מיקרו-מיתוג', price:1200},
+  {g:'אתרים ומערכות', id:'copy', name:'כתיבת תוכן שיווקי', price:200, per:'לטקסט'},
+  {g:'שירותים חודשיים', id:'retainer', name:'ריטיינר וידאו – 4 רילסים בחודש', price:1200, monthly:true, link:U+'MFNOVU5od2RGTC9hOWxtT3VDSzJpZz09'},
+  {g:'שירותים חודשיים', id:'social', name:'ניהול עמודי סושיאל מלא', price:2900, monthly:true},
+  {g:'שירותים חודשיים', id:'ppc', name:'ניהול קמפיינים ממומנים במטא', price:1500, monthly:true, extra:'לא כולל תקציב הפרסום'},
+];
+const PACKS = [
+  {name:'פתיחה לעסק חדש', ids:['landing','reel','card']},
+  {name:'נוכחות דיגיטלית מלאה', ids:['site','brand','retainer']},
+  {name:'וידאו כל חודש', ids:['retainer','repurpose']},
+  {name:'מכונת לידים', ids:['landing','video','ppc']},
+];
+const byId = Object.fromEntries(PRODUCTS.map(p=>[p.id,p]));
+const $ = id => document.getElementById(id);
+const fmt = n => n.toLocaleString('he-IL') + '\u00A0₪';
+const unit = p => p.monthly ? 'לחודש' : (p.per || '');
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = {
+  get(k,d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+
+let picked = new Set(['landing','reel']);
+let shown = new Set();
+let offerNo = newOfferNo();
+
+function newOfferNo(){
+  const d = new Date();
+  return `EM-${String(d.getFullYear()).slice(2)}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}-${String(Math.floor(Math.random()*900)+100)}`;
+}
+
+function renderPacks(){
+  $('packs').innerHTML = PACKS.map((k,i)=>{
+    const {once, month} = sums(k.ids.map(id=>byId[id]));
+    return `<button class="chip" type="button" data-pack="${i}">${k.name}<small><bdi>${fmt(once)}</bdi>${month?` + <bdi>${fmt(month)}</bdi> לחודש`:''}</small></button>`;
+  }).join('');
+  $('packs').addEventListener('click', e=>{
+    const b = e.target.closest('[data-pack]'); if(!b) return;
+    picked = new Set(PACKS[+b.dataset.pack].ids);
+    syncChecks(); update();
+  });
+}
+
+function renderList(){
+  const q = $('q').value.trim();
+  const groups = [...new Set(PRODUCTS.map(p=>p.g))];
+  let html = '';
+  for(const g of groups){
+    const ps = PRODUCTS.filter(p=>p.g===g && (!q || p.name.includes(q) || g.includes(q)));
+    if(!ps.length) continue;
+    html += `<p class="group-title">${g}</p><div class="items">` + ps.map(p=>`
+      <label class="item" for="p-${p.id}">
+        <input type="checkbox" id="p-${p.id}" data-id="${p.id}" ${picked.has(p.id)?'checked':''}>
+        <span class="name">${p.name}</span>
+        <span class="price"><bdi>${p.from?'<span class="per">החל מ-</span>':''}${fmt(p.price)}</bdi></span>
+        <span class="meta"><span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#04131A" stroke-width="3.5" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span>${unit(p)?unit(p)+' · ':''}${p.link?'לינק תשלום מוכן':'<span class="nolink">אין לינק עדיין</span>'}</span>
+      </label>`).join('') + '</div>';
+  }
+  $('list').innerHTML = html || '<p class="empty-search">לא נמצא מוצר בשם הזה.</p>';
+}
+
+function syncChecks(){ PRODUCTS.forEach(p=>{ const c=$('p-'+p.id); if(c) c.checked = picked.has(p.id); }); }
+function items(){ return PRODUCTS.filter(p=>picked.has(p.id)); }
+
+function waNumber(raw){
+  let d = (raw||'').replace(/\D/g,'');
+  if(d.startsWith('00')) d = d.slice(2);
+  if(d.startsWith('0')) d = '972' + d.slice(1);
+  return d.length >= 11 && d.length <= 13 ? d : '';
+}
+function validUntil(){
+  const d = new Date(); d.setDate(d.getDate() + (+$('valid').value));
+  return d.toLocaleDateString('he-IL',{day:'numeric',month:'numeric',year:'numeric'});
+}
+function sums(list){
+  return { once:list.filter(p=>!p.monthly).reduce((s,p)=>s+p.price,0), month:list.filter(p=>p.monthly).reduce((s,p)=>s+p.price,0) };
+}
+
+/* the message as lines: [{t:'text', id?:productId}] so the phone can animate new products in */
+function buildLines(list){
+  const name = $('cname').value.trim(), note = $('cnote').value.trim();
+  const {once, month} = sums(list);
+  const L = [];
+  L.push({t:`שלום${name?' '+name:''} 👋`});
+  if(note) L.push({t:note});
+  L.push({t:''});
+  L.push({t:`*הצעת מחיר מאקו מדיה* · מס' \u2066${offerNo}\u2069`});
+  list.forEach(p=>{
+    let line = `\n▫️ *${p.name}* – ${p.from?'החל מ-':''}${fmt(p.price)}${unit(p)?' '+unit(p):''}`;
+    if(p.extra) line += ` (${p.extra})`;
+    line += p.link ? `\nלתשלום: ${p.link}` : `\nלינק לתשלום יישלח בנפרד`;
+    L.push({t:line, id:p.id});
+  });
+  L.push({t:''});
+  if(once) L.push({t:`סה"כ חד-פעמי: *${fmt(once)}*`});
+  if(month) L.push({t:`סה"כ חודשי: *${fmt(month)} לחודש*`});
+  L.push({t:`\nההצעה בתוקף עד ${validUntil()}.\nלוחצים על הלינק של המוצר ומשלמים באשראי או בביט, והחשבונית נשלחת אוטומטית.\n\nאקו מדיה | ${PHONE}`});
+  return L;
+}
+const toText = L => L.map(l=>l.t).join('\n');
+
+/* WhatsApp-style rendering: *bold*, links */
+function waHtml(t){
+  return esc(t)
+    .replace(/\*([^*\n]+)\*/g,'<b>$1</b>')
+    .replace(/(https:\/\/[^\s]+)/g,'<a href="$1" target="_blank" rel="noopener">$1</a>');
+}
+
+function renderPhone(L, list){
+  const chat = $('chat');
+  if(!list.length){
+    chat.innerHTML = '<div class="placeholder">סמנו מוצר אחד או יותר, וההודעה תיבנה כאן מול העיניים.</div>';
+    shown = new Set(); return;
+  }
+  const now = new Date().toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'});
+  const body = L.map(l=>`<span class="line${l.id && !shown.has(l.id)?' new':''}">${waHtml(l.t)||'&nbsp;'}</span>`).join('');
+  chat.innerHTML = `<div class="day">היום</div><div class="bubble">${body}<span class="meta">${now} ✓✓</span></div>`;
+  shown = new Set(list.map(p=>p.id));
+}
+
+function update(){
+  const list = items();
+  const L = buildLines(list), text = toText(L);
+  const {once, month} = sums(list);
+  const num = waNumber($('cphone').value);
+  renderPhone(L, list);
+  $('oid').textContent = offerNo;
+  $('chatName').textContent = $('cname').value.trim() || 'הלקוח';
+  $('chatPhone').textContent = num ? '+' + num : 'אין מספר עדיין';
+  $('tOnce').textContent = fmt(once);
+  $('tMon').textContent = fmt(month);
+  $('barTot').innerHTML = `<bdi>${fmt(once)}</bdi>` + (month ? ` <span class="per">+ <bdi>${fmt(month)}</bdi> לחודש</span>` : '');
+  const href = `https://wa.me/${num}?text=${encodeURIComponent(text)}`;
+  ['send','send2'].forEach(id=>{ $(id).href = href; $(id).setAttribute('aria-disabled', list.length ? 'false':'true'); });
+  $('copy').disabled = !list.length;
+  const missing = list.filter(p=>!p.link).length;
+  const hints = [];
+  if(!num) hints.push(['','כדאי להוסיף את מספר הוואטסאפ של הלקוח. בלי מספר, וואטסאפ ייפתח ויבקש לבחור למי לשלוח.']);
+  if(missing) hints.push(['warn',`ל-${missing} מהמוצרים שבחרתם עוד אין לינק ב-UPay. בהודעה כתוב שהלינק יישלח בנפרד.`]);
+  if(list.length > 1) hints.push(['','כל מוצר מגיע עם לינק משלו. אם הלקוח רוצה לשלם הכל בבת אחת, יוצרים ב-UPay לינק אחד בסכום הכולל.']);
+  $('hints').innerHTML = hints.map(([c,t])=>`<li class="${c}">${t}</li>`).join('');
+  document.querySelectorAll('#packs .chip').forEach((b,i)=>{
+    const ids = PACKS[i].ids; b.classList.toggle('on', ids.length===picked.size && ids.every(id=>picked.has(id)));
+  });
+}
+
+function saveHistory(){
+  const list = items(); if(!list.length) return;
+  const {once, month} = sums(list);
+  const h = store.get('em-offers', []);
+  if(h[0] && h[0].no === offerNo){ h.shift(); }
+  h.unshift({no:offerNo, name:$('cname').value.trim(), phone:$('cphone').value.trim(), note:$('cnote').value, ids:[...picked], once, month, at:Date.now()});
+  store.set('em-offers', h.slice(0,8));
+  renderHistory();
+}
+function renderHistory(){
+  const h = store.get('em-offers', []);
+  if(!h.length){ $('hist').innerHTML = '<p class="hist-empty">עוד לא נשלחו הצעות מהמכשיר הזה. כל הצעה שתשלחו תישמר כאן, וככה אפשר לשלוח אותה שוב בלחיצה.</p>'; return; }
+  $('hist').innerHTML = h.map((o,i)=>`
+    <li><span><b>${esc(o.name||'לקוח')}</b> · <bdi>${o.no}</bdi></span>
+    <button type="button" data-h="${i}">פתיחה</button>
+    <small><bdi>${fmt(o.once)}</bdi>${o.month?` + <bdi>${fmt(o.month)}</bdi> לחודש`:''} · ${new Date(o.at).toLocaleDateString('he-IL')}</small></li>`).join('');
+}
+$('hist').addEventListener('click', e=>{
+  const b = e.target.closest('[data-h]'); if(!b) return;
+  const o = store.get('em-offers', [])[+b.dataset.h]; if(!o) return;
+  $('cname').value = o.name; $('cphone').value = o.phone; $('cnote').value = o.note || '';
+  picked = new Set(o.ids.filter(id=>byId[id])); offerNo = o.no; shown = new Set(picked);
+  $('q').value=''; renderList(); update();
+  $('toast').textContent = `הצעה ${o.no} נפתחה מחדש.`;
+});
+
+['send','send2'].forEach(id=>$(id).addEventListener('click', ()=>{
+  saveHistory();
+  $('toast').textContent = 'וואטסאפ אמור להיפתח עם ההודעה מוכנה, ושם לוחצים על שליחה. אם הוא לא נפתח, השתמשו ב"העתקת ההודעה".';
+}));
+$('copy').addEventListener('click', async ()=>{
+  const text = toText(buildLines(items()));
+  try{ await navigator.clipboard.writeText(text); saveHistory(); $('toast').textContent = 'ההודעה הועתקה. מדביקים אותה בצ\'אט של הלקוח.'; }
+  catch(e){
+    const r = document.createRange(); r.selectNodeContents(document.querySelector('.bubble'));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+    $('toast').textContent = 'ההעתקה האוטומטית חסומה כאן. סימנתי את ההודעה בטלפון, אפשר להעתיק אותה ידנית.';
+  }
+});
+$('reset').addEventListener('click', ()=>{
+  picked = new Set(); shown = new Set(); offerNo = newOfferNo();
+  $('cname').value=''; $('cphone').value=''; $('q').value='';
+  renderList(); update(); $('cname').focus();
+  $('toast').textContent = 'הצעה חדשה מוכנה למילוי.';
+});
+document.querySelectorAll('[data-note]').forEach(b=>b.addEventListener('click',()=>{ $('cnote').value = b.dataset.note; update(); }));
+$('list').addEventListener('change', e=>{
+  const id = e.target.dataset.id; if(!id) return;
+  e.target.checked ? picked.add(id) : picked.delete(id); update();
+});
+$('q').addEventListener('input', renderList);
+$('peek').addEventListener('click', ()=>$('s3').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start'}));
+['cname','cphone','cnote','valid'].forEach(id=>$(id).addEventListener('input', update));
+
+renderPacks(); renderList(); update(); renderHistory();
+shown = new Set(picked);
+</script>
+
+</body>
+</html>

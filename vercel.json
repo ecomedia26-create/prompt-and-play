@@ -21,5 +21,22 @@
       "destination": "https://www.promptandplay.co.il/:path*",
       "permanent": true
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/offer",
+      "destination": "/offer/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/offer(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
   ]
 }
