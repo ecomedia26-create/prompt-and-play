@@ -33,6 +33,12 @@ export function Header() {
         </nav>
         <div className="flex items-center gap-2">
           <a
+            href="/calculator"
+            className="whitespace-nowrap rounded-full bg-white px-3.5 py-2 text-xs font-bold text-ink shadow-md shadow-[#141846]/20 transition hover:bg-white/90 sm:px-4 sm:text-sm"
+          >
+            קבלו הצעת מחיר
+          </a>
+          <a
             href={BRAND.siteUrl}
             target="_blank"
             rel="noopener"

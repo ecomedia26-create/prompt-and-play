@@ -129,6 +129,17 @@ export function Hero() {
           ))}
         </motion.div>
 
+        <motion.a
+          href="/calculator"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.7 }}
+          className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/40 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-white/15 sm:text-base"
+        >
+          צריכים סרטון או אתר לעסק? קבלו הצעת מחיר
+          <span aria-hidden="true">←</span>
+        </motion.a>
+
         <p className="mt-6 text-sm text-white/85">{FREE} פרומפטים · בעברית · בלי הרשמה · מבית אקו מדיה</p>
       </motion.div>
     </section>

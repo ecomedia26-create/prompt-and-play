@@ -23,8 +23,8 @@ export function EcoLogo({ compact = false }: { compact?: boolean }) {
       >
         <span className="whitespace-nowrap font-display text-base font-black tracking-wide sm:text-lg">
           <span dir="ltr" className="text-neon-gradient">Eco Media</span>
-          {!compact && <span className="mx-2 text-white/30">|</span>}
-          {!compact && <span className="text-white">אקו מדיה</span>}
+          {!compact && <span className="mx-2 hidden text-white/30 sm:inline">|</span>}
+          {!compact && <span className="hidden text-white sm:inline">אקו מדיה</span>}
         </span>
         {!compact && (
           <span className="mt-1 hidden text-[10px] font-medium sm:block tracking-[0.25em] text-neon-blue/70">

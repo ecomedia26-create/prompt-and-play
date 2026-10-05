@@ -26,6 +26,10 @@
     {
       "source": "/offer",
       "destination": "/offer/index.html"
+    },
+    {
+      "source": "/calculator",
+      "destination": "/calculator/index.html"
     }
   ],
   "headers": [

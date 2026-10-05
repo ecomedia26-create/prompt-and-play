@@ -5,7 +5,7 @@ import { BRAND, waLink } from '../lib/brand'
 import { legalFromHash, type LegalDoc } from '../lib/legal'
 
 
-const UPDATED = '4 באוקטובר 2026'
+const UPDATED = '5 באוקטובר 2026'
 
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
@@ -33,8 +33,14 @@ function Privacy() {
       <p className="text-sm leading-relaxed text-white/80">
         Prompt & Play מופעל ע"י {BRAND.nameHe}. אנחנו אוספים כמה שפחות מידע. כאן מוסבר מה בדיוק קורה עם המידע שלכם.
       </p>
-      <Section title="אין הרשמה ואין טפסים">
-        <p>האתר לא מבקש שם, טלפון או אימייל. הפרטים שאתם ממלאים בפרומפט (שם העסק, קהל יעד וכו') נשארים בדפדפן שלכם ולא נשלחים אלינו.</p>
+      <Section title="אין הרשמה">
+        <p>הספרייה לא מבקשת שם, טלפון או אימייל. הפרטים שאתם ממלאים בפרומפט (שם העסק, קהל יעד וכו') נשארים בדפדפן שלכם ולא נשלחים אלינו.</p>
+      </Section>
+      <Section title="מחשבון המחיר">
+        <p>
+          אם תבקשו הצעת מחיר במחשבון (בעמוד /calculator), השם, הטלפון, האימייל והבחירות שלכם נשלחים אלינו ואליכם במייל דרך שירות המיילים
+          EmailJS (או FormSubmit כגיבוי), כדי שנוכל לשלוח את ההצעה ולחזור אליכם. בקשה בוואטסאפ עוברת ישירות לוואטסאפ. לא נשתמש בפרטים לשום מטרה אחרת.
+        </p>
       </Section>
       <Section title="סטטיסטיקת ביקורים">
         <p>
