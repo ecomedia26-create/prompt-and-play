@@ -20,6 +20,28 @@
       ],
       "destination": "https://www.promptandplay.co.il/:path*",
       "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "calc.ecomedia.co.il"
+        }
+      ],
+      "destination": "/calculator",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "offer.ecomedia.co.il"
+        }
+      ],
+      "destination": "/offer",
+      "permanent": false
     }
   ],
   "rewrites": [
@@ -35,6 +57,21 @@
   "headers": [
     {
       "source": "/offer(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "offer.ecomedia.co.il"
+        }
+      ],
       "headers": [
         {
           "key": "X-Robots-Tag",
