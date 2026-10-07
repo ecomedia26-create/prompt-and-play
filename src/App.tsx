@@ -3,7 +3,6 @@ import { Accessibility } from './components/Accessibility'
 import { AgencyCTA } from './components/AgencyCTA'
 import { AngelDust } from './components/AngelDust'
 import { AssistantChat } from './components/AssistantChat'
-import { CloudSky } from './components/CloudSky'
 import { CopyFlight } from './components/CopyFlight'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
@@ -13,15 +12,18 @@ import { Legal } from './components/Legal'
 import { Intro } from './components/Intro'
 import { Library } from './components/Library'
 import { Manifesto } from './components/Manifesto'
-import { PaperPlane } from './components/PaperPlane'
 import { ProTips } from './components/ProTips'
 import { ToolsMarquee } from './components/ToolsMarquee'
 import { WhatsAppFab } from './components/WhatsAppFab'
 import { ShareFab } from './components/ShareFab'
-import { useEffect } from 'react'
+import { Suspense, lazy, useEffect } from 'react'
 import { useIsTouch, usePrefersReducedMotion } from './hooks/useIsTouch'
 import { useA11y } from './lib/a11y'
 import { jumpToHash, startSmoothScroll } from './lib/smoothScroll'
+
+// השמיים והמטוס (three.js) נטענים בנפרד, אחרי שהדף כבר מוצג: בלי זה הטלפון מחכה לכל הספרייה לפני שהוא מראה משהו
+const CloudSky = lazy(() => import('./components/CloudSky').then((m) => ({ default: m.CloudSky })))
+const PaperPlane = lazy(() => import('./components/PaperPlane').then((m) => ({ default: m.PaperPlane })))
 
 export default function App() {
   const touch = useIsTouch()
@@ -34,9 +36,17 @@ export default function App() {
   return (
     <MotionConfig reducedMotion={calm ? 'always' : 'user'}>
     <div dir="rtl" className="relative min-h-screen overflow-x-clip font-sans text-white">
-      {!reduced && <CloudSky lite={touch} />}
+      {!reduced && (
+        <Suspense fallback={<div className="sky-fallback pointer-events-none fixed inset-0 -z-10" aria-hidden="true" />}>
+          <CloudSky lite={touch} />
+        </Suspense>
+      )}
       {!reduced && !touch && <AngelDust />}
-      {!reduced && <PaperPlane touch={touch} />}
+      {!reduced && (
+        <Suspense fallback={null}>
+          <PaperPlane touch={touch} />
+        </Suspense>
+      )}
       <Header />
       <main>
         <Hero />
