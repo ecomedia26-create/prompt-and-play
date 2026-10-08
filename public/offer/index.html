@@ -157,7 +157,7 @@ input::placeholder,textarea::placeholder{color:var(--dim)}
     <div>
       <p class="eyebrow">אקו מדיה · מערכת הצעות</p>
       <h1>הצעה ללקוח, <span>בשלושה צעדים</span></h1>
-      <p class="sub">בוחרים לקוח, מסמנים מוצרים ושולחים. הטלפון מראה בדיוק מה הלקוח יקבל בוואטסאפ, כולל לינק תשלום של UPay לכל מוצר.</p>
+      <p class="sub">בוחרים לקוח, מסמנים מוצרים ושולחים. הטלפון מראה בדיוק מה הלקוח יקבל בוואטסאפ, כולל לינק תשלום של Cardcom כשיש למוצר דף תשלום קבוע.</p>
     </div>
     <div class="offer-id">הצעה מס' <b><bdi id="oid"></bdi></b></div>
   </div>
@@ -248,23 +248,22 @@ input::placeholder,textarea::placeholder{color:var(--dim)}
 </div>
 
 <script>
-const U = 'https://app.upay.co.il/API6/s.php?m=';
 const PHONE = '053-426-2621';
 const PRODUCTS = [
-  {g:'וידאו וקריאייטיב', id:'reel', name:'סרטון AI קצר לרילס/סטורי', price:350, link:U+'RmFES2thNzhyNzc2THF2YXk3YXZIQT09'},
-  {g:'וידאו וקריאייטיב', id:'video', name:'הפקת וידאו AI – מסלול מלא', price:500, link:U+'WWpQaENLcTk0d0hMbS9OK0d4UGNJdz09'},
-  {g:'וידאו וקריאייטיב', id:'shoot', name:'הפקת שטח בעסק', price:1900, link:U+'NUF1eFhicEd2a2xPd3F2V04ycUtGUT09'},
-  {g:'וידאו וקריאייטיב', id:'avatar', name:'סרטון אווטאר ודובר וירטואלי', price:500, per:'לדקה', link:U+'cndDWW1WTzZXYU1sWlJrdGw3b0xNdz09'},
-  {g:'וידאו וקריאייטיב', id:'repurpose', name:'מיחזור תוכן ל-4–5 רילסים', price:900, link:U+'YkRCbmdYWkR3SWlESmhIUVgyT0lwUT09'},
-  {g:'וידאו וקריאייטיב', id:'ugc', name:'סרטון UGC מבוסס AI', price:700, link:U+'UGpCeXJZTUFrcFdRc3lHTXRWdjFLQT09'},
-  {g:'אתרים ומערכות', id:'landing', name:'בניית דף נחיתה', price:700, link:U+'ZVNHRzM0dUZpVG83ckNpUm80QVFRdz09'},
-  {g:'אתרים ומערכות', id:'site', name:'בניית אתר עסקי', price:2200, from:true, link:U+'dEpadFh0OFdWQVcvZGhSUFd1cmFJZz09'},
-  {g:'אתרים ומערכות', id:'dash', name:'הקמת דשבורד לעסק', price:1200, link:U+'alF2K0s5eDFnd0lDeXc5UVRSSEVxUT09'},
-  {g:'אתרים ומערכות', id:'calc', name:'מחשבון הצעת מחיר מותאם אישית', price:2500, link:U+'QmRHRnIyNHl0VHpyRkg2b0ZMbkJPdz09'},
+  {g:'וידאו וקריאייטיב', id:'reel', name:'סרטון AI קצר לרילס/סטורי', price:350},
+  {g:'וידאו וקריאייטיב', id:'video', name:'הפקת וידאו AI – מסלול מלא', price:500},
+  {g:'וידאו וקריאייטיב', id:'shoot', name:'הפקת שטח בעסק', price:1900},
+  {g:'וידאו וקריאייטיב', id:'avatar', name:'סרטון אווטאר ודובר וירטואלי', price:500, per:'לדקה'},
+  {g:'וידאו וקריאייטיב', id:'repurpose', name:'מיחזור תוכן ל-4–5 רילסים', price:900},
+  {g:'וידאו וקריאייטיב', id:'ugc', name:'סרטון UGC מבוסס AI', price:700},
+  {g:'אתרים ומערכות', id:'landing', name:'בניית דף נחיתה', price:700},
+  {g:'אתרים ומערכות', id:'site', name:'בניית אתר עסקי', price:2200, from:true},
+  {g:'אתרים ומערכות', id:'dash', name:'הקמת דשבורד לעסק', price:1200},
+  {g:'אתרים ומערכות', id:'calc', name:'מחשבון הצעת מחיר מותאם אישית', price:2500},
   {g:'אתרים ומערכות', id:'card', name:'כרטיס ביקור דיגיטלי חכם', price:390},
   {g:'אתרים ומערכות', id:'brand', name:'חבילת מיקרו-מיתוג', price:1200},
   {g:'אתרים ומערכות', id:'copy', name:'כתיבת תוכן שיווקי', price:200, per:'לטקסט'},
-  {g:'שירותים חודשיים', id:'retainer', name:'ריטיינר וידאו – 4 רילסים בחודש', price:1200, monthly:true, link:U+'MFNOVU5od2RGTC9hOWxtT3VDSzJpZz09'},
+  {g:'שירותים חודשיים', id:'retainer', name:'ריטיינר וידאו – 4 רילסים בחודש', price:1200, monthly:true},
   {g:'שירותים חודשיים', id:'social', name:'ניהול עמודי סושיאל מלא', price:2900, monthly:true},
   {g:'שירותים חודשיים', id:'ppc', name:'ניהול קמפיינים ממומנים במטא', price:1500, monthly:true, extra:'לא כולל תקציב הפרסום'},
 ];
@@ -400,8 +399,8 @@ function update(){
   const missing = list.filter(p=>!p.link).length;
   const hints = [];
   if(!num) hints.push(['','כדאי להוסיף את מספר הוואטסאפ של הלקוח. בלי מספר, וואטסאפ ייפתח ויבקש לבחור למי לשלוח.']);
-  if(missing) hints.push(['warn',`ל-${missing} מהמוצרים שבחרתם עוד אין לינק ב-UPay. בהודעה כתוב שהלינק יישלח בנפרד.`]);
-  if(list.length > 1) hints.push(['','כל מוצר מגיע עם לינק משלו. אם הלקוח רוצה לשלם הכל בבת אחת, יוצרים ב-UPay לינק אחד בסכום הכולל.']);
+  if(missing) hints.push(['warn',`ל-${missing} מהמוצרים שבחרתם אין דף תשלום קבוע ב-Cardcom. בהודעה כתוב שהלינק יישלח בנפרד, ושולחים ללקוח בקשת תשלום מהירה מ-Cardcom בסכום המדויק.`]);
+  if(list.length > 1) hints.push(['','כל מוצר מגיע עם לינק משלו. אם הלקוח רוצה לשלם הכל בבת אחת, שולחים בקשת תשלום מהירה אחת ב-Cardcom בסכום הכולל.']);
   $('hints').innerHTML = hints.map(([c,t])=>`<li class="${c}">${t}</li>`).join('');
   document.querySelectorAll('#packs .chip').forEach((b,i)=>{
     const ids = PACKS[i].ids; b.classList.toggle('on', ids.length===picked.size && ids.every(id=>picked.has(id)));
