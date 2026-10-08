@@ -375,13 +375,13 @@ const PRICES = {
     {id:"auto",    name:"אוטומציית לידים",       desc:"כל ליד נשלח לוואטסאפ ונשמר בטבלה לבד",          once:800,  monthly:50,  icon:"bolt"},
   ],
   webBundle: {min:3, discount:0.10},  // הנחת חבילה מ-3 שירותים
-  // ===== תשלום ב-UPay =====
-  // מדביקים כאן את הקישורים לדפי התשלום מ-UPay (בין המרכאות). כל עוד ריק, הכפתור במצב דמו.
+  // ===== תשלום ב-Cardcom =====
+  // מדביקים כאן את הקישורים לדפי התשלום מ-Cardcom (בין המרכאות). כל עוד ריק, הכפתור במצב דמו.
   payment: {
     advance: 0.5,  // מקדמה של 50% באישור ההצעה, היתרה במסירה
-    // מחיר קבוע (סרטון בסיסי, עד 30 שנ׳, בלי תוספות): קישור UPay למקדמה של 50%
-    fixed:   { reel:{amount:350, url:"https://app.upay.co.il/API6/s.php?m=UGpCeXJZTUFrcFdRc3lHTXRWdjFLQT09"}, ai:{amount:500, url:"https://app.upay.co.il/API6/s.php?m=eSt1MnZHTk1ZMVZJRklnZzg4Y0U5QT09"} }, // לפי סדר השליחה: 175 ₪, 250 ₪ (לאימות)
-    // בכל השאר המחיר משתנה, אז אקו מדיה שולחת בקשת תשלום אישית ב-UPay על 50% מהמחיר המדויק
+    // מחיר קבוע (סרטון בסיסי, עד 30 שנ׳, בלי תוספות): קישור Cardcom למקדמה של 50%
+    fixed:   { reel:{amount:350, url:"https://secure.cardcom.solutions/EA/EA5/C9C7DrH2d09SV1ynZhAAg/PaymentSP"}, ai:{amount:500, url:"https://secure.cardcom.solutions/EA/EA5/oCEG9h7unUm6noZlmjcQ/PaymentSP"}, filmed:{amount:1900, url:"https://secure.cardcom.solutions/EA/EA5/U7lOtwYzQ0KnbK5vnnWmXw/PaymentSP"} }, // הקישור ב-Cardcom הוא על המקדמה: 175 / 250 / 950 ₪
+    // בכל השאר המחיר משתנה, אז אקו מדיה שולחת בקשת תשלום אישית ב-Cardcom על 50% מהמחיר המדויק
   },
   // ===== הצעת מחיר במייל =====
   // השליחה עוברת דרך FormSubmit (חינם). בפעם הראשונה תגיע למייל הזה הודעת אישור, לוחצים "Activate" פעם אחת וזהו.
@@ -551,7 +551,7 @@ function renderPay(){
 $("payBtn").addEventListener("click",()=>{
   const pl=payPlan(current());
   if(pl.url) window.open(pl.url,"_blank","noopener");
-  else $("payNote").innerHTML=`מצב דמו: כאן ייפתח דף התשלום המאובטח של <bdi>UPay</bdi> על סך <bdi>${num(pl.amount)} ₪</bdi>.`;
+  else $("payNote").innerHTML=`מצב דמו: כאן ייפתח דף התשלום המאובטח של <bdi>Cardcom</bdi> על סך <bdi>${num(pl.amount)} ₪</bdi>.`;
 });
 document.addEventListener("change",renderPay); renderPay();
 
@@ -579,7 +579,7 @@ function offerInfo(c){
     ? {bonus:b,payLabel:`מאשר ומתחיל: מקדמה של ${num(pl.amount)} ₪`,payUrl:pl.url||waClose,
        payNote:`מקדמה של ${pct}%, בתשלום מאובטח. את היתרה, ${num(pl.total-pl.amount)} ₪, משלמים רק במסירה.`}
     : {bonus:b,payLabel:"מאשר את ההצעה ושומר את הבונוס",payUrl:waClose,
-       payNote:`לחיצה שולחת לנו אישור בוואטסאפ, ואנחנו שולחים בקשת תשלום מאובטחת ב-UPay על מקדמה של ${pct}% מהמחיר המדויק.`};
+       payNote:`לחיצה שולחת לנו אישור בוואטסאפ, ואנחנו שולחים בקשת תשלום מאובטחת ב-Cardcom על מקדמה של ${pct}% מהמחיר המדויק.`};
 }
 /* 3 הודעות פולו-אפ מוכנות ללידים שלא סגרו (לעותק של בעל העסק) */
 function followUps(c,name){
