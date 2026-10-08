@@ -86,7 +86,6 @@ input::placeholder,textarea::placeholder{color:var(--dim)}
 .item:has(input:checked){border-color:color-mix(in srgb,var(--cyan) 70%,transparent);background:linear-gradient(135deg,color-mix(in srgb,var(--cyan) 10%,var(--ink-1)),color-mix(in srgb,var(--purple) 10%,var(--ink-1)))}
 .item:has(input:checked) .tick{background:var(--cyan);border-color:var(--cyan)}
 .item:has(input:checked) .tick svg{opacity:1;transform:none}
-.nolink{color:var(--warn)}
 .per{font-weight:400;color:var(--muted);font-size:.78rem;font-family:var(--body)}
 .empty-search{color:var(--muted);font-size:.9rem;padding:8px 2px;margin:0}
 
@@ -117,6 +116,9 @@ input::placeholder,textarea::placeholder{color:var(--dim)}
 .tot b{font-family:var(--display);font-size:1.35rem;font-variant-numeric:tabular-nums}
 .tot.one b{color:var(--cyan)} .tot.mon b{color:var(--violet)}
 .actions{width:min(360px,100%);display:flex;flex-direction:column;gap:8px}
+.pay{width:min(360px,100%);display:flex;flex-direction:column;gap:8px;padding:12px;border:1px solid var(--line);border-radius:var(--r-m);background:var(--ink-1)}
+.pay .btn.ready{border-color:var(--cyan);color:var(--cyan)}
+.pay .btn[hidden]{display:none}
 .btn{font:inherit;font-weight:700;font-size:1rem;border-radius:14px;padding:13px 16px;border:1px solid var(--line-2);background:var(--ink-2);color:var(--fg);cursor:pointer;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px}
 .btn.wa{background:var(--wa);border-color:var(--wa);color:var(--wa-ink)}
 .btn.wa:hover{filter:brightness(1.06)}
@@ -157,7 +159,7 @@ input::placeholder,textarea::placeholder{color:var(--dim)}
     <div>
       <p class="eyebrow">אקו מדיה · מערכת הצעות</p>
       <h1>הצעה ללקוח, <span>בשלושה צעדים</span></h1>
-      <p class="sub">בוחרים לקוח, מסמנים מוצרים ושולחים. הטלפון מראה בדיוק מה הלקוח יקבל בוואטסאפ, כולל לינק תשלום של Cardcom כשיש למוצר דף תשלום קבוע.</p>
+      <p class="sub">בוחרים לקוח, מסמנים מוצרים ושולחים. הטלפון מראה בדיוק מה הלקוח יקבל בוואטסאפ, כולל לינק תשלום של Cardcom בסכום המדויק, ואחרי התשלום הלקוח עובר לבחירת סגנון.</p>
     </div>
     <div class="offer-id">הצעה מס' <b><bdi id="oid"></bdi></b></div>
   </div>
@@ -220,6 +222,16 @@ input::placeholder,textarea::placeholder{color:var(--dim)}
         <div class="tot one"><span>סה"כ חד-פעמי</span><b><bdi id="tOnce">0 ₪</bdi></b></div>
         <div class="tot mon"><span>סה"כ חודשי</span><b><bdi id="tMon">0 ₪</bdi></b></div>
       </div>
+      <div class="pay" aria-labelledby="payLbl">
+        <label class="f" for="paymode"><span id="payLbl">לינק תשלום בהודעה</span>
+          <select id="paymode">
+            <option value="deposit" selected>מקדמה 50%</option>
+            <option value="full">תשלום מלא</option>
+            <option value="none">בלי לינק, יישלח בנפרד</option>
+          </select>
+        </label>
+        <button id="mkpay" class="btn" type="button">יצירת לינק תשלום</button>
+      </div>
       <div class="actions">
         <a id="send" class="btn wa" href="https://wa.me/" target="_blank" rel="noopener">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.2-.2-.5-.3Z"/></svg>
@@ -250,20 +262,20 @@ input::placeholder,textarea::placeholder{color:var(--dim)}
 <script>
 const PHONE = '053-426-2621';
 const PRODUCTS = [
-  {g:'וידאו וקריאייטיב', id:'reel', name:'סרטון AI קצר לרילס/סטורי', price:350},
-  {g:'וידאו וקריאייטיב', id:'video', name:'הפקת וידאו AI – מסלול מלא', price:500},
-  {g:'וידאו וקריאייטיב', id:'shoot', name:'הפקת שטח בעסק', price:1900},
-  {g:'וידאו וקריאייטיב', id:'avatar', name:'סרטון אווטאר ודובר וירטואלי', price:500, per:'לדקה'},
-  {g:'וידאו וקריאייטיב', id:'repurpose', name:'מיחזור תוכן ל-4–5 רילסים', price:900},
-  {g:'וידאו וקריאייטיב', id:'ugc', name:'סרטון UGC מבוסס AI', price:700},
-  {g:'אתרים ומערכות', id:'landing', name:'בניית דף נחיתה', price:700},
-  {g:'אתרים ומערכות', id:'site', name:'בניית אתר עסקי', price:2200, from:true},
-  {g:'אתרים ומערכות', id:'dash', name:'הקמת דשבורד לעסק', price:1200},
-  {g:'אתרים ומערכות', id:'calc', name:'מחשבון הצעת מחיר מותאם אישית', price:2500},
-  {g:'אתרים ומערכות', id:'card', name:'כרטיס ביקור דיגיטלי חכם', price:390},
-  {g:'אתרים ומערכות', id:'brand', name:'חבילת מיקרו-מיתוג', price:1200},
-  {g:'אתרים ומערכות', id:'copy', name:'כתיבת תוכן שיווקי', price:200, per:'לטקסט'},
-  {g:'שירותים חודשיים', id:'retainer', name:'ריטיינר וידאו – 4 רילסים בחודש', price:1200, monthly:true},
+  {g:'וידאו וקריאייטיב', id:'reel', k:'video', name:'סרטון AI קצר לרילס/סטורי', price:350},
+  {g:'וידאו וקריאייטיב', id:'video', k:'video', name:'הפקת וידאו AI – מסלול מלא', price:500},
+  {g:'וידאו וקריאייטיב', id:'shoot', k:'video', name:'הפקת שטח בעסק', price:1900},
+  {g:'וידאו וקריאייטיב', id:'avatar', k:'video', name:'סרטון אווטאר ודובר וירטואלי', price:500, per:'לדקה'},
+  {g:'וידאו וקריאייטיב', id:'repurpose', k:'video', name:'מיחזור תוכן ל-4–5 רילסים', price:900},
+  {g:'וידאו וקריאייטיב', id:'ugc', k:'video', name:'סרטון UGC מבוסס AI', price:700},
+  {g:'אתרים ומערכות', id:'landing', k:'web', name:'בניית דף נחיתה', price:700},
+  {g:'אתרים ומערכות', id:'site', k:'web', name:'בניית אתר עסקי', price:2200, from:true},
+  {g:'אתרים ומערכות', id:'dash', k:'system', name:'הקמת דשבורד לעסק', price:1200},
+  {g:'אתרים ומערכות', id:'calc', k:'system', name:'מחשבון הצעת מחיר מותאם אישית', price:2500},
+  {g:'אתרים ומערכות', id:'card', k:'web', name:'כרטיס ביקור דיגיטלי חכם', price:390},
+  {g:'אתרים ומערכות', id:'brand', k:'web', name:'חבילת מיקרו-מיתוג', price:1200},
+  {g:'אתרים ומערכות', id:'copy', k:'web', name:'כתיבת תוכן שיווקי', price:200, per:'לטקסט'},
+  {g:'שירותים חודשיים', id:'retainer', k:'video', name:'ריטיינר וידאו – 4 רילסים בחודש', price:1200, monthly:true},
   {g:'שירותים חודשיים', id:'social', name:'ניהול עמודי סושיאל מלא', price:2900, monthly:true},
   {g:'שירותים חודשיים', id:'ppc', name:'ניהול קמפיינים ממומנים במטא', price:1500, monthly:true, extra:'לא כולל תקציב הפרסום'},
 ];
@@ -286,6 +298,8 @@ const store = {
 let picked = new Set(['landing','reel']);
 let shown = new Set();
 let offerNo = newOfferNo();
+let pay = null;        // {url, amount, full, key}: לינק שנוצר ב-Cardcom להצעה הנוכחית
+let payReady = null;   // האם /api/pay מחובר לקארדקום (null = עוד לא ידוע)
 
 function newOfferNo(){
   const d = new Date();
@@ -316,7 +330,7 @@ function renderList(){
         <input type="checkbox" id="p-${p.id}" data-id="${p.id}" ${picked.has(p.id)?'checked':''}>
         <span class="name">${p.name}</span>
         <span class="price"><bdi>${p.from?'<span class="per">החל מ-</span>':''}${fmt(p.price)}</bdi></span>
-        <span class="meta"><span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#04131A" stroke-width="3.5" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span>${unit(p)?unit(p)+' · ':''}${p.link?'לינק תשלום מוכן':'<span class="nolink">אין לינק עדיין</span>'}</span>
+        <span class="meta"><span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#04131A" stroke-width="3.5" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span>${unit(p)}</span>
       </label>`).join('') + '</div>';
   }
   $('list').innerHTML = html || '<p class="empty-search">לא נמצא מוצר בשם הזה.</p>';
@@ -339,6 +353,21 @@ function sums(list){
   return { once:list.filter(p=>!p.monthly).reduce((s,p)=>s+p.price,0), month:list.filter(p=>p.monthly).reduce((s,p)=>s+p.price,0) };
 }
 
+/* payment link: the one-time total plus the first month of monthly services, in full or as a 50% deposit (same rounding as /api/pay) */
+const payItems = list => list.map(p=>({name: p.monthly ? `${p.name} (חודש ראשון)` : p.name, price:p.price}));
+function payDue(list, mode){ const t = list.reduce((s,p)=>s+p.price,0); return mode==='full' ? Math.round(t) : Math.round(t/2); }
+/* after paying, the style board opens on the matching project type: a site beats a system beats a video */
+function kindOf(list){ const ks = list.map(p=>p.k); return ['web','system','video'].find(k=>ks.includes(k)) || ''; }
+/* a link belongs to one exact offer: changing the products, the mode or the client's name voids it */
+const payKey = () => JSON.stringify([offerNo, [...picked].sort(), $('paymode').value, $('cname').value.trim()]);
+function payError(status, d){
+  if(status===503) return 'החיבור האוטומטי לקארדקום עוד לא הוגדר. בינתיים ההודעה אומרת שהלינק יישלח בנפרד.';
+  if(status===429) return 'יותר מדי ניסיונות ברצף. נסו שוב בעוד כמה דקות.';
+  if(d && d.error==='amount') return `הסכום לתשלום צריך להיות בין ${fmt(d.min)} ל-${fmt(d.max)}.`;
+  if(d && d.error==='cardcom') return 'קארדקום לא יצרה את הדף' + (d.message ? `: ${d.message}` : '.');
+  return 'משהו השתבש ביצירת הלינק. נסו שוב בעוד רגע.';
+}
+
 /* the message as lines: [{t:'text', id?:productId}] so the phone can animate new products in */
 function buildLines(list){
   const name = $('cname').value.trim(), note = $('cnote').value.trim();
@@ -351,13 +380,15 @@ function buildLines(list){
   list.forEach(p=>{
     let line = `\n▫️ *${p.name}* – ${p.from?'החל מ-':''}${fmt(p.price)}${unit(p)?' '+unit(p):''}`;
     if(p.extra) line += ` (${p.extra})`;
-    line += p.link ? `\nלתשלום: ${p.link}` : `\nלינק לתשלום יישלח בנפרד`;
     L.push({t:line, id:p.id});
   });
   L.push({t:''});
   if(once) L.push({t:`סה"כ חד-פעמי: *${fmt(once)}*`});
   if(month) L.push({t:`סה"כ חודשי: *${fmt(month)} לחודש*`});
-  L.push({t:`\nההצעה בתוקף עד ${validUntil()}.\nלוחצים על הלינק של המוצר ומשלמים באשראי או בביט, והחשבונית נשלחת אוטומטית.\n\nאקו מדיה | ${PHONE}`});
+  L.push({t: pay
+    ? `\n💳 *${pay.full?'לתשלום':'לתשלום מקדמה (50%)'}: ${fmt(pay.amount)}*\n${pay.url}\nמשלמים באשראי בדף מאובטח של Cardcom, ומיד אחרי התשלום בוחרים סגנון לפרויקט.`
+    : `\nלינק לתשלום יישלח בנפרד.`});
+  L.push({t:`\nההצעה בתוקף עד ${validUntil()}.\n\nאקו מדיה | ${PHONE}`});
   return L;
 }
 const toText = L => L.map(l=>l.t).join('\n');
@@ -383,6 +414,8 @@ function renderPhone(L, list){
 
 function update(){
   const list = items();
+  const mode = $('paymode').value;
+  if(pay && pay.key !== payKey()) pay = null;
   const L = buildLines(list), text = toText(L);
   const {once, month} = sums(list);
   const num = waNumber($('cphone').value);
@@ -396,11 +429,18 @@ function update(){
   const href = `https://wa.me/${num}?text=${encodeURIComponent(text)}`;
   ['send','send2'].forEach(id=>{ $(id).href = href; $(id).setAttribute('aria-disabled', list.length ? 'false':'true'); });
   $('copy').disabled = !list.length;
-  const missing = list.filter(p=>!p.link).length;
+  const mk = $('mkpay');
+  mk.hidden = mode==='none';
+  mk.classList.toggle('ready', !!pay);
+  mk.disabled = !list.length || !!pay || payReady===false;
+  mk.innerHTML = pay ? `✓ הלינק בהודעה · <bdi>${fmt(pay.amount)}</bdi>`
+    : payReady===false ? 'לינק אוטומטי: מחכה להגדרה בקארדקום'
+    : `יצירת לינק תשלום · <bdi>${fmt(payDue(list, mode))}</bdi>`;
   const hints = [];
   if(!num) hints.push(['','כדאי להוסיף את מספר הוואטסאפ של הלקוח. בלי מספר, וואטסאפ ייפתח ויבקש לבחור למי לשלוח.']);
-  if(missing) hints.push(['warn',`ל-${missing} מהמוצרים שבחרתם אין דף תשלום קבוע ב-Cardcom. בהודעה כתוב שהלינק יישלח בנפרד, ושולחים ללקוח בקשת תשלום מהירה מ-Cardcom בסכום המדויק.`]);
-  if(list.length > 1) hints.push(['','כל מוצר מגיע עם לינק משלו. אם הלקוח רוצה לשלם הכל בבת אחת, שולחים בקשת תשלום מהירה אחת ב-Cardcom בסכום הכולל.']);
+  if(mode!=='none' && payReady===false) hints.push(['warn','החיבור האוטומטי לקארדקום עוד לא הוגדר. עד אז ההודעה אומרת שהלינק יישלח בנפרד, ושולחים ללקוח בקשת תשלום מהירה מ-Cardcom בסכום המדויק.']);
+  else if(mode!=='none' && list.length && !pay) hints.push(['warn','לוחצים על "יצירת לינק תשלום" לפני השליחה, וכך הלינק נכנס להודעה. אחרי התשלום הלקוח עובר לבחירת סגנון.']);
+  if(mode!=='none' && list.some(p=>p.from || p.per)) hints.push(['','בחלק מהמוצרים המחיר הוא "החל מ-" או ליחידה. הלינק נוצר לפי המחיר שמופיע בהצעה.']);
   $('hints').innerHTML = hints.map(([c,t])=>`<li class="${c}">${t}</li>`).join('');
   document.querySelectorAll('#packs .chip').forEach((b,i)=>{
     const ids = PACKS[i].ids; b.classList.toggle('on', ids.length===picked.size && ids.every(id=>picked.has(id)));
@@ -412,7 +452,7 @@ function saveHistory(){
   const {once, month} = sums(list);
   const h = store.get('em-offers', []);
   if(h[0] && h[0].no === offerNo){ h.shift(); }
-  h.unshift({no:offerNo, name:$('cname').value.trim(), phone:$('cphone').value.trim(), note:$('cnote').value, ids:[...picked], once, month, at:Date.now()});
+  h.unshift({no:offerNo, name:$('cname').value.trim(), phone:$('cphone').value.trim(), note:$('cnote').value, ids:[...picked], mode:$('paymode').value, pay, once, month, at:Date.now()});
   store.set('em-offers', h.slice(0,8));
   renderHistory();
 }
@@ -429,6 +469,7 @@ $('hist').addEventListener('click', e=>{
   const o = store.get('em-offers', [])[+b.dataset.h]; if(!o) return;
   $('cname').value = o.name; $('cphone').value = o.phone; $('cnote').value = o.note || '';
   picked = new Set(o.ids.filter(id=>byId[id])); offerNo = o.no; shown = new Set(picked);
+  $('paymode').value = o.mode || 'deposit'; pay = o.pay || null;
   $('q').value=''; renderList(); update();
   $('toast').textContent = `הצעה ${o.no} נפתחה מחדש.`;
 });
@@ -447,7 +488,7 @@ $('copy').addEventListener('click', async ()=>{
   }
 });
 $('reset').addEventListener('click', ()=>{
-  picked = new Set(); shown = new Set(); offerNo = newOfferNo();
+  picked = new Set(); shown = new Set(); offerNo = newOfferNo(); pay = null;
   $('cname').value=''; $('cphone').value=''; $('q').value='';
   renderList(); update(); $('cname').focus();
   $('toast').textContent = 'הצעה חדשה מוכנה למילוי.';
@@ -458,11 +499,32 @@ $('list').addEventListener('change', e=>{
   e.target.checked ? picked.add(id) : picked.delete(id); update();
 });
 $('q').addEventListener('input', renderList);
+$('paymode').addEventListener('change', update);
+$('mkpay').addEventListener('click', async ()=>{
+  const list = items(), mode = $('paymode').value;
+  if(!list.length || mode==='none' || pay) return;
+  const mk = $('mkpay'), key = payKey();
+  mk.disabled = true; mk.textContent = 'יוצרים דף תשלום ב-Cardcom…';
+  try{
+    const r = await fetch('/api/pay', {method:'POST', headers:{'content-type':'application/json'},
+      body: JSON.stringify({offer:offerNo, name:$('cname').value.trim(), phone:$('cphone').value.trim(), kind:kindOf(list), mode, items:payItems(list)})});
+    const d = await r.json().catch(()=>({}));
+    if(r.ok && d.url){
+      pay = {url:d.url, amount:d.amount, full:!!d.full, key};
+      $('toast').textContent = 'הלינק מוכן ונכנס להודעה. אפשר לשלוח ללקוח.';
+    } else {
+      if(r.status===503) payReady = false;
+      $('toast').textContent = payError(r.status, d);
+    }
+  }catch(e){ $('toast').textContent = 'אין חיבור לשרת כרגע. נסו שוב בעוד רגע.'; }
+  update();
+});
 $('peek').addEventListener('click', ()=>$('s3').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start'}));
 ['cname','cphone','cnote','valid'].forEach(id=>$(id).addEventListener('input', update));
 
 renderPacks(); renderList(); update(); renderHistory();
 shown = new Set(picked);
+fetch('/api/pay').then(r=>r.ok ? r.json() : {enabled:false}).then(d=>{ payReady = !!d.enabled; update(); }).catch(()=>{ payReady = false; update(); });
 </script>
 
 </body>
