@@ -52,6 +52,10 @@
     {
       "source": "/calculator",
       "destination": "/calculator/index.html"
+    },
+    {
+      "source": "/pay/:product",
+      "destination": "/api/go?product=:product"
     }
   ],
   "headers": [
@@ -72,6 +76,15 @@
           "value": "offer.ecomedia.co.il"
         }
       ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/pay/(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",
