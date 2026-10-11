@@ -86,7 +86,6 @@ input::placeholder,textarea::placeholder{color:var(--dim)}
 .item:has(input:checked){border-color:color-mix(in srgb,var(--cyan) 70%,transparent);background:linear-gradient(135deg,color-mix(in srgb,var(--cyan) 10%,var(--ink-1)),color-mix(in srgb,var(--purple) 10%,var(--ink-1)))}
 .item:has(input:checked) .tick{background:var(--cyan);border-color:var(--cyan)}
 .item:has(input:checked) .tick svg{opacity:1;transform:none}
-.nolink{color:var(--warn)}
 .per{font-weight:400;color:var(--muted);font-size:.78rem;font-family:var(--body)}
 .empty-search{color:var(--muted);font-size:.9rem;padding:8px 2px;margin:0}
 
@@ -157,7 +156,7 @@ input::placeholder,textarea::placeholder{color:var(--dim)}
     <div>
       <p class="eyebrow">אקו מדיה · מערכת הצעות</p>
       <h1>הצעה ללקוח, <span>בשלושה צעדים</span></h1>
-      <p class="sub">בוחרים לקוח, מסמנים מוצרים ושולחים. הטלפון מראה בדיוק מה הלקוח יקבל בוואטסאפ, כולל לינק תשלום של Cardcom כשיש למוצר דף תשלום קבוע.</p>
+      <p class="sub">בוחרים לקוח, מסמנים מוצרים ושולחים. הטלפון מראה בדיוק מה הלקוח יקבל בוואטסאפ.</p>
     </div>
     <div class="offer-id">הצעה מס' <b><bdi id="oid"></bdi></b></div>
   </div>
@@ -256,8 +255,8 @@ const PRODUCTS = [
   {g:'וידאו וקריאייטיב', id:'avatar', name:'סרטון אווטאר ודובר וירטואלי', price:500, per:'לדקה'},
   {g:'וידאו וקריאייטיב', id:'repurpose', name:'מיחזור תוכן ל-4–5 רילסים', price:900},
   {g:'וידאו וקריאייטיב', id:'ugc', name:'סרטון UGC מבוסס AI', price:700},
-  {g:'אתרים ומערכות', id:'landing', name:'בניית דף נחיתה', price:700},
-  {g:'אתרים ומערכות', id:'site', name:'בניית אתר עסקי', price:2200, from:true},
+  {g:'אתרים ומערכות', id:'landing', name:'בניית דף נחיתה', price:500, from:true},
+  {g:'אתרים ומערכות', id:'site', name:'בניית אתר עסקי', price:1100, from:true},
   {g:'אתרים ומערכות', id:'dash', name:'הקמת דשבורד לעסק', price:1200},
   {g:'אתרים ומערכות', id:'calc', name:'מחשבון הצעת מחיר מותאם אישית', price:2500},
   {g:'אתרים ומערכות', id:'card', name:'כרטיס ביקור דיגיטלי חכם', price:390},
@@ -316,7 +315,7 @@ function renderList(){
         <input type="checkbox" id="p-${p.id}" data-id="${p.id}" ${picked.has(p.id)?'checked':''}>
         <span class="name">${p.name}</span>
         <span class="price"><bdi>${p.from?'<span class="per">החל מ-</span>':''}${fmt(p.price)}</bdi></span>
-        <span class="meta"><span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#04131A" stroke-width="3.5" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span>${unit(p)?unit(p)+' · ':''}${p.link?'לינק תשלום מוכן':'<span class="nolink">אין לינק עדיין</span>'}</span>
+        <span class="meta"><span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#04131A" stroke-width="3.5" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span>${unit(p)}</span>
       </label>`).join('') + '</div>';
   }
   $('list').innerHTML = html || '<p class="empty-search">לא נמצא מוצר בשם הזה.</p>';
@@ -351,13 +350,12 @@ function buildLines(list){
   list.forEach(p=>{
     let line = `\n▫️ *${p.name}* – ${p.from?'החל מ-':''}${fmt(p.price)}${unit(p)?' '+unit(p):''}`;
     if(p.extra) line += ` (${p.extra})`;
-    line += p.link ? `\nלתשלום: ${p.link}` : `\nלינק לתשלום יישלח בנפרד`;
     L.push({t:line, id:p.id});
   });
   L.push({t:''});
   if(once) L.push({t:`סה"כ חד-פעמי: *${fmt(once)}*`});
   if(month) L.push({t:`סה"כ חודשי: *${fmt(month)} לחודש*`});
-  L.push({t:`\nההצעה בתוקף עד ${validUntil()}.\nלוחצים על הלינק של המוצר ומשלמים באשראי או בביט, והחשבונית נשלחת אוטומטית.\n\nאקו מדיה | ${PHONE}`});
+  L.push({t:`\nההצעה בתוקף עד ${validUntil()}.\nלאישור ההצעה עונים להודעה הזאת.\n\nאקו מדיה | ${PHONE}`});
   return L;
 }
 const toText = L => L.map(l=>l.t).join('\n');
@@ -396,11 +394,8 @@ function update(){
   const href = `https://wa.me/${num}?text=${encodeURIComponent(text)}`;
   ['send','send2'].forEach(id=>{ $(id).href = href; $(id).setAttribute('aria-disabled', list.length ? 'false':'true'); });
   $('copy').disabled = !list.length;
-  const missing = list.filter(p=>!p.link).length;
   const hints = [];
   if(!num) hints.push(['','כדאי להוסיף את מספר הוואטסאפ של הלקוח. בלי מספר, וואטסאפ ייפתח ויבקש לבחור למי לשלוח.']);
-  if(missing) hints.push(['warn',`ל-${missing} מהמוצרים שבחרתם אין דף תשלום קבוע ב-Cardcom. בהודעה כתוב שהלינק יישלח בנפרד, ושולחים ללקוח בקשת תשלום מהירה מ-Cardcom בסכום המדויק.`]);
-  if(list.length > 1) hints.push(['','כל מוצר מגיע עם לינק משלו. אם הלקוח רוצה לשלם הכל בבת אחת, שולחים בקשת תשלום מהירה אחת ב-Cardcom בסכום הכולל.']);
   $('hints').innerHTML = hints.map(([c,t])=>`<li class="${c}">${t}</li>`).join('');
   document.querySelectorAll('#packs .chip').forEach((b,i)=>{
     const ids = PACKS[i].ids; b.classList.toggle('on', ids.length===picked.size && ids.every(id=>picked.has(id)));
