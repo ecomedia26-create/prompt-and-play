@@ -376,12 +376,12 @@ const PRICES = {
   ],
   webBundle: {min:3, discount:0.10},  // הנחת חבילה מ-3 שירותים
   // ===== תשלום ב-Cardcom =====
-  // מדביקים כאן את הקישורים לדפי התשלום מ-Cardcom (בין המרכאות). כל עוד ריק, הכפתור במצב דמו.
+  // חבילה קבועה (סרטון בסיסי, עד 30 שנ׳, בלי תוספות) משולמת במלואה בקישור התשלום של אקו מדיה: www.ecomedia.co.il/pay/<מוצר>.
+  // מחיר מלא, בלי מקדמה (החלטת יצחק 11.10.2026). הסכום נקבע בשרת של האתר, כאן רק להצגה.
   payment: {
-    advance: 0.5,  // מקדמה של 50% באישור ההצעה, היתרה במסירה
-    // מחיר קבוע (סרטון בסיסי, עד 30 שנ׳, בלי תוספות): קישור Cardcom למקדמה של 50%
-    fixed:   { reel:{amount:350, url:"https://secure.cardcom.solutions/EA/EA5/C9C7DrH2d09SV1ynZhAAg/PaymentSP"}, ai:{amount:500, url:"https://secure.cardcom.solutions/EA/EA5/oCEG9h7unUm6noZlmjcQ/PaymentSP"}, filmed:{amount:1900, url:"https://secure.cardcom.solutions/EA/EA5/U7lOtwYzQ0KnbK5vnnWmXw/PaymentSP"} }, // הקישור ב-Cardcom הוא על המקדמה: 175 / 250 / 950 ₪
-    // בכל השאר המחיר משתנה, אז אקו מדיה שולחת בקשת תשלום אישית ב-Cardcom על 50% מהמחיר המדויק
+    active: true, // מתג: true = כפתור התשלום מופיע. false = מוסתר והלקוח מאשר בוואטסאפ
+    advance: 0.5,  // בהצעה מותאמת (כל השאר): מקדמה של 50% בבקשת תשלום אישית מ-Cardcom, היתרה במסירה
+    fixed:   { reel:{amount:350, url:"https://www.ecomedia.co.il/pay/reel"}, ai:{amount:500, url:"https://www.ecomedia.co.il/pay/aiad"}, filmed:{amount:1900, url:"https://www.ecomedia.co.il/pay/filmed"} },
   },
   // ===== הצעת מחיר במייל =====
   // השליחה עוברת דרך FormSubmit (חינם). בפעם הראשונה תגיע למייל הזה הודעת אישור, לוחצים "Activate" פעם אחת וזהו.
@@ -401,8 +401,8 @@ const PRICES = {
   // תנאים והערות: מופיעים בתחתית כל הצעת מחיר
   terms: [
     "אקו מדיה הינה עוסק פטור. המחירים המוצגים הינם סופיים (לא תתווסף תוספת מע״מ למחיר).",
-    "הפקת הסרטון תחל לאחר אישור הצעת המחיר והעברת מקדמה.",
-    "תנאי תשלום: מקדמה של 50% באישור ההצעה, והיתרה במסירה לפני קבלת הקבצים הסופיים.",
+    "הפקת הסרטון תחל לאחר התשלום: חבילה קבועה משולמת במלואה בהזמנה, ובהצעה מותאמת לאחר העברת מקדמה.",
+    "תנאי תשלום בהצעה מותאמת: מקדמה של 50% באישור ההצעה, והיתרה במסירה לפני קבלת הקבצים הסופיים.",
     "המחיר כולל עד 2 סבבי תיקונים. כל סבב תיקונים נוסף יתומחר בנפרד (150 ₪).",
     "זכויות השימוש המלאות בסרטון עוברות ללקוח לאחר התשלום המלא.",
     "הצעה זו בתוקף ל-14 ימים. הטבת הסגירה בתוקף 72 שעות בלבד, עד המועד המצוין בה.",
@@ -535,7 +535,7 @@ render();
 function payPlan(c){
   const P=PRICES.payment;
   if(!c.web && P.fixed[c.svc.id] && c.len.id==="s" && !c.extras.length && c.qty.id===1)
-    return {url:P.fixed[c.svc.id].url, amount:Math.round(P.fixed[c.svc.id].amount*P.advance), total:P.fixed[c.svc.id].amount, full:true};
+    return {url:P.fixed[c.svc.id].url, amount:P.fixed[c.svc.id].amount, total:P.fixed[c.svc.id].amount, full:true};
   return {url:"", amount:0, full:false};
 }
 function renderPay(){
@@ -543,8 +543,8 @@ function renderPay(){
   const pct=Math.round(PRICES.payment.advance*100);
   $("payBtn").hidden=!pl.full;
   $("payAmt").innerHTML=pl.full?`<bdi>${num(pl.amount)} ₪</bdi>`:"";
-  $("payLabel").textContent=`מתחילים עכשיו: מקדמה ${pct}%`;
-  $("paySub").textContent=pl.full?`תשלום מאובטח. את היתרה, ${num(pl.total-pl.amount)} ₪, משלמים רק במסירה.`:`מקדמה של ${pct}% באישור ההצעה, והיתרה במסירה. בקשת התשלום נשלחת אחרי הצעה מדויקת.`;
+  $("payLabel").textContent="הזמן ושלם עכשיו";
+  $("paySub").textContent=pl.full?"תשלום מאובטח במחיר המלא: אשראי, ביט, Apple Pay או Google Pay. הקבלה נשלחת במייל.":`מקדמה של ${pct}% באישור ההצעה, והיתרה במסירה. בקשת התשלום נשלחת אחרי הצעה מדויקת.`;
   $("payBtn").disabled=off; $("payBtn").style.opacity=off?.4:1;
   $("payNote").textContent="";
 }
@@ -576,8 +576,8 @@ function offerInfo(c){
   const pl=payPlan(c), b=bonusFor(c), pct=Math.round(PRICES.payment.advance*100);
   const waClose=`https://wa.me/${PRICES.whatsapp}?text=${encodeURIComponent(`היי אקו מדיה, אני מאשר את ההצעה עם קוד ההטבה ${O.code}. אשמח לבקשת תשלום למקדמה.`)}`;
   return pl.full
-    ? {bonus:b,payLabel:`מאשר ומתחיל: מקדמה של ${num(pl.amount)} ₪`,payUrl:pl.url||waClose,
-       payNote:`מקדמה של ${pct}%, בתשלום מאובטח. את היתרה, ${num(pl.total-pl.amount)} ₪, משלמים רק במסירה.`}
+    ? {bonus:b,payLabel:`מאשר ומתחיל: ${num(pl.amount)} ₪`,payUrl:pl.url||waClose,
+       payNote:"תשלום מאובטח במחיר המלא: אשראי, ביט, Apple Pay או Google Pay. הקבלה נשלחת במייל."}
     : {bonus:b,payLabel:"מאשר את ההצעה ושומר את הבונוס",payUrl:waClose,
        payNote:`לחיצה שולחת לנו אישור בוואטסאפ, ואנחנו שולחים בקשת תשלום מאובטחת ב-Cardcom על מקדמה של ${pct}% מהמחיר המדויק.`};
 }
