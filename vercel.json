@@ -29,8 +29,23 @@
           "value": "calc.ecomedia.co.il"
         }
       ],
-      "destination": "/calculator",
+      "destination": "https://www.ecomedia.co.il/calculator",
       "permanent": false
+    },
+    {
+      "source": "/calculator",
+      "destination": "https://www.ecomedia.co.il/calculator",
+      "permanent": true
+    },
+    {
+      "source": "/calculator.html",
+      "destination": "https://www.ecomedia.co.il/calculator",
+      "permanent": true
+    },
+    {
+      "source": "/calculator/:path*",
+      "destination": "https://www.ecomedia.co.il/calculator",
+      "permanent": true
     },
     {
       "source": "/",
@@ -48,10 +63,6 @@
     {
       "source": "/offer",
       "destination": "/offer/index.html"
-    },
-    {
-      "source": "/calculator",
-      "destination": "/calculator/index.html"
     }
   ],
   "headers": [
