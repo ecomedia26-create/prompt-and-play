@@ -24,6 +24,7 @@ export const PRODUCTS: Record<string, Product> = {
   site: { name: 'אתר תדמית', price: 1100, done: `${STYLE}?paid=web&pk=site` },
   makleed: { name: 'מערכת מקליד', price: 3500, done: `${STYLE}?paid=system&pk=makleed` },
   hosting: { name: 'אחסון ודומיין לשנה', price: 490, done: 'https://www.ecomedia.co.il/' },
+  card: { name: 'כרטיס ביקור דיגיטלי', price: 350, done: `${STYLE}?paid=web&pk=card` },
 }
 
 export const apiName = () => process.env.CARDCOM_API_NAME ?? ''
