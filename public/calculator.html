@@ -148,7 +148,6 @@ body{background:var(--bg);color:var(--ink);font-family:"Rubik",system-ui,sans-se
 .meter{height:6px;border-radius:9px;background:rgba(255,255,255,.07);margin:18px 0 6px;overflow:hidden}
 .meter i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--green),var(--gold),var(--purple));
   width:10%;transition:width .9s var(--ease)}
-.save{min-height:24px;font-size:14px;color:var(--green)}
 .lines{list-style:none;margin:16px 0 4px;border-top:1px dashed var(--stroke);padding-top:14px;font-size:14px;color:var(--muted)}
 .lines li{display:flex;justify-content:space-between;gap:10px;padding:3px 0}
 .lines li span:last-child{color:var(--ink);direction:ltr}
@@ -215,12 +214,6 @@ form{display:grid;gap:10px;margin-top:20px}
 .mailbtn svg{width:20px;height:20px;stroke:#d9c8ff;fill:none;stroke-width:1.7}
 .mailbtn[disabled]{opacity:.6;cursor:wait}
 .ok{font-size:14px;color:var(--green);min-height:0;text-align:center}
-.gift{display:flex;gap:12px;align-items:center;padding:14px 16px;border-radius:16px;margin-top:6px;
-  background:linear-gradient(120deg,rgba(237,197,106,.16),rgba(142,92,247,.12));border:1px dashed rgba(237,197,106,.6)}
-.gift svg{width:28px;height:28px;stroke:var(--gold);fill:none;stroke-width:1.6;flex:none;animation:wiggle 3s 2s infinite}
-@keyframes wiggle{0%,90%,100%{transform:none}93%{transform:rotate(-10deg)}96%{transform:rotate(10deg)}}
-.gift b{color:var(--gold)}
-.gift p{font-size:14.5px;line-height:1.45}
 footer{position:relative;z-index:2;margin-top:60px;padding-top:24px;border-top:1px solid var(--stroke);display:flex;flex-wrap:wrap;
   justify-content:space-between;gap:10px;color:var(--muted);font-size:14px}
 footer a{color:var(--ink);text-decoration:none}
@@ -256,7 +249,6 @@ footer a{color:var(--ink);text-decoration:none}
       <section class="block">
         <div class="block-h"><span class="mono">01</span><h2>מה בונים לעסק?</h2><span class="est">מחירים משוערים</span></div>
         <div class="services web" id="web" aria-label="שירותים דיגיטליים"></div>
-        <p class="fine" style="text-align:start;margin-top:14px" id="webHint"></p>
       </section>
       </div>
       <div id="videoSteps">
@@ -287,7 +279,6 @@ footer a{color:var(--ink);text-decoration:none}
       <div class="price" id="price"></div>
       <div class="meter" aria-hidden="true"><i id="meter"></i></div>
       <div class="monthly" id="monthly"></div>
-      <div class="save" id="save"></div>
       <ul class="lines" id="lines"></ul>
 
       <div class="pay">
@@ -302,8 +293,6 @@ footer a{color:var(--ink);text-decoration:none}
       <form id="lead" novalidate>
         <div class="f"><input id="name" placeholder=" " autocomplete="name" required><label for="name">השם שלך</label></div>
         <div class="f"><input id="phone" placeholder=" " type="tel" inputmode="tel" autocomplete="tel" required><label for="phone">טלפון</label></div>
-        <div class="gift"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v8h14v-8M12 8v12M12 8S10.5 3 8 4s.5 4 4 4Zm0 0s1.5-5 4-4-.5 4-4 4Z"/></svg>
-          <p id="giftText"></p></div>
         <div class="f"><input id="email" placeholder=" " type="email" inputmode="email" autocomplete="email" dir="ltr" style="text-align:right"><label for="email">אימייל (לקבלת ההצעה במייל)</label></div>
         <div class="err" id="err" role="alert"></div>
         <button class="cta" type="submit">
@@ -312,7 +301,7 @@ footer a{color:var(--ink);text-decoration:none}
         </button>
         <button class="mailbtn" type="button" id="mailBtn">
           <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg>
-          <span id="mailLabel">שלחו לי הצעה + הטבה במייל</span>
+          <span id="mailLabel">שלחו לי הצעה במייל</span>
         </button>
         <div class="ok" id="ok" role="status"></div>
         <p class="fine">ייעוץ ראשון חינם וללא התחייבות · עוסק פטור, המחירים סופיים · כולל 2 סבבי תיקונים</p>
@@ -362,8 +351,8 @@ const PRICES = {
     {id:"campaign", name:"ניהול קמפיין ממומן (חודש ראשון)", add:900, per:"order"},
   ],
   qty: [
-    {id:1, name:"סרטון אחד",  sub:"חד פעמי",     discount:0},
-    {id:4, name:"4 בחודש",    sub:"ריטיינר",     discount:0.15},
+    {id:1, name:"סרטון אחד",  sub:"חד פעמי"},
+    {id:4, name:"4 בחודש",    sub:"ריטיינר"},
   ],
   // אתרים ומערכות (מחירים משוערים). once = תשלום חד פעמי, monthly = אחסון/תחזוקה בחודש
   web: [
@@ -374,7 +363,6 @@ const PRICES = {
     {id:"bot",     name:"בוט וואטסאפ / צ׳אט AI", desc:"עונה ללקוחות, קובע תורים ואוסף פניות",        once:1800, monthly:250, icon:"chat"},
     {id:"auto",    name:"אוטומציית לידים",       desc:"כל ליד נשלח לוואטסאפ ונשמר בטבלה לבד",          once:800,  monthly:50,  icon:"bolt"},
   ],
-  webBundle: {min:3, discount:0.10},  // הנחת חבילה מ-3 שירותים
   // ===== תשלום ב-Cardcom =====
   // חבילה קבועה (סרטון בסיסי, עד 30 שנ׳, בלי תוספות) משולמת במלואה בקישור התשלום של אקו מדיה: www.ecomedia.co.il/pay/<מוצר>.
   // מחיר מלא, בלי מקדמה (החלטת יצחק 11.10.2026). הסכום נקבע בשרת של האתר, כאן רק להצגה.
@@ -386,16 +374,8 @@ const PRICES = {
   // ===== הצעת מחיר במייל =====
   // השליחה עוברת דרך FormSubmit (חינם). בפעם הראשונה תגיע למייל הזה הודעת אישור, לוחצים "Activate" פעם אחת וזהו.
   quoteEmail: { to: "ecomedia26@gmail.com" },
-  // ההטבה שמגיעה רק במייל. משנים כאן אחוז, ימים וקוד.
-  // הטבת סגירה: בונוס ערך (לא הנחה) למי שסוגר תוך X שעות
-  offer: { hours:72, code:"ECO72",
-    bonuses: [ // הראשון שהלקוח עוד לא בחר הוא הבונוס שלו
-      {id:"format", text:"התאמה לפורמט כפול, רוחבי וגם אנכי, ללא עלות", value:150},
-      {id:"ab",     text:"גרסת A/B עם הוק פתיחה נוסף ללא עלות",        value:150},
-      {id:"thumb",  text:"תמונת נושא מעוצבת ללא עלות",      value:50},
-    ],
-    webBonus:     {text:"חודש אחזקה ואחסון ראשון ללא עלות"},
-    webBonusNoMo: {text:"סבב תיקונים נוסף ללא עלות", value:150} },
+  // תוקף ההצעה, כמו בתנאים. בלי הנחות, בלי קוד הטבה ובלי מתנות: מחיר מלא (החלטת יצחק 11.10.2026)
+  offer: { days:14 },
   // מייל מעוצב דרך EmailJS (חינם). מדביקים כאן 3 מזהים מהחשבון. כל עוד ריק, נשלח מייל טקסט רגיל.
   emailjs: { serviceId:"service_nr9io04", templateId:"template_ou7k6me", publicKey:"GxOCF2gEokbMBWeFF" },
   // תנאים והערות: מופיעים בתחתית כל הצעת מחיר
@@ -405,7 +385,7 @@ const PRICES = {
     "תנאי תשלום בהצעה מותאמת: מקדמה של 50% באישור ההצעה, והיתרה במסירה לפני קבלת הקבצים הסופיים.",
     "המחיר כולל עד 2 סבבי תיקונים. כל סבב תיקונים נוסף יתומחר בנפרד (150 ₪).",
     "זכויות השימוש המלאות בסרטון עוברות ללקוח לאחר התשלום המלא.",
-    "הצעה זו בתוקף ל-14 ימים. הטבת הסגירה בתוקף 72 שעות בלבד, עד המועד המצוין בה.",
+    "הצעה זו בתוקף ל-14 ימים, עד המועד המצוין בה.",
   ],
   range: {low:0.9, high:1.15},
   whatsapp: "972534262621"
@@ -444,7 +424,6 @@ $("web").innerHTML = PRICES.web.map((s,i)=>`
     <span class="p">החל מ-<b><bdi>${num(s.once)} ₪</bdi></b></span>
     <span class="m">${s.monthly?`+ <bdi>${num(s.monthly)} ₪</bdi> לחודש אחזקה`:"בלי תשלום חודשי"}</span>
   </label>`).join("");
-$("webHint").textContent = `✦ ${PRICES.webBundle.min} שירותים ומעלה: ${Math.round(PRICES.webBundle.discount*100)}% הנחת חבילה`;
 const seg = (el,name,list) => el.insertAdjacentHTML("beforeend", list.map((x,i)=>`
   <label><input type="radio" name="${name}" value="${x.id}" ${i===0?"checked":""}>${x.name}<small>${x.sub}</small></label>`).join(""));
 seg($("mode"),"mode",[{id:"video",name:"סרטונים",sub:"וידאו ופרסומות"},{id:"web",name:"אתרים ומערכות",sub:"אתר, דשבורד, בוט"}]);
@@ -467,9 +446,8 @@ document.querySelectorAll(".card").forEach(c=>c.addEventListener("pointermove",e
 const mode=()=>document.querySelector("input[name=mode]:checked").value;
 function currentWeb(){
   const items=PRICES.web.filter(w=>document.querySelector(`input[name=web][value=${w.id}]`).checked);
-  const sum=items.reduce((s,w)=>s+w.once,0), disc=items.length>=PRICES.webBundle.min?PRICES.webBundle.discount:0;
-  const total=sum*(1-disc), monthly=items.reduce((s,w)=>s+w.monthly,0);
-  return {web:true,items,disc,total,monthly,low:r50(total*PRICES.range.low),high:r50(total*PRICES.range.high)};
+  const total=items.reduce((s,w)=>s+w.once,0), monthly=items.reduce((s,w)=>s+w.monthly,0);
+  return {web:true,items,total,monthly,low:r50(total*PRICES.range.low),high:r50(total*PRICES.range.high)};
 }
 function current(){
   if(mode()==="web") return currentWeb();
@@ -477,7 +455,7 @@ function current(){
   const svc=pick("svc",PRICES.services), len=pick("len",PRICES.lengths), qty=pick("qty",PRICES.qty);
   const extras=PRICES.extras.filter(e=>document.querySelector(`.tog input[value=${e.id}]`).checked);
   const per=svc.base*len.mult+extras.filter(e=>e.per!=="order").reduce((s,e)=>s+(e.pct?svc.base*len.mult*e.pct:e.add),0);
-  const total=per*qty.id*(1-qty.discount)+extras.filter(e=>e.per==="order").reduce((s,e)=>s+e.add,0);
+  const total=per*qty.id+extras.filter(e=>e.per==="order").reduce((s,e)=>s+e.add,0);
   const fx=PRICES.payment.fixed[svc.id];
   if(fx && len.id==="s" && !extras.length && qty.id===1) return {svc,len,qty,extras,per,total,low:fx.amount,high:fx.amount,exact:true}; // מחיר קבוע ומדויק
   return {svc,len,qty,extras,per,total,low:r50(total*PRICES.range.low),high:r50(total*PRICES.range.high)};
@@ -512,13 +490,11 @@ function render(){
   if(web){
     $("svcName").textContent=c.items.length?`${c.items.length} שירותים`:"בחר שירות";
     $("meter").style.width=Math.min(100,8+Math.sqrt(c.high)/Math.sqrt(24000)*92)+"%";
-    $("save").textContent=c.disc?`✦ חוסכים ${Math.round(c.disc*100)}% בזכות חבילה`:"";
     $("lines").innerHTML=c.items.map(w=>`<li><span>${w.name}</span><span>${num(w.once)} ₪</span></li>`).join("")||`<li><span>סמן לפחות שירות אחד</span><span></span></li>`;
     moveThumb($("mode")); return;
   }
   $("svcName").textContent=c.svc.name;
   $("meter").style.width=Math.min(100,8+Math.sqrt(c.high)/Math.sqrt(24000)*92)+"%";
-  $("save").textContent=c.qty.discount?`✦ חוסכים ${Math.round(c.qty.discount*100)}% בריטיינר החודשי`:"";
   $("lines").innerHTML=[
     [c.svc.name, `${num(c.svc.base)} ₪`],
     [`אורך: ${c.len.name}`, `×${c.len.mult}`],
@@ -564,21 +540,17 @@ bio.observe($("summary")); addEventListener("scroll",()=>{if(scrollY<200)$("bar"
 
 /* ===== שליחת הצעת מחיר במייל ===== */
 const O=PRICES.offer;
-$("giftText").innerHTML=`<b>סוגרים תוך ${O.hours} שעות? מקבלים בונוס בשווי עד 150 ₪.</b><br>השאירו מייל ונשלח לכם הצעה מסודרת עם קוד ההטבה.`;
-const until=()=>{const d=new Date(Date.now()+O.hours*36e5);return d.toLocaleDateString("he-IL")+" בשעה "+d.toLocaleTimeString("he-IL",{hour:"2-digit",minute:"2-digit"})};
+/* תוקף ההצעה (14 יום, כמו בתנאים) */
+const until=()=>new Date(Date.now()+O.days*864e5).toLocaleDateString("he-IL");
 const offerUntil=until;
-function bonusFor(c){
-  if(c.web) return c.monthly?{...O.webBonus,value:Math.max(...c.items.map(w=>w.monthly))}:O.webBonusNoMo;
-  const ids=c.extras.map(e=>e.id); return O.bonuses.find(b=>!ids.includes(b.id))||O.bonuses[O.bonuses.length-1];
-}
-/* מחיר אחרי ההטבה + לאן מוביל כפתור התשלום במייל */
+/* לאן מוביל כפתור התשלום במייל */
 function offerInfo(c){
-  const pl=payPlan(c), b=bonusFor(c), pct=Math.round(PRICES.payment.advance*100);
-  const waClose=`https://wa.me/${PRICES.whatsapp}?text=${encodeURIComponent(`היי אקו מדיה, אני מאשר את ההצעה עם קוד ההטבה ${O.code}. אשמח לבקשת תשלום למקדמה.`)}`;
+  const pl=payPlan(c), pct=Math.round(PRICES.payment.advance*100);
+  const waClose=`https://wa.me/${PRICES.whatsapp}?text=${encodeURIComponent("היי אקו מדיה, אני מאשר את ההצעה. אשמח לבקשת תשלום למקדמה.")}`;
   return pl.full
-    ? {bonus:b,payLabel:`מאשר ומתחיל: ${num(pl.amount)} ₪`,payUrl:pl.url||waClose,
+    ? {payLabel:`מאשר ומתחיל: ${num(pl.amount)} ₪`,payUrl:pl.url||waClose,
        payNote:"תשלום מאובטח במחיר המלא: אשראי, ביט, Apple Pay או Google Pay. הקבלה נשלחת במייל."}
-    : {bonus:b,payLabel:"מאשר את ההצעה ושומר את הבונוס",payUrl:waClose,
+    : {payLabel:"מאשר את ההצעה",payUrl:waClose,
        payNote:`לחיצה שולחת לנו אישור בוואטסאפ, ואנחנו שולחים בקשת תשלום מאובטחת ב-Cardcom על מקדמה של ${pct}% מהמחיר המדויק.`};
 }
 /* 3 הודעות פולו-אפ מוכנות ללידים שלא סגרו (לעותק של בעל העסק) */
@@ -586,8 +558,8 @@ function followUps(c,name){
   const oi=offerInfo(c);
   return [
     ["כמה שעות אחרי ההצעה (וואטסאפ אישי)",`היי ${name}, הצעת המחיר מאקו מדיה נחתה אצלך במייל. עברת עליה? אני כאן לכל שאלה על התסריט, הסגנון או התהליך 🙂`],
-    ["למחרת (מייל או וואטסאפ עם דוגמה)",`היי ${name}, רציתי להראות לך איך נראה וידאו שעוצר גלילה: [קישור לסרטון דוגמה]. רק תזכורת, הבונוס שלך (${oi.bonus.text}) שמור עד ${until()}.`],
-    ["כמה שעות לפני שההטבה פגה",`היי ${name}, רק מעדכן שקוד ההטבה ${O.code} יפוג ב-${until()}. אם מתאים לך לסגור, הנה הקישור לאישור ותחילת עבודה: ${oi.payUrl}`],
+    ["למחרת (מייל או וואטסאפ עם דוגמה)",`היי ${name}, רציתי להראות לך איך נראה וידאו שעוצר גלילה: [קישור לסרטון דוגמה]. ההצעה שלך בתוקף עד ${until()}.`],
+    ["כמה ימים לפני סוף תוקף ההצעה",`היי ${name}, רק מזכיר שההצעה בתוקף עד ${until()}. אם מתאים לך, הנה הקישור לאישור ותחילת עבודה: ${oi.payUrl}`],
   ];
 }
 function quoteText(c, name){
@@ -601,8 +573,7 @@ function quoteText(c, name){
 ${lines.join("\n")}
 
 המחיר: ${c.exact?`${num(c.low)} ₪`:`${num(c.low)} עד ${num(c.high)} ₪`}${c.web&&c.monthly?` + ${num(c.monthly)} ₪ לחודש`:""}
-🎁 הטבת סגירה ל-${O.hours} שעות: ${oi.bonus.text}${oi.bonus.value?` (בשווי ${num(oi.bonus.value)} ₪)`:""}
-קוד: ${O.code} · בתוקף עד ${until()}
+ההצעה בתוקף עד ${until()}
 
 ${oi.payLabel}: ${oi.payUrl}
 
@@ -619,8 +590,7 @@ function quoteHTML(c, name){
     ? c.items.map(w=>[w.name, `${num(w.once)} ₪`, w.monthly?`+ ${num(w.monthly)} ₪ לחודש`:""])
     : [[`${c.svc.name}, ${c.len.name}`, `${num(c.svc.base)} ₪`, c.svc.full+(c.len.mult!==1?` (×${c.len.mult} לפי אורך)`:"")],
        ...c.extras.map(e=>[e.name, xl(e), e.per==="order"?"פעם אחת להזמנה":"לכל סרטון"]),
-       [c.qty.name, c.qty.id>1?`×${c.qty.id}`:"×1", c.qty.discount?`${Math.round(c.qty.discount*100)}% הנחת ריטיינר`:""]];
-  if(c.disc) rows.push(["הנחת חבילה", `-${Math.round(c.disc*100)}%`, ""]);
+       [c.qty.name, c.qty.id>1?`×${c.qty.id}`:"×1", ""]];
   const price=(a,b)=>a===b?`${num(a)} ₪`:`${num(a)} – ${num(b)} ₪`;
   const F="font-family:Arial,Helvetica,sans-serif;";
   return `<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"></head>
@@ -641,15 +611,9 @@ function quoteHTML(c, name){
       <td style="${F}padding:16px 0 4px;font-size:17px;color:#8a87a0;text-align:left;white-space:nowrap" dir="ltr"><b style="color:#1c1a2b;font-size:19px">${price(c.low,c.high)}</b></td></tr>
     </table>
   </td></tr>
-  <tr><td style="padding:12px 28px 4px">
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#fbf6e8;border:2px dashed #EDC56A;border-radius:14px">
-      <tr><td style="padding:18px 20px;text-align:right">
-        <div style="${F}font-size:14px;color:#9a7412;font-weight:bold">🎁 הטבת סגירה ל-${O.hours} שעות בלבד</div>
-        <div style="${F}font-size:22px;font-weight:bold;color:#1c1a2b;margin-top:6px;line-height:1.35">${esc(oi.bonus.text)}</div>
-        ${oi.bonus.value?`<div style="${F}font-size:14px;color:#9a7412;margin-top:4px">בשווי ${num(oi.bonus.value)} ₪, מתנה מאיתנו</div>`:""}
-        ${c.web&&c.monthly?`<div style="${F}font-size:13px;color:#6b6880;margin-top:2px">ועוד ${num(c.monthly)} ₪ לחודש אחזקה ואחסון</div>`:""}
-        <div style="${F}font-size:13px;color:#6b6880;margin-top:8px">קוד הטבה <b style="color:#1c1a2b;letter-spacing:1px">${O.code}</b> · בתוקף עד <b style="color:#c0392b">${untilTxt}</b> בלבד</div>
-      </td></tr></table>
+  <tr><td style="padding:12px 28px 4px;text-align:right">
+    ${c.web&&c.monthly?`<div style="${F}font-size:13px;color:#6b6880">ועוד ${num(c.monthly)} ₪ לחודש אחזקה ואחסון</div>`:""}
+    <div style="${F}font-size:13px;color:#6b6880;margin-top:4px">ההצעה בתוקף עד <b style="color:#1c1a2b">${untilTxt}</b></div>
   </td></tr>
   <tr><td style="padding:22px 28px 6px" align="center">
     <a href="${esc(oi.payUrl)}" style="${F}display:block;background:#3CE271;color:#04130a;text-decoration:none;font-size:18px;font-weight:bold;padding:17px 20px;border-radius:14px;text-align:center">💳 ${esc(oi.payLabel)}</a>
@@ -672,7 +636,7 @@ window.__quoteHTML=quoteHTML; /* לתצוגה מקדימה */
 /* שליחה: EmailJS (מייל מעוצב), ואם עוד לא הוגדר, FormSubmit (טקסט) */
 async function sendQuote(c,name,phone,email){
   const E=PRICES.emailjs, html=quoteHTML(c,name), text=quoteText(c,name);
-  const subject=`${name}, הצעת המחיר שלך מאקו מדיה + מתנה ל-${O.hours} שעות`;
+  const subject=`${name}, הצעת המחיר שלך מאקו מדיה`;
   const fu=followUps(c,name).map(([w,t],i)=>`${i+1}. ${w}:\n${t}`).join("\n\n");
   if(E.serviceId && E.templateId && E.publicKey){
     const r=await fetch("https://api.emailjs.com/api/v1.0/email/send",{method:"POST",headers:{"Content-Type":"application/json"},
@@ -683,7 +647,7 @@ async function sendQuote(c,name,phone,email){
   }
   const r=await fetch(`https://formsubmit.co/ajax/${PRICES.quoteEmail.to}`,{method:"POST",
     headers:{"Content-Type":"application/json",Accept:"application/json"},
-    body:JSON.stringify({_subject:`הצעת מחיר חדשה מהמחשבון: ${name} (הטבה ${O.code})`,_template:"box",_captcha:"false",
+    body:JSON.stringify({_subject:`הצעת מחיר חדשה מהמחשבון: ${name}`,_template:"box",_captcha:"false",
       _replyto:email,_autoresponse:text,"שם":name,"טלפון":phone||"לא נמסר",email,"ההצעה":text,"הודעות פולו-אפ מוכנות":fu})});
   const j=await r.json().catch(()=>({}));
   if(!r.ok || j.success===false || j.success==="false") throw new Error(j.message||r.status);
@@ -699,12 +663,12 @@ $("mailBtn").addEventListener("click", async ()=>{
   $("mailBtn").disabled=true; $("mailLabel").textContent="שולח...";
   try{
     await sendQuote(c,name,phone,email);
-    $("ok").textContent=`✓ ההצעה והמתנה נשלחו! קוד ההטבה שלך: ${O.code}. בדוק את המייל (גם בקידומי מכירות).`;
+    $("ok").textContent="✓ ההצעה נשלחה! בדוק את המייל (גם בקידומי מכירות).";
   }catch(err){
     // אם השליחה האוטומטית לא עובדת, פותחים את תוכנת המייל עם ההצעה מוכנה
     location.href=`mailto:${PRICES.quoteEmail.to}?cc=${encodeURIComponent(email)}&subject=${encodeURIComponent("הצעת מחיר מהמחשבון: "+name)}&body=${encodeURIComponent(quoteText(c,name))}`;
     $("ok").textContent="פתחנו את תוכנת המייל שלך עם ההצעה מוכנה, רק ללחוץ שלח.";
-  }finally{ $("mailBtn").disabled=false; $("mailLabel").textContent="שלחו לי הצעה + הטבה במייל"; }
+  }finally{ $("mailBtn").disabled=false; $("mailLabel").textContent="שלחו לי הצעה במייל"; }
 });
 
 $("lead").addEventListener("submit",e=>{
